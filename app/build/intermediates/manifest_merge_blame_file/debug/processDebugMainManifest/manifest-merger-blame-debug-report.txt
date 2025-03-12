@@ -63,8 +63,8 @@
 37-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:19:9-40
 38        <activity
 38-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:21:9-29:20
-39            android:name="ucacue.edu.udipsai.MainActivity"
-39-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:13-41
+39            android:name="ucacue.edu.udipsai.UI.login.LoginActivity"
+39-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:13-51
 40            android:exported="true"
 40-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:24:13-36
 41            android:windowSoftInputMode="stateHidden|adjustResize" >
@@ -83,8 +83,8 @@
 48
 49        <service
 49-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:30:9-32:79
-50            android:name="ucacue.edu.udipsai.SerialService"
-50-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:31:13-42
+50            android:name="ucacue.edu.udipsai.Services.SerialService"
+50-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:31:13-51
 51            android:foregroundServiceType="remoteMessaging|connectedDevice" />
 51-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:32:13-76
 52

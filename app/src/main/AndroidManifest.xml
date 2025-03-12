@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.login.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:exported="true">
             <intent-filter>
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".SerialService"
+            android:name=".Services.SerialService"
             android:foregroundServiceType="remoteMessaging|connectedDevice" />
     </application>
 

@@ -36,7 +36,7 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ucacue.edu.udipsai.MainActivity"
+            android:name="ucacue.edu.udipsai.UI.login.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="stateHidden|adjustResize" >
             <intent-filter>
@@ -47,7 +47,7 @@
         </activity>
 
         <service
-            android:name="ucacue.edu.udipsai.SerialService"
+            android:name="ucacue.edu.udipsai.Services.SerialService"
             android:foregroundServiceType="remoteMessaging|connectedDevice" />
 
         <provider

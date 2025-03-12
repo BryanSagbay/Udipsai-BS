@@ -118,14 +118,14 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/bryansagbay/.gradle/
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:17:9-43
 	android:theme
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:19:9-40
-activity#ucacue.edu.udipsai.MainActivity
+activity#ucacue.edu.udipsai.UI.login.LoginActivity
 ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:21:9-29:20
 	android:windowSoftInputMode
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:23:13-67
 	android:exported
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:24:13-36
 	android:name
-		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:13-41
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:13-51
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:25:13-28:29
 action#android.intent.action.MAIN
@@ -136,12 +136,12 @@ category#android.intent.category.LAUNCHER
 ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:27:17-77
 	android:name
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:27:27-74
-service#ucacue.edu.udipsai.SerialService
+service#ucacue.edu.udipsai.Services.SerialService
 ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:30:9-32:79
 	android:foregroundServiceType
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:32:13-76
 	android:name
-		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:31:13-42
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:31:13-51
 uses-sdk
 INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml
