@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="250dp"
             android:layout_height="150dp"
-            android:src="@drawable/inclulab_provisional"
+            android:src="@drawable/lg_inclulab_provisional"
             android:contentDescription="Logo" />
 
         <TextView
@@ -107,7 +107,7 @@
         <ImageView
             android:layout_width="180dp"
             android:layout_height="130dp"
-            android:src="@drawable/ucacue"
+            android:src="@drawable/lg_ucacue"
             android:layout_marginTop="20dp"
             android:contentDescription="UCACUE Logo" />
 

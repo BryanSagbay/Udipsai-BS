@@ -11,7 +11,7 @@
         android:layout_width="140dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:src="@drawable/ucacuelogo"
+        android:src="@drawable/lg_ucacuelogo"
         android:scaleType="fitCenter"/>
 
     <ImageView
@@ -19,7 +19,7 @@
         android:layout_width="140dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:src="@drawable/udipsai"
+        android:src="@drawable/lg_udipsai"
         android:scaleType="fitCenter"/>
 
     <View
