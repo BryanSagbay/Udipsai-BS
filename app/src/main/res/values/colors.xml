@@ -13,10 +13,10 @@
     <color name="gray">#BDBDBD</color>
     <!--End-Login-->
 
-    <!--HomePage-->
     <color name="black89">#000000DD</color>
     <color name="red89">#FD0000</color>
     <color name="black">#000000</color>
+    <color name="white80">#99FFFFFF</color>
     <!--End-HomePage-->
 
     <color name="colorRecieveText">#00FF00</color>

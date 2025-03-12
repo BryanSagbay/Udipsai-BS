@@ -50,6 +50,18 @@
         <activity
             android:name="ucacue.edu.udipsai.UI.test.HomeTest"
             android:exported="true" />
+        <activity
+            android:name="ucacue.edu.udipsai.UI.test.test_Monotonia"
+            android:exported="true" />
+        <activity
+            android:name="ucacue.edu.udipsai.UI.test.test_Riel"
+            android:exported="true" />
+        <activity
+            android:name="ucacue.edu.udipsai.UI.test.test_Palanca"
+            android:exported="true" />
+        <activity
+            android:name="ucacue.edu.udipsai.UI.test.test_Bennett"
+            android:exported="true" />
 
         <service
             android:name="ucacue.edu.udipsai.Services.SerialService"

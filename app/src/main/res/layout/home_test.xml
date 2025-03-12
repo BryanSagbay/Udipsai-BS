@@ -3,15 +3,199 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/testTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pantalla de Test"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"/>
+    <!-- Navbar -->
+    <include layout="@layout/navbar_test"/>
+
+    <!-- Fondo de pantalla -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/backgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/lg_ofertafond"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="717dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Tarjeta del Paciente -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/white"
+                android:elevation="8dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/patientInfoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PACIENTE SELECCIONADO:"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/patientName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre del Paciente"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Animación del águila -->
+            <ImageView
+                android:id="@+id/eagleImage"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:alpha="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/lg_aguila"
+                android:translationY="-25dp" />
+
+            <!-- Contenedor de los botones (2 columnas x 2 filas) -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:columnCount="2"
+                android:padding="16dp">
+
+                <!-- Test Monotonía -->
+                <LinearLayout
+                    android:id="@+id/btnMonotonia"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/btn_rounded"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingStart="32dp"
+                        android:text="Test de Monotonía"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/test_monotonia" />
+                </LinearLayout>
+
+                <!-- Test Riel -->
+                <LinearLayout
+                    android:id="@+id/btnRiel"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/btn_rounded"
+                    android:elevation="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingStart="32dp"
+                        android:text="Sistema de Motricidad"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/test_riel" />
+                </LinearLayout>
+
+                <!-- Test Palanca -->
+                <LinearLayout
+                    android:id="@+id/btnPalanca"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/btn_rounded"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingStart="32dp"
+                        android:text="Test de Palanca"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/test_palanca" />
+                </LinearLayout>
+
+                <!-- Test Bennett -->
+                <LinearLayout
+                    android:id="@+id/btnBennett"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/btn_rounded"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingStart="32dp"
+                        android:text="Test de Bennett"
+                        android:textColor="@android:color/black"
+                        android:textSize="19sp" />
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/test_bennett" />
+                </LinearLayout>
+
+            </GridLayout>
+        </LinearLayout>
+    </FrameLayout>
+
 </LinearLayout>

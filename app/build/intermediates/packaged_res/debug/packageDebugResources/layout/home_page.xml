@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/fondo"/>
+            android:src="@drawable/lg_fondo"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:id="@+id/eagleImage"
                 android:layout_width="650dp"
                 android:layout_height="350dp"
-                android:src="@drawable/aguila"
+                android:src="@drawable/lg_aguila"
                 android:scaleType="fitCenter"
                 android:alpha="0"
                 android:translationX="-500dp"/>

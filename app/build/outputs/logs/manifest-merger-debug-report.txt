@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-39:12
-INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-39:12
-INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-39:12
-INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-39:12
+ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-44:12
+INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-44:12
+INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-44:12
+INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:2:1-44:12
 MERGED from [com.google.android.material:material:1.11.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/c5c07204c2ff634f43af0fc5f36f0586/transformed/material-1.11.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/4f6c014faca8da2c77d3ad6dbacac8e2/transformed/jetified-appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/dc6162e8f26f967bb5595a2bb44c61b1/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
@@ -88,8 +88,8 @@ ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/Andr
 	android:name
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:13:22-73
 application
-ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:16:5-37:19
-INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:16:5-37:19
+ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:16:5-42:19
+INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:16:5-42:19
 MERGED from [com.google.android.material:material:1.11.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/c5c07204c2ff634f43af0fc5f36f0586/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/c5c07204c2ff634f43af0fc5f36f0586/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/dc6162e8f26f967bb5595a2bb44c61b1/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
@@ -142,12 +142,36 @@ ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/Andr
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:32:52-75
 	android:name
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:32:19-51
-service#ucacue.edu.udipsai.Services.SerialService
-ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:9-36:79
-	android:foregroundServiceType
-		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:13-76
+activity#ucacue.edu.udipsai.UI.test.test_Monotonia
+ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:9-83
+	android:exported
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:58-81
 	android:name
-		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:13-51
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:19-57
+activity#ucacue.edu.udipsai.UI.test.test_Riel
+ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:9-78
+	android:exported
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:53-76
+	android:name
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:19-52
+activity#ucacue.edu.udipsai.UI.test.test_Palanca
+ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:9-81
+	android:exported
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:56-79
+	android:name
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:19-55
+activity#ucacue.edu.udipsai.UI.test.test_Bennett
+ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:37:9-81
+	android:exported
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:37:56-79
+	android:name
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:37:19-55
+service#ucacue.edu.udipsai.Services.SerialService
+ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:39:9-41:79
+	android:foregroundServiceType
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:41:13-76
+	android:name
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:40:13-51
 uses-sdk
 INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml

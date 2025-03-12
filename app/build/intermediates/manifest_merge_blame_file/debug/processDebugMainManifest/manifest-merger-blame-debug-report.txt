@@ -49,7 +49,7 @@
 29-->[androidx.core:core:1.9.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e255476a4c42dff7e48fd3b51ad4a402/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
 29-->[androidx.core:core:1.9.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e255476a4c42dff7e48fd3b51ad4a402/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
 30    <application
-30-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:16:5-37:19
+30-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:16:5-42:19
 31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 31-->[androidx.core:core:1.9.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e255476a4c42dff7e48fd3b51ad4a402/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
 32        android:debuggable="true"
@@ -88,79 +88,103 @@
 51-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:32:19-51
 52            android:exported="true" />
 52-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:32:52-75
-53
-54        <service
-54-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:9-36:79
-55            android:name="ucacue.edu.udipsai.Services.SerialService"
-55-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:13-51
-56            android:foregroundServiceType="remoteMessaging|connectedDevice" />
-56-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:13-76
-57
-58        <provider
-58-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
-59            android:name="androidx.startup.InitializationProvider"
-59-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
-60            android:authorities="ucacue.edu.udipsai.androidx-startup"
-60-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
-61            android:exported="false" >
-61-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
-62            <meta-data
-62-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
-63                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-63-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
-64                android:value="androidx.startup" />
-64-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
-65            <meta-data
-65-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/272fcff139d261f83d5860b2d6e4f559/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
-66                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-66-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/272fcff139d261f83d5860b2d6e4f559/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
-67                android:value="androidx.startup" />
-67-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/272fcff139d261f83d5860b2d6e4f559/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
-68            <meta-data
-68-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-69                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-69-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-70                android:value="androidx.startup" />
-70-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-71        </provider>
-72
-73        <receiver
-73-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-74            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-74-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-75            android:directBootAware="false"
-75-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-76            android:enabled="true"
-76-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-77            android:exported="true"
-77-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-78            android:permission="android.permission.DUMP" >
-78-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-79            <intent-filter>
-79-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-80                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-80-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-80-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-81            </intent-filter>
-82            <intent-filter>
-82-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-83                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-83-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-83-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-84            </intent-filter>
-85            <intent-filter>
-85-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-86                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-86-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-86-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
-87            </intent-filter>
-88            <intent-filter>
-88-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-89                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-89-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-89-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
-90            </intent-filter>
-91        </receiver>
-92    </application>
-93
-94</manifest>
+53        <activity
+53-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:9-83
+54            android:name="ucacue.edu.udipsai.UI.test.test_Monotonia"
+54-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:19-57
+55            android:exported="true" />
+55-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:34:58-81
+56        <activity
+56-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:9-78
+57            android:name="ucacue.edu.udipsai.UI.test.test_Riel"
+57-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:19-52
+58            android:exported="true" />
+58-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:35:53-76
+59        <activity
+59-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:9-81
+60            android:name="ucacue.edu.udipsai.UI.test.test_Palanca"
+60-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:19-55
+61            android:exported="true" />
+61-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:36:56-79
+62        <activity
+62-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:37:9-81
+63            android:name="ucacue.edu.udipsai.UI.test.test_Bennett"
+63-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:37:19-55
+64            android:exported="true" />
+64-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:37:56-79
+65
+66        <service
+66-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:39:9-41:79
+67            android:name="ucacue.edu.udipsai.Services.SerialService"
+67-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:40:13-51
+68            android:foregroundServiceType="remoteMessaging|connectedDevice" />
+68-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:41:13-76
+69
+70        <provider
+70-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+71            android:name="androidx.startup.InitializationProvider"
+71-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+72            android:authorities="ucacue.edu.udipsai.androidx-startup"
+72-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+73            android:exported="false" >
+73-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+74            <meta-data
+74-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+75                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+75-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+76                android:value="androidx.startup" />
+76-->[androidx.emoji2:emoji2:1.2.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/e133da6b3bcdda27766e90d24340514e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+77            <meta-data
+77-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/272fcff139d261f83d5860b2d6e4f559/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
+78                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+78-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/272fcff139d261f83d5860b2d6e4f559/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
+79                android:value="androidx.startup" />
+79-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/272fcff139d261f83d5860b2d6e4f559/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
+80            <meta-data
+80-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+81                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+81-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+82                android:value="androidx.startup" />
+82-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+83        </provider>
+84
+85        <receiver
+85-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+86            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+86-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+87            android:directBootAware="false"
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+88            android:enabled="true"
+88-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+89            android:exported="true"
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+90            android:permission="android.permission.DUMP" >
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+91            <intent-filter>
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+92                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+93            </intent-filter>
+94            <intent-filter>
+94-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+95                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+96            </intent-filter>
+97            <intent-filter>
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+98                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+98-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+98-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+99            </intent-filter>
+100            <intent-filter>
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+101                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/bryansagbay/.gradle/caches/8.10.2/transforms/3d8ba2cccab21b604646e70d4cd0b3c8/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+102            </intent-filter>
+103        </receiver>
+104    </application>
+105
+106</manifest>
