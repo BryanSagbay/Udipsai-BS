@@ -30,6 +30,7 @@ public class HomeTest extends AppCompatActivity {
         LinearLayout btnPalanca = findViewById(R.id.btnPalanca);
         LinearLayout btnBennett = findViewById(R.id.btnBennett);
         ImageView logoutIcon = findViewById(R.id.logoutIcon);
+        ImageView backIcon = findViewById(R.id.backIcon); // Icono de regreso
 
         // Simulación de asignación del paciente (En caso real, pasar desde Intent)
         patientName.setText("Juan Pérez");
@@ -42,6 +43,9 @@ public class HomeTest extends AppCompatActivity {
         btnRiel.setOnClickListener(v -> openTestActivity(test_Riel.class));
         btnPalanca.setOnClickListener(v -> openTestActivity(test_Palanca.class));
         btnBennett.setOnClickListener(v -> openTestActivity(test_Bennett.class));
+
+        // Evento de clic para regresar a la página anterior
+        backIcon.setOnClickListener(v -> onBackPressed());
     }
 
     private void startEagleFloatingAnimation() {

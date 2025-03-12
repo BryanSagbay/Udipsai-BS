@@ -1270,6 +1270,7 @@ int color background_material_dark 0x7f06001f
 int color background_material_light 0x7f060020
 int color black 0x7f060021
 int color black89 0x7f060022
+int color black90 0x7f060310
 int color blue 0x7f060023
 int color bright_foreground_disabled_material_dark 0x7f060024
 int color bright_foreground_disabled_material_light 0x7f060025
@@ -2911,6 +2912,7 @@ int drawable design_ic_visibility_off 0x7f080084
 int drawable design_password_eye 0x7f080085
 int drawable design_snackbar_background 0x7f080086
 int drawable ic_arrow_back_black_24 0x7f080087
+int drawable ic_back 0x7f0800f1
 int drawable ic_clear_black_24 0x7f080088
 int drawable ic_clear_white_24dp 0x7f080089
 int drawable ic_clock_black_24dp 0x7f08008a
@@ -3097,6 +3099,7 @@ int id auto 0x7f09004d
 int id autoComplete 0x7f09004e
 int id autoCompleteToEnd 0x7f09004f
 int id autoCompleteToStart 0x7f090050
+int id backIcon 0x7f0901e3
 int id backgroundImage 0x7f090051
 int id backgroundNotification 0x7f090052
 int id barrier 0x7f090053

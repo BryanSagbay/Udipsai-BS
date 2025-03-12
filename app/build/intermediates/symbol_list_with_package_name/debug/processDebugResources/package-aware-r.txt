@@ -1271,6 +1271,7 @@ color background_material_dark
 color background_material_light
 color black
 color black89
+color black90
 color blue
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
@@ -2912,6 +2913,7 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable ic_arrow_back_black_24
+drawable ic_back
 drawable ic_clear_black_24
 drawable ic_clear_white_24dp
 drawable ic_clock_black_24dp
@@ -3098,6 +3100,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backIcon
 id backgroundImage
 id backgroundNotification
 id barrier

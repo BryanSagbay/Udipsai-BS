@@ -12,6 +12,7 @@
     </string-array>
     <color name="black">#000000</color>
     <color name="black89">#000000DD</color>
+    <color name="black90">#000000DD</color>
     <color name="blue">#2196F3</color>
     <color name="colorAccent">#ff6e40</color>
     <color name="colorPrimary">#d84315</color>

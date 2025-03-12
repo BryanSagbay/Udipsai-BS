@@ -24,6 +24,10 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-33:/drawable/ic_delete_white_24dp.xml"
     },
     {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-31:/drawable_ic_back.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-33:/drawable/ic_back.png"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-31:/drawable_lg_aguila.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-33:/drawable/lg_aguila.png"
     },
@@ -184,8 +188,8 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-33:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "ucacue.edu.udipsai.app-debug-31:/layout_home_test.xml.flat",
-        "source": "ucacue.edu.udipsai.app-main-33:/layout/home_test.xml"
+        "merged": "ucacue.edu.udipsai.app-debug-31:/layout_navbar_test.xml.flat",
+        "source": "ucacue.edu.udipsai.app-main-33:/layout/navbar_test.xml"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-31:/drawable_ic_test.png.flat",
