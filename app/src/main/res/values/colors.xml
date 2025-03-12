@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#d84315</color>
-    <color name="colorPrimaryDark">#bf360c</color>
+    <color name="colorPrimaryDark">#000000DD</color>
     <color name="colorAccent">#ff6e40</color>
 
-    <!--login-->
+    <!--Login-->
     <color name="gray_light">#F5F5F5</color>
     <color name="gray_dark">#707070</color>
     <color name="primary">#3F51B5</color>
     <color name="white">#FFFFFF</color>
     <color name="blue">#2196F3</color>
     <color name="gray">#BDBDBD</color>
-    <!--end-login-->
+    <!--End-Login-->
+
+    <!--HomePage-->
+    <color name="black89">#000000DD</color>
+    <color name="red89">#FD0000</color>
+    <color name="black">#000000</color>
+    <!--End-HomePage-->
 
     <color name="colorRecieveText">#00FF00</color>
     <color name="colorSendText">#82CAFF</color>

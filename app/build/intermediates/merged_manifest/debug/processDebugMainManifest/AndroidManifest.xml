@@ -36,7 +36,7 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ucacue.edu.udipsai.UI.login.LoginActivity"
+            android:name="ucacue.edu.udipsai.UI.home.HomePage"
             android:exported="true"
             android:windowSoftInputMode="stateHidden|adjustResize" >
             <intent-filter>
@@ -45,6 +45,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Nueva actividad para Test -->
+        <activity
+            android:name="ucacue.edu.udipsai.UI.test.HomeTest"
+            android:exported="true" />
 
         <service
             android:name="ucacue.edu.udipsai.Services.SerialService"

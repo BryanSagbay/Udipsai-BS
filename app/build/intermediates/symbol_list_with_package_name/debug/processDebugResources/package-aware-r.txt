@@ -1269,6 +1269,8 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color black
+color black89
 color blue
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
@@ -2001,6 +2003,7 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color red89
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -2915,6 +2918,7 @@ drawable ic_clear_white_24dp
 drawable ic_clock_black_24dp
 drawable ic_delete_white_24dp
 drawable ic_keyboard_black_24dp
+drawable ic_logout
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -2923,8 +2927,11 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_notification
+drawable ic_paciente
 drawable ic_search_black_24
 drawable ic_send_white_24dp
+drawable ic_soporte
+drawable ic_test
 drawable inclulab_provisional
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3085,6 +3092,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backgroundImage
 id backgroundNotification
 id barrier
 id baseline
@@ -3153,6 +3161,7 @@ id dragRight
 id dragStart
 id dragUp
 id dropdown_menu
+id eagleImage
 id easeIn
 id easeInOut
 id easeOut
@@ -3200,6 +3209,9 @@ id home
 id homeAsUp
 id honorRequest
 id icon
+id iconPacientes
+id iconSoporte
+id iconTest
 id icon_group
 id ifRoom
 id ignore
@@ -3223,6 +3235,9 @@ id line3
 id linear
 id listMode
 id list_item
+id logoLeft
+id logoRight
+id logoutIcon
 id m3_side_sheet
 id marquee
 id masked
@@ -3258,6 +3273,7 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id motion_base
+id mottoText
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
 id mtrl_calendar_days_of_week
@@ -3415,13 +3431,17 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
+id testTitle
 id text
 id text1
 id text2
 id textEnd
+id textPacientes
+id textSoporte
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textTest
 id textTop
 id text_input_end_icon
 id text_input_error_icon
@@ -3453,6 +3473,7 @@ id tvForgotPassword
 id tvRegister
 id unchecked
 id uniform
+id universityText
 id unlabeled
 id up
 id useLogo
@@ -3601,7 +3622,10 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout device_list_header
 layout device_list_item
+layout footer_home
 layout fragment_terminal
+layout home_page
+layout home_test
 layout login_activity
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -3654,6 +3678,7 @@ layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
 layout mtrl_search_bar
 layout mtrl_search_view
+layout navbar_home
 layout notification_action
 layout notification_action_tombstone
 layout notification_template_custom_big
