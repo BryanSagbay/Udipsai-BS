@@ -65,6 +65,7 @@
 
         <service
             android:name="ucacue.edu.udipsai.Services.SerialService"
+            android:exported="false"
             android:foregroundServiceType="remoteMessaging|connectedDevice" />
 
         <provider

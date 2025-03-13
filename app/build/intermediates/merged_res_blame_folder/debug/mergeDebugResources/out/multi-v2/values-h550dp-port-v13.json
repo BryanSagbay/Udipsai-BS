@@ -1,16 +1,16 @@
 {
     "logs": [
         {
-            "outputFile": "ucacue.edu.udipsai.app-mergeDebugResources-29:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+            "outputFile": "ucacue.edu.udipsai.app-mergeDebugResources-30:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
             "map": [
                 {
-                    "source": "/Users/bryansagbay/.gradle/caches/8.10.2/transforms/c5c07204c2ff634f43af0fc5f36f0586/transformed/material-1.11.0/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+                    "source": "/Users/bryansagbay/.gradle/caches/8.10.2/transforms/8045ff922730674f1717ee77d2c5096e/transformed/material-1.10.0/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
-                        "endColumns": "64",
-                        "endOffsets": "115"
+                        "endColumns": "76",
+                        "endOffsets": "127"
                     }
                 }
             ]

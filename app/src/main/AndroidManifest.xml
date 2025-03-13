@@ -12,6 +12,7 @@
     <!-- >= API 31 -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
 
+
     <!-- mipmap/ic_launcher created with Android Studio -> New -> Image Asset using @color/colorPrimaryDark as background color -->
     <application
         android:icon="@mipmap/ic_launcher"
@@ -38,7 +39,8 @@
 
         <service
             android:name=".Services.SerialService"
-            android:foregroundServiceType="remoteMessaging|connectedDevice" />
+            android:foregroundServiceType="remoteMessaging|connectedDevice"
+            android:exported="false"/>
     </application>
 
 </manifest>

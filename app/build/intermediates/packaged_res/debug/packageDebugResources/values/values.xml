@@ -14,6 +14,7 @@
     <color name="black89">#000000DD</color>
     <color name="black90">#000000DD</color>
     <color name="blue">#2196F3</color>
+    <color name="bluedark">#0023FF</color>
     <color name="colorAccent">#ff6e40</color>
     <color name="colorPrimary">#d84315</color>
     <color name="colorPrimaryDark">#000000DD</color>
@@ -23,10 +24,12 @@
     <color name="gray">#BDBDBD</color>
     <color name="gray_dark">#707070</color>
     <color name="gray_light">#F5F5F5</color>
+    <color name="greendark">#1E6A1F</color>
     <color name="primary">#3F51B5</color>
-    <color name="red89">#FD0000</color>
+    <color name="red89">#680303</color>
     <color name="white">#FFFFFF</color>
     <color name="white80">#99FFFFFF</color>
+    <color name="yellow20">#FFEB3B</color>
     <string name="app_name">Simple Bluetooth Terminal</string>
     <string name="bluetooth_permission_denied">Bluetooth permission was permanently denied. You have to enable permission \"%s\" in App settings.</string>
     <string name="bluetooth_permission_grant">Bluetooth permission is required by this App. Please grant in next dialog.</string>

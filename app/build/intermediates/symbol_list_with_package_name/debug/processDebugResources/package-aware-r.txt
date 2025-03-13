@@ -234,7 +234,6 @@ attr cardMaxElevation
 attr cardPreventCornerOverlap
 attr cardUseCompatPadding
 attr cardViewStyle
-attr carousel_alignment
 attr centerIfNoTextEnabled
 attr chainUseRtl
 attr checkMarkCompat
@@ -756,6 +755,26 @@ attr logo
 attr logoAdjustViewBounds
 attr logoDescription
 attr logoScaleType
+attr lottieAnimationViewStyle
+attr lottie_autoPlay
+attr lottie_cacheComposition
+attr lottie_clipToCompositionBounds
+attr lottie_colorFilter
+attr lottie_defaultFontFileExtension
+attr lottie_enableMergePathsForKitKatAndAbove
+attr lottie_fallbackRes
+attr lottie_fileName
+attr lottie_ignoreDisabledSystemAnimations
+attr lottie_imageAssetsFolder
+attr lottie_loop
+attr lottie_progress
+attr lottie_rawRes
+attr lottie_renderMode
+attr lottie_repeatCount
+attr lottie_repeatMode
+attr lottie_speed
+attr lottie_url
+attr lottie_useCompositionFrameRate
 attr marginHorizontal
 attr marginLeftSystemWindowInsets
 attr marginRightSystemWindowInsets
@@ -1273,6 +1292,7 @@ color black
 color black89
 color black90
 color blue
+color bluedark
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1340,6 +1360,7 @@ color foreground_material_light
 color gray
 color gray_dark
 color gray_light
+color greendark
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color m3_appbar_overlay_color
@@ -1431,26 +1452,15 @@ color m3_ref_palette_dynamic_neutral99
 color m3_ref_palette_dynamic_neutral_variant0
 color m3_ref_palette_dynamic_neutral_variant10
 color m3_ref_palette_dynamic_neutral_variant100
-color m3_ref_palette_dynamic_neutral_variant12
-color m3_ref_palette_dynamic_neutral_variant17
 color m3_ref_palette_dynamic_neutral_variant20
-color m3_ref_palette_dynamic_neutral_variant22
-color m3_ref_palette_dynamic_neutral_variant24
 color m3_ref_palette_dynamic_neutral_variant30
-color m3_ref_palette_dynamic_neutral_variant4
 color m3_ref_palette_dynamic_neutral_variant40
 color m3_ref_palette_dynamic_neutral_variant50
-color m3_ref_palette_dynamic_neutral_variant6
 color m3_ref_palette_dynamic_neutral_variant60
 color m3_ref_palette_dynamic_neutral_variant70
 color m3_ref_palette_dynamic_neutral_variant80
-color m3_ref_palette_dynamic_neutral_variant87
 color m3_ref_palette_dynamic_neutral_variant90
-color m3_ref_palette_dynamic_neutral_variant92
-color m3_ref_palette_dynamic_neutral_variant94
 color m3_ref_palette_dynamic_neutral_variant95
-color m3_ref_palette_dynamic_neutral_variant96
-color m3_ref_palette_dynamic_neutral_variant98
 color m3_ref_palette_dynamic_neutral_variant99
 color m3_ref_palette_dynamic_primary0
 color m3_ref_palette_dynamic_primary10
@@ -1624,14 +1634,10 @@ color m3_sys_color_dark_surface_variant
 color m3_sys_color_dark_tertiary
 color m3_sys_color_dark_tertiary_container
 color m3_sys_color_dynamic_dark_background
-color m3_sys_color_dynamic_dark_error
-color m3_sys_color_dynamic_dark_error_container
 color m3_sys_color_dynamic_dark_inverse_on_surface
 color m3_sys_color_dynamic_dark_inverse_primary
 color m3_sys_color_dynamic_dark_inverse_surface
 color m3_sys_color_dynamic_dark_on_background
-color m3_sys_color_dynamic_dark_on_error
-color m3_sys_color_dynamic_dark_on_error_container
 color m3_sys_color_dynamic_dark_on_primary
 color m3_sys_color_dynamic_dark_on_primary_container
 color m3_sys_color_dynamic_dark_on_secondary
@@ -1658,14 +1664,10 @@ color m3_sys_color_dynamic_dark_surface_variant
 color m3_sys_color_dynamic_dark_tertiary
 color m3_sys_color_dynamic_dark_tertiary_container
 color m3_sys_color_dynamic_light_background
-color m3_sys_color_dynamic_light_error
-color m3_sys_color_dynamic_light_error_container
 color m3_sys_color_dynamic_light_inverse_on_surface
 color m3_sys_color_dynamic_light_inverse_primary
 color m3_sys_color_dynamic_light_inverse_surface
 color m3_sys_color_dynamic_light_on_background
-color m3_sys_color_dynamic_light_on_error
-color m3_sys_color_dynamic_light_on_error_container
 color m3_sys_color_dynamic_light_on_primary
 color m3_sys_color_dynamic_light_on_primary_container
 color m3_sys_color_dynamic_light_on_secondary
@@ -1781,14 +1783,6 @@ color material_cursor_color
 color material_deep_teal_200
 color material_deep_teal_500
 color material_divider_color
-color material_dynamic_color_dark_error
-color material_dynamic_color_dark_error_container
-color material_dynamic_color_dark_on_error
-color material_dynamic_color_dark_on_error_container
-color material_dynamic_color_light_error
-color material_dynamic_color_light_error_container
-color material_dynamic_color_light_on_error
-color material_dynamic_color_light_on_error_container
 color material_dynamic_neutral0
 color material_dynamic_neutral10
 color material_dynamic_neutral100
@@ -2021,6 +2015,7 @@ color tooltip_background_dark
 color tooltip_background_light
 color white
 color white80
+color yellow20
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -2460,7 +2455,6 @@ dimen m3_large_fab_max_image_size
 dimen m3_large_fab_size
 dimen m3_large_text_vertical_offset_adjustment
 dimen m3_menu_elevation
-dimen m3_nav_badge_with_text_vertical_offset
 dimen m3_navigation_drawer_layout_corner_size
 dimen m3_navigation_item_active_indicator_label_padding
 dimen m3_navigation_item_horizontal_padding
@@ -2564,7 +2558,6 @@ dimen material_bottom_sheet_max_width
 dimen material_clock_display_height
 dimen material_clock_display_padding
 dimen material_clock_display_width
-dimen material_clock_face_margin_bottom
 dimen material_clock_face_margin_top
 dimen material_clock_hand_center_dot_radius
 dimen material_clock_hand_padding
@@ -2597,6 +2590,7 @@ dimen material_textinput_max_width
 dimen material_textinput_min_width
 dimen material_time_picker_minimum_screen_height
 dimen material_time_picker_minimum_screen_width
+dimen material_timepicker_dialog_buttons_margin_top
 dimen mtrl_alert_dialog_background_inset_bottom
 dimen mtrl_alert_dialog_background_inset_end
 dimen mtrl_alert_dialog_background_inset_start
@@ -2941,6 +2935,7 @@ drawable lg_ofertafond
 drawable lg_ucacue
 drawable lg_ucacuelogo
 drawable lg_udipsai
+drawable m3_appbar_background
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3013,6 +3008,10 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable test_bennett
+drawable test_btn_1
+drawable test_btn_2
+drawable test_btn_3
+drawable test_btn_4
 drawable test_level_drawable
 drawable test_monotonia
 drawable test_palanca
@@ -3100,6 +3099,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id automatic
 id backIcon
 id backgroundImage
 id backgroundNotification
@@ -3117,8 +3117,14 @@ id btnLogin
 id btnMonotonia
 id btnPalanca
 id btnRiel
+id button1
+id button2
+id button3
+id button4
+id buttonContainer
 id buttonPanel
 id cancel_button
+id cardView
 id center
 id centerCrop
 id centerInside
@@ -3191,6 +3197,8 @@ id etPassword
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id fabPlay
+id fabReset
 id fade
 id fill
 id fill_horizontal
@@ -3213,8 +3221,10 @@ id ghost_view_holder
 id gone
 id graph
 id graph_wrap
+id gridButtons
 id group_divider
 id groups
+id hardware
 id header_title
 id hex
 id hideable
@@ -3251,6 +3261,7 @@ id list_item
 id logoLeft
 id logoRight
 id logoutIcon
+id lottie_layer_name
 id m3_side_sheet
 id marquee
 id masked
@@ -3311,6 +3322,8 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id navbar_container
+id navbar_test
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3366,10 +3379,14 @@ id progress_horizontal
 id radio
 id ratio
 id receive_text
+id receivedDataText
 id rectangles
 id report_drawn
+id restart
+id reverse
 id reverseSawtooth
 id right
+id rightColumn
 id rightToLeft
 id right_icon
 id right_side
@@ -3411,8 +3428,10 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
+id software
 id spacer
 id special_effects_controller_view_tag
+id spinnerOptions
 id spline
 id split_action_bar
 id spread
@@ -3693,6 +3712,7 @@ layout mtrl_picker_text_input_date_range
 layout mtrl_search_bar
 layout mtrl_search_view
 layout navbar_home
+layout navbar_pagesoftest
 layout navbar_test
 layout notification_action
 layout notification_action_tombstone
@@ -4714,7 +4734,6 @@ style Widget_Material3_Badge_AdjustToBounds
 style Widget_Material3_BottomAppBar
 style Widget_Material3_BottomAppBar_Button_Navigation
 style Widget_Material3_BottomAppBar_Legacy
-style Widget_Material3_BottomNavigation_Badge
 style Widget_Material3_BottomNavigationView
 style Widget_Material3_BottomNavigationView_ActiveIndicator
 style Widget_Material3_BottomSheet
@@ -5020,7 +5039,6 @@ styleable BottomSheetBehavior_Layout android_maxWidth android_maxHeight android_
 styleable ButtonBarLayout allowStacking
 styleable Capability queryPatterns shortcutMatchRequired
 styleable CardView android_minWidth android_minHeight cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
-styleable Carousel carousel_alignment
 styleable CheckedTextView android_checkMark checkMarkCompat checkMarkTint checkMarkTintMode
 styleable Chip android_textAppearance android_textSize android_textColor android_ellipsize android_maxWidth android_text android_checkable checkedIcon checkedIconEnabled checkedIconTint checkedIconVisible chipBackgroundColor chipCornerRadius chipEndPadding chipIcon chipIconEnabled chipIconSize chipIconTint chipIconVisible chipMinHeight chipMinTouchTargetSize chipStartPadding chipStrokeColor chipStrokeWidth chipSurfaceColor closeIcon closeIconEnabled closeIconEndPadding closeIconSize closeIconStartPadding closeIconTint closeIconVisible ensureMinTouchTargetSize hideMotionSpec iconEndPadding iconStartPadding rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec textEndPadding textStartPadding
 styleable ChipGroup checkedChip chipSpacing chipSpacingHorizontal chipSpacingVertical selectionRequired singleLine singleSelection
@@ -5067,6 +5085,7 @@ styleable LinearLayoutCompat android_gravity android_orientation android_baselin
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable LinearProgressIndicator indeterminateAnimationType indicatorDirectionLinear
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable LottieAnimationView lottie_autoPlay lottie_cacheComposition lottie_clipToCompositionBounds lottie_colorFilter lottie_defaultFontFileExtension lottie_enableMergePathsForKitKatAndAbove lottie_fallbackRes lottie_fileName lottie_ignoreDisabledSystemAnimations lottie_imageAssetsFolder lottie_loop lottie_progress lottie_rawRes lottie_renderMode lottie_repeatCount lottie_repeatMode lottie_speed lottie_url lottie_useCompositionFrameRate
 styleable MaterialAlertDialog backgroundInsetBottom backgroundInsetEnd backgroundInsetStart backgroundInsetTop backgroundTint
 styleable MaterialAlertDialogTheme materialAlertDialogBodyTextStyle materialAlertDialogButtonSpacerVisibility materialAlertDialogTheme materialAlertDialogTitleIconStyle materialAlertDialogTitlePanelStyle materialAlertDialogTitleTextStyle
 styleable MaterialAutoCompleteTextView android_inputType android_popupElevation dropDownBackgroundTint simpleItemLayout simpleItemSelectedColor simpleItemSelectedRippleColor simpleItems

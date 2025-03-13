@@ -2,54 +2,79 @@ package ucacue.edu.udipsai.UI.test;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.IBinder;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import ucacue.edu.udipsai.R;
+import android.widget.Toast;
+import android.Manifest;
 
-public class HomeTest extends AppCompatActivity {
-    private ImageView eagleImage;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import ucacue.edu.udipsai.R;
+import ucacue.edu.udipsai.Services.SerialListener;
+import ucacue.edu.udipsai.Services.SerialService;
+import ucacue.edu.udipsai.Services.SerialSocket;
+
+public class HomeTest extends AppCompatActivity implements SerialListener, ServiceConnection {
     private TextView patientName;
-    private Handler animationHandler = new Handler();
+    private SerialService service;
+    private SerialSocket socket;
+    private boolean isConnected = false;
+    private String currentMacAddress = null;
+
+    // Diccionario de botones y direcciones MAC
+    private final Map<Integer, String> macAddresses = new HashMap<Integer, String>() {{
+        put(R.id.btnMonotonia, "98:D3:71:FD:80:8B"); // MAC del dispositivo Monotonía
+        put(R.id.btnRiel, "66:77:88:99:AA:BB");      // MAC del dispositivo Riel
+        put(R.id.btnPalanca, "CC:DD:EE:FF:00:11");  // MAC del dispositivo Palanca
+        put(R.id.btnBennett, "22:33:44:55:66:77");  // MAC del dispositivo Bennett
+    }};
+
+    private final Map<Integer, Class<?>> testActivities = new HashMap<Integer, Class<?>>() {{
+        put(R.id.btnMonotonia, test_Monotonia.class);
+        put(R.id.btnRiel, test_Riel.class);
+        put(R.id.btnPalanca, test_Palanca.class);
+        put(R.id.btnBennett, test_Bennett.class);
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_test);
 
-        // Referencias a los elementos
-        eagleImage = findViewById(R.id.eagleImage);
         patientName = findViewById(R.id.patientName);
-        LinearLayout btnMonotonia = findViewById(R.id.btnMonotonia);
-        LinearLayout btnRiel = findViewById(R.id.btnRiel);
-        LinearLayout btnPalanca = findViewById(R.id.btnPalanca);
-        LinearLayout btnBennett = findViewById(R.id.btnBennett);
-        ImageView logoutIcon = findViewById(R.id.logoutIcon);
-        ImageView backIcon = findViewById(R.id.backIcon); // Icono de regreso
-
-        // Simulación de asignación del paciente (En caso real, pasar desde Intent)
         patientName.setText("Juan Pérez");
 
-        // Iniciar la animación del águila flotando
+        startService(new Intent(this, SerialService.class));
+        bindService(new Intent(this, SerialService.class), this, Context.BIND_AUTO_CREATE);
+
+        // Vinculamos cada botón con su dirección MAC y actividad
+        for (Map.Entry<Integer, String> entry : macAddresses.entrySet()) {
+            findViewById(entry.getKey()).setOnClickListener(v -> connectToDevice(entry.getValue(), testActivities.get(entry.getKey())));
+        }
+
         startEagleFloatingAnimation();
-
-        // Configurar eventos de clic para redirigir a las actividades correspondientes
-        btnMonotonia.setOnClickListener(v -> openTestActivity(test_Monotonia.class));
-        btnRiel.setOnClickListener(v -> openTestActivity(test_Riel.class));
-        btnPalanca.setOnClickListener(v -> openTestActivity(test_Palanca.class));
-        btnBennett.setOnClickListener(v -> openTestActivity(test_Bennett.class));
-
-        // Evento de clic para regresar a la página anterior
-        backIcon.setOnClickListener(v -> onBackPressed());
     }
 
     private void startEagleFloatingAnimation() {
-        ObjectAnimator floatAnimation = ObjectAnimator.ofFloat(eagleImage, "translationY", -20f, 20f);
+        ObjectAnimator floatAnimation = ObjectAnimator.ofFloat(findViewById(R.id.eagleImage), "translationY", -20f, 20f);
         floatAnimation.setDuration(2000);
         floatAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
         floatAnimation.setRepeatMode(ValueAnimator.REVERSE);
@@ -57,8 +82,121 @@ public class HomeTest extends AppCompatActivity {
         floatAnimation.start();
     }
 
-    private void openTestActivity(Class<?> testActivity) {
-        Intent intent = new Intent(HomeTest.this, testActivity);
-        startActivity(intent);
+    /**
+     * Inicia la conexión con el dispositivo Bluetooth según su dirección MAC.
+     */
+    private static final int REQUEST_BLUETOOTH_CONNECT = 1;
+
+    private void connectToDevice(String macAddress, Class<?> nextActivity) {
+        // Verificar si el permiso está concedido (Android 12+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            // Solicitar el permiso
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_BLUETOOTH_CONNECT);
+            return;
+        }
+
+        // Continuar con la conexión si el permiso está concedido
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            Toast.makeText(this, "Bluetooth no disponible o desactivado", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(macAddress);
+        if (device == null) {
+            Toast.makeText(this, "Dispositivo no encontrado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            socket = new SerialSocket(getApplicationContext(), device);
+            currentMacAddress = macAddress;
+            isConnected = true;
+            service.connect(socket);
+            Toast.makeText(this, "Conectando a " + macAddress, Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(this, "Error al conectar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Finaliza la conexión Bluetooth cuando el usuario regresa a HomeTest.
+     */
+    private void disconnect() {
+        if (socket != null) {
+            socket.disconnect();
+            socket = null;
+            isConnected = false;
+            currentMacAddress = null;
+        }
+    }
+
+    /**
+     * Implementación de SerialListener para manejar eventos de conexión Bluetooth.
+     */
+    @Override
+    public void onSerialConnect() {
+        runOnUiThread(() -> {
+            Toast.makeText(this, "Conexión exitosa", Toast.LENGTH_SHORT).show();
+            // Redirigir al usuario a la actividad correspondiente después de la conexión
+            Intent intent = new Intent(this, testActivities.get(getCurrentButtonId()));
+            startActivity(intent);
+        });
+    }
+
+    @Override
+    public void onSerialConnectError(Exception e) {
+        runOnUiThread(() -> Toast.makeText(this, "Error de conexión: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        disconnect();
+    }
+
+    @Override
+    public void onSerialRead(byte[] data) {
+        // No necesitamos leer datos en esta pantalla, pero se debe implementar el método.
+    }
+
+    @Override
+    public void onSerialRead(java.util.ArrayDeque<byte[]> datas) {
+        // No necesitamos leer datos en esta pantalla, pero se debe implementar el método.
+    }
+
+    @Override
+    public void onSerialIoError(Exception e) {
+        runOnUiThread(() -> {
+            Toast.makeText(this, "Conexión perdida, volviendo al inicio...", Toast.LENGTH_LONG).show();
+            disconnect();
+            Intent intent = new Intent(this, HomeTest.class);
+            startActivity(intent);
+        });
+    }
+
+    /**
+     * Lógica para asociar la conexión a su botón correspondiente
+     */
+    private int getCurrentButtonId() {
+        for (Map.Entry<Integer, String> entry : macAddresses.entrySet()) {
+            if (entry.getValue().equals(currentMacAddress)) {
+                return entry.getKey();
+            }
+        }
+        return -1; // Si no se encuentra, retorna -1
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder binder) {
+        service = ((SerialService.SerialBinder) binder).getService();
+        service.attach(this);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        service = null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        disconnect();
+        super.onDestroy();
     }
 }

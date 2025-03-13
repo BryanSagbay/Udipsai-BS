@@ -2,7 +2,7 @@ package ucacue.edu.udipsai.Services;
 
 import java.util.ArrayDeque;
 
-interface SerialListener {
+public interface SerialListener {
     void onSerialConnect      ();
     void onSerialConnectError (Exception e);
     void onSerialRead         (byte[] data);                // socket -> service

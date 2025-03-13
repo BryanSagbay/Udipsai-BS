@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "ucacue.edu.udipsai.app-mergeDebugResources-29:/values-gu/values-gu.xml",
+            "outputFile": "ucacue.edu.udipsai.app-mergeDebugResources-30:/values-gu/values-gu.xml",
             "map": [
                 {
-                    "source": "/Users/bryansagbay/.gradle/caches/8.10.2/transforms/c5c07204c2ff634f43af0fc5f36f0586/transformed/material-1.11.0/res/values-gu/values-gu.xml",
+                    "source": "/Users/bryansagbay/.gradle/caches/8.10.2/transforms/8045ff922730674f1717ee77d2c5096e/transformed/material-1.10.0/res/values-gu/values-gu.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
