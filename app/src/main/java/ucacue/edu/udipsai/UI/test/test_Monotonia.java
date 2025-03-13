@@ -1,23 +1,17 @@
 package ucacue.edu.udipsai.UI.test;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -29,145 +23,175 @@ import ucacue.edu.udipsai.Services.SerialListener;
 import ucacue.edu.udipsai.Services.SerialService;
 
 public class test_Monotonia extends AppCompatActivity implements SerialListener, ServiceConnection {
-
-    private FloatingActionButton fabPlay, fabReset;
-    private Spinner spinnerOptions;
-    private Button button1, button2, button3, button4;
-    private TextView receivedDataText;
-    private CardView dataCardView;
     private SerialService service;
-
+    private TextView receivedDataText;
+    private StringBuilder fullReceivedData = new StringBuilder(); // Para acumular datos recibidos
+    private boolean isBound = false;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_monotonia);
 
-        // Inicializar vistas
-        fabPlay = findViewById(R.id.fabPlay);
-        fabReset = findViewById(R.id.fabReset);
-        spinnerOptions = findViewById(R.id.spinnerOptions);
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
+        receivedDataText = findViewById(R.id.text_datos);
+        Button sendButtonS1 = findViewById(R.id.button_aletorio);
+        Button sendButtonS2 = findViewById(R.id.button_horario);
+        Button sendButtonS3 = findViewById(R.id.button_Antihorario);
+        Button sendButton1 = findViewById(R.id.button_rojo);
+        Button sendButton2 = findViewById(R.id.button_amarillo);
+        Button sendButton3 = findViewById(R.id.button_azul);
+        Button sendButton4 = findViewById(R.id.button_verde);
+        Button backButton = findViewById(R.id.button_regresar);
 
-        // Asumimos que tienes un TextView dentro de un CardView para mostrar datos recibidos
-        receivedDataText = findViewById(R.id.receivedDataText);
-        dataCardView = findViewById(R.id.cardView);
+        // Botón flotante Play
+        FloatingActionButton fabPlay = findViewById(R.id.fab_play);
+        FloatingActionButton fabReset = findViewById(R.id.fab_reset);
 
-        // Vincular al servicio existente
-        bindService(new Intent(this, SerialService.class), this, 0);
+        // Iniciar y vincular servicio Bluetooth
+        Intent intent = new Intent(this, SerialService.class);
+        bindService(intent, this, Context.BIND_AUTO_CREATE);
 
-        // Configurar Spinner con opciones correctas
-        String[] opciones = {"Selecciona una opción", "Aleatoriamente", "Horario", "Antihorario"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, opciones);
-        spinnerOptions.setAdapter(adapter);
-
-        // Deshabilitar botones y Spinner al inicio
-        deshabilitarBotonesYSpinner();
-
-        // Botón Play -> Habilita el Spinner y muestra Reset
+        // Botón para habilitar los botones
         fabPlay.setOnClickListener(v -> {
-            fabReset.setVisibility(View.VISIBLE);
-            spinnerOptions.setEnabled(true);
-            spinnerOptions.setAlpha(1.0f); // Hacer que se vea normal
+            habilitarBotones();
+            fabReset.setVisibility(View.VISIBLE); // Mostrar botón reset
+            Toast.makeText(this, "Botones habilitados", Toast.LENGTH_SHORT).show();
         });
 
-        // Evento de selección del Spinner
-        spinnerOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) { // Si no es la opción por defecto
-                    habilitarBotones();
-
-                    // Enviar comando según la opción seleccionada
-                    String command = "";
-                    switch (position) {
-                        case 1: // Aleatoriamente
-                            command = "M1";
-                            break;
-                        case 2: // Horario
-                            command = "M2";
-                            break;
-                        case 3: // Antihorario
-                            command = "M3";
-                            break;
-                    }
-
-                    sendCommand(command);
-                    Toast.makeText(test_Monotonia.this, "Enviado: " + command, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        // Asignar OnClickListener a los botones
-        button1.setOnClickListener(v -> {
-            sendCommand("rojo");
-            Toast.makeText(test_Monotonia.this, "Enviado: rojo", Toast.LENGTH_SHORT).show();
-            deshabilitarBotonesYSpinner();
-        });
-
-        button2.setOnClickListener(v -> {
-            sendCommand("amarillo");
-            Toast.makeText(test_Monotonia.this, "Enviado: amarillo", Toast.LENGTH_SHORT).show();
-            deshabilitarBotonesYSpinner();
-        });
-
-        button3.setOnClickListener(v -> {
-            sendCommand("azul");
-            Toast.makeText(test_Monotonia.this, "Enviado: azul", Toast.LENGTH_SHORT).show();
-            deshabilitarBotonesYSpinner();
-        });
-
-        button4.setOnClickListener(v -> {
-            sendCommand("verde");
-            Toast.makeText(test_Monotonia.this, "Enviado: verde", Toast.LENGTH_SHORT).show();
-            deshabilitarBotonesYSpinner();
-        });
-
-        // Botón Reset -> Reinicia todo
+        // Botón para resetear y deshabilitar botones
         fabReset.setOnClickListener(v -> {
-            // Deshabilita los botones y el Spinner
-            deshabilitarBotonesYSpinner();
-
-            // Oculta el botón Reset nuevamente
-            fabReset.setVisibility(View.GONE);
-
-            // Limpiar los datos acumulados en la variable global
-            fullReceivedData.setLength(0);
-
-            // Limpiar el texto en el TextView (pero sin ocultar la CardView)
-            receivedDataText.setText("Esperando datos..."); // Mensaje en lugar de ocultarlo
-
-            // Mantener la CardView visible
-            dataCardView.setVisibility(View.VISIBLE);
-
-            // Enviar el comando "S" por Bluetooth para indicar el reinicio
-            sendCommand("S");
-
-            // Mensaje de confirmación para el usuario
-            Toast.makeText(test_Monotonia.this, "Datos reiniciados y enviado: S", Toast.LENGTH_SHORT).show();
+            deshabilitarBotones();
+            fabReset.setVisibility(View.GONE); // Ocultar botón reset
+            Toast.makeText(this, "Botones deshabilitados", Toast.LENGTH_SHORT).show();
         });
 
-        // Configurar el botón de retroceso (backIcon)
-        View navbarView = findViewById(R.id.navbar_test);
-        ImageButton backIcon = navbarView.findViewById(R.id.backIcon);
+        // Botones de envío de datos
+        sendButtonS1.setOnClickListener(v -> sendData("M1"));
+        sendButtonS2.setOnClickListener(v -> sendData("M2"));
+        sendButtonS3.setOnClickListener(v -> sendData("M3"));
+        sendButton1.setOnClickListener(v -> sendData("rojo"));
+        sendButton2.setOnClickListener(v -> sendData("amarillo"));
+        sendButton3.setOnClickListener(v -> sendData("azul"));
+        sendButton4.setOnClickListener(v -> sendData("verde"));
 
-        backIcon.setOnClickListener(v -> {
+        // Botón para regresar y desconectar Bluetooth
+        backButton.setOnClickListener(v -> {
             disconnectBluetooth();
             Intent homeIntent = new Intent(test_Monotonia.this, HomeTest.class);
             startActivity(homeIntent);
             finish();
         });
 
-
+        // Deshabilitar botones al inicio
+        deshabilitarBotones();
     }
 
-    private boolean isBound = false;
+    /**
+     * Método para habilitar los botones
+     */
+    private void habilitarBotones() {
+        Button[] botones = {
+                findViewById(R.id.button_aletorio),
+                findViewById(R.id.button_horario),
+                findViewById(R.id.button_Antihorario),
+                findViewById(R.id.button_rojo),
+                findViewById(R.id.button_amarillo),
+                findViewById(R.id.button_azul),
+                findViewById(R.id.button_verde)
+        };
 
+        for (Button btn : botones) {
+            btn.setEnabled(true);
+            btn.setAlpha(1.0f); // Quitar opacidad
+        }
+    }
+
+    /**
+     * Método para deshabilitar los botones
+     */
+    private void deshabilitarBotones() {
+        Button[] botones = {
+                findViewById(R.id.button_aletorio),
+                findViewById(R.id.button_horario),
+                findViewById(R.id.button_Antihorario),
+                findViewById(R.id.button_rojo),
+                findViewById(R.id.button_amarillo),
+                findViewById(R.id.button_azul),
+                findViewById(R.id.button_verde)
+        };
+
+        for (Button btn : botones) {
+            btn.setEnabled(false);
+            btn.setAlpha(0.5f); // Poner opacidad para indicar que están deshabilitados
+        }
+    }
+
+
+    /**
+     * Enviar datos al dispositivo Bluetooth
+     */
+    private void sendData(String message) {
+        if (service != null) {
+            try {
+                service.write(message.getBytes("UTF-8")); // Compatible con API 18+
+                Toast.makeText(this, "Mensaje enviado: " + message, Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                Toast.makeText(this, "Error al enviar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "No hay conexión Bluetooth", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Recibir y mostrar datos del dispositivo Bluetooth
+     */
+    @Override
+    public void onSerialRead(ArrayDeque<byte[]> datas) {
+        runOnUiThread(() -> {
+            for (byte[] data : datas) {
+                try {
+                    fullReceivedData.append(new String(data, "UTF-8")); // Acumular los datos recibidos
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Mostrar los datos completos en el TextView
+            if (receivedDataText != null) {
+                receivedDataText.setText("Datos recibidos: " + fullReceivedData.toString());
+            }
+        });
+    }
+
+    /**
+     * Manejo de conexión y errores Bluetooth
+     */
+    @Override
+    public void onSerialConnect() {
+        runOnUiThread(() -> Toast.makeText(this, "Conexión Bluetooth establecida", Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    public void onSerialConnectError(Exception e) {
+        runOnUiThread(() -> Toast.makeText(this, "Error de conexión: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    public void onSerialRead(byte[] data) {
+    }
+
+    @Override
+    public void onSerialIoError(Exception e) {
+        runOnUiThread(() -> {
+            Toast.makeText(this, "Error de comunicación", Toast.LENGTH_SHORT).show();
+            disconnectBluetooth();
+        });
+    }
+
+    /**
+     * Cerrar conexión Bluetooth
+     */
     private void disconnectBluetooth() {
         if (service != null) {
             service.disconnect();
@@ -177,96 +201,10 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             isBound = false;
         }
     }
-    // Método para enviar comandos por Bluetooth
-    private void sendCommand(String command) {
-        if (service != null) {
-            try {
-                service.write(command.getBytes());
-            } catch (IOException e) {
-                Toast.makeText(this, "Error al enviar comando: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(this, "No conectado al dispositivo", Toast.LENGTH_SHORT).show();
-        }
-    }
 
-    // Método para habilitar los botones (quita la opacidad)
-    private void habilitarBotones() {
-        button1.setEnabled(true);
-        button2.setEnabled(true);
-        button3.setEnabled(true);
-        button4.setEnabled(true);
-
-        button1.setAlpha(1.0f);
-        button2.setAlpha(1.0f);
-        button3.setAlpha(1.0f);
-        button4.setAlpha(1.0f);
-    }
-
-    // Método para deshabilitar botones y el Spinner (los hace opacos)
-    private void deshabilitarBotonesYSpinner() {
-        spinnerOptions.setEnabled(false);
-        spinnerOptions.setAlpha(0.5f); // Opacar el Spinner
-        spinnerOptions.setSelection(0); // Resetear selección
-
-        button1.setEnabled(false);
-        button2.setEnabled(false);
-        button3.setEnabled(false);
-        button4.setEnabled(false);
-
-        button1.setAlpha(0.5f);
-        button2.setAlpha(0.5f);
-        button3.setAlpha(0.5f);
-        button4.setAlpha(0.5f);
-    }
-
-    // Implementación de métodos de SerialListener
-    @Override
-    public void onSerialConnect() {
-        runOnUiThread(() -> Toast.makeText(this, "Conectado y listo para usar", Toast.LENGTH_SHORT).show());
-    }
-
-    @Override
-    public void onSerialConnectError(Exception e) {
-        runOnUiThread(() -> {
-            Toast.makeText(this, "Error de conexión: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            finish(); // Volver a HomeTest si hay error
-        });
-    }
-
-    @Override
-    public void onSerialRead(byte[] data) {
-    }
-
-    // Agrega esta variable global en tu clase
-    private StringBuilder fullReceivedData = new StringBuilder();
-
-    @Override
-    public void onSerialRead(ArrayDeque<byte[]> datas) {
-        runOnUiThread(() -> {
-            for (byte[] data : datas) {
-                fullReceivedData.append(new String(data)); // Acumular los datos
-            }
-
-            // Mostrar los datos completos en el TextView
-            if (receivedDataText != null) {
-                receivedDataText.setText("Datos recibidos: " + fullReceivedData.toString());
-                dataCardView.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-
-
-    @Override
-    public void onSerialIoError(Exception e) {
-        runOnUiThread(() -> {
-            Toast.makeText(this, "Error de comunicación: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            finish(); // Volver a HomeTest si hay error
-        });
-    }
-
-    // Implementación de métodos de ServiceConnection
+    /**
+     * Métodos para el ServiceConnection
+     */
     @Override
     public void onServiceConnected(ComponentName name, IBinder binder) {
         service = ((SerialService.SerialBinder) binder).getService();
@@ -279,8 +217,6 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         service = null;
         isBound = false;
     }
-
-    private boolean isFinishing = false; // Agregar al principio de la clase
 
     @Override
     protected void onDestroy() {
