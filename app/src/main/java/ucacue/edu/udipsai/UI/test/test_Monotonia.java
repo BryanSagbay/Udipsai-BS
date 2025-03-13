@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -149,9 +152,31 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             Toast.makeText(test_Monotonia.this, "Datos reiniciados y enviado: S", Toast.LENGTH_SHORT).show();
         });
 
+        // Configurar el botón de retroceso (backIcon)
+        View navbarView = findViewById(R.id.navbar_test);
+        ImageButton backIcon = navbarView.findViewById(R.id.backIcon);
+
+        backIcon.setOnClickListener(v -> {
+            disconnectBluetooth();
+            Intent homeIntent = new Intent(test_Monotonia.this, HomeTest.class);
+            startActivity(homeIntent);
+            finish();
+        });
+
 
     }
 
+    private boolean isBound = false;
+
+    private void disconnectBluetooth() {
+        if (service != null) {
+            service.disconnect();
+        }
+        if (isBound) {
+            unbindService(this);
+            isBound = false;
+        }
+    }
     // Método para enviar comandos por Bluetooth
     private void sendCommand(String command) {
         if (service != null) {
@@ -211,7 +236,6 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
 
     @Override
     public void onSerialRead(byte[] data) {
-        // Este método no se usa directamente, los datos llegan desde onSerialRead(ArrayDeque<byte[]>)
     }
 
     // Agrega esta variable global en tu clase
@@ -247,25 +271,20 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
     public void onServiceConnected(ComponentName name, IBinder binder) {
         service = ((SerialService.SerialBinder) binder).getService();
         service.attach(this);
+        isBound = true;
     }
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
         service = null;
+        isBound = false;
     }
 
-    @Override
-    public void onBackPressed() {
-        // Solo volver a HomeTest, la desconexión se maneja allí
-        super.onBackPressed();
-    }
+    private boolean isFinishing = false; // Agregar al principio de la clase
 
     @Override
     protected void onDestroy() {
-        if (service != null) {
-            service.detach();
-            unbindService(this);
-        }
         super.onDestroy();
+        disconnectBluetooth();
     }
 }

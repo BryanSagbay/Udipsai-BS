@@ -3123,8 +3123,11 @@ id button3
 id button4
 id buttonContainer
 id buttonPanel
+id button_enviar_m1
+id button_regresar
 id cancel_button
 id cardView
+id card_datos
 id center
 id centerCrop
 id centerInside
@@ -3224,6 +3227,7 @@ id graph_wrap
 id gridButtons
 id group_divider
 id groups
+id guidelineCenter
 id hardware
 id header_title
 id hex
@@ -3476,6 +3480,7 @@ id textSpacerNoTitle
 id textStart
 id textTest
 id textTop
+id text_datos
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon

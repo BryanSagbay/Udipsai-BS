@@ -70,7 +70,7 @@
                 android:background="@drawable/test_btn_1"
                 android:backgroundTint="@color/red89"
                 android:enabled="false"
-                android:text="" />
+                android:text="ㅤ" />
 
             <Button
                 android:id="@+id/button2"
@@ -80,7 +80,7 @@
                 android:background="@drawable/test_btn_2"
                 android:backgroundTint="@color/yellow20"
                 android:enabled="false"
-                android:text="" />
+                android:text="ㅤ" />
 
             <Button
                 android:id="@+id/button3"
@@ -90,7 +90,7 @@
                 android:background="@drawable/test_btn_3"
                 android:backgroundTint="@color/bluedark"
                 android:enabled="false"
-                android:text="" />
+                android:text="ㅤ" />
 
             <Button
                 android:id="@+id/button4"
@@ -100,7 +100,7 @@
                 android:background="@drawable/test_btn_4"
                 android:backgroundTint="@color/greendark"
                 android:enabled="false"
-                android:text="" />
+                android:text="ㅤ" />
         </GridLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Contenido de la tarjeta"
-                android:background="@android:color/darker_gray"
+                android:background="@android:color/background_dark"
                 android:gravity="center"
                 android:padding="16dp"/>
         </androidx.cardview.widget.CardView>
@@ -154,7 +154,7 @@
         android:src="@android:drawable/ic_media_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp" />
 
     <!-- Botón flotante de Reinicio (inicialmente invisible) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton

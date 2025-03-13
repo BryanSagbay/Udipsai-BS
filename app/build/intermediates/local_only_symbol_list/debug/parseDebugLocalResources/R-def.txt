@@ -63,7 +63,10 @@ id button2
 id button3
 id button4
 id buttonContainer
+id button_enviar_m1
+id button_regresar
 id cardView
+id card_datos
 id clear
 id eagleImage
 id etEmail
@@ -72,6 +75,7 @@ id fabPlay
 id fabReset
 id fragment
 id gridButtons
+id guidelineCenter
 id hex
 id iconPacientes
 id iconSoporte
@@ -96,6 +100,7 @@ id text2
 id textPacientes
 id textSoporte
 id textTest
+id text_datos
 id toolbar
 id tvForgotPassword
 id tvRegister

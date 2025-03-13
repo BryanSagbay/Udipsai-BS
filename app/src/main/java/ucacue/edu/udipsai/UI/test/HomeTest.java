@@ -2,6 +2,7 @@ package ucacue.edu.udipsai.UI.test;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
@@ -12,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ import android.Manifest;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,10 +45,10 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
 
     // Diccionario de botones y direcciones MAC
     private final Map<Integer, String> macAddresses = new HashMap<Integer, String>() {{
-        put(R.id.btnMonotonia, "98:D3:71:FD:80:8B"); // MAC del dispositivo Monotonía
-        put(R.id.btnRiel, "66:77:88:99:AA:BB");      // MAC del dispositivo Riel
-        put(R.id.btnPalanca, "CC:DD:EE:FF:00:11");  // MAC del dispositivo Palanca
-        put(R.id.btnBennett, "22:33:44:55:66:77");  // MAC del dispositivo Bennett
+        put(R.id.btnMonotonia, "98:D3:71:FD:80:8B");
+        put(R.id.btnRiel, "98:D3:31:F6:5D:9D");
+        put(R.id.btnPalanca, "00:22:03:01:3C:45");
+        put(R.id.btnBennett, "98:D3:11:FC:3B:3D");
     }};
 
     private final Map<Integer, Class<?>> testActivities = new HashMap<Integer, Class<?>>() {{
@@ -62,12 +66,19 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         patientName = findViewById(R.id.patientName);
         patientName.setText("Juan Pérez");
 
+        disconnect();
+
         startService(new Intent(this, SerialService.class));
         bindService(new Intent(this, SerialService.class), this, Context.BIND_AUTO_CREATE);
 
         // Vinculamos cada botón con su dirección MAC y actividad
         for (Map.Entry<Integer, String> entry : macAddresses.entrySet()) {
             findViewById(entry.getKey()).setOnClickListener(v -> connectToDevice(entry.getValue(), testActivities.get(entry.getKey())));
+        }
+
+        // Verificar si el Intent tiene el Extra "disconnected"
+        if (getIntent() != null && getIntent().getBooleanExtra("disconnected", false)) {
+            showDisconnected();
         }
 
         startEagleFloatingAnimation();
@@ -153,18 +164,16 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
 
     @Override
     public void onSerialRead(byte[] data) {
-        // No necesitamos leer datos en esta pantalla, pero se debe implementar el método.
     }
 
     @Override
     public void onSerialRead(java.util.ArrayDeque<byte[]> datas) {
-        // No necesitamos leer datos en esta pantalla, pero se debe implementar el método.
     }
 
     @Override
     public void onSerialIoError(Exception e) {
         runOnUiThread(() -> {
-            Toast.makeText(this, "Conexión perdida, volviendo al inicio...", Toast.LENGTH_LONG).show();
+            showDisconnectedDialog();
             disconnect();
             Intent intent = new Intent(this, HomeTest.class);
             startActivity(intent);
@@ -180,7 +189,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
                 return entry.getKey();
             }
         }
-        return -1; // Si no se encuentra, retorna -1
+        return -1;
     }
 
     @Override
@@ -199,4 +208,25 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         disconnect();
         super.onDestroy();
     }
+    /**
+     * Alertas
+     */
+
+    private void showDisconnectedDialog() {
+        runOnUiThread(() -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Conexión Perdida")
+                    .setMessage("Se perdió la conexión con el dispositivo. Por favor, vuelva a conectarse.")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
+        });
+    }
+
+    // Método para mostrar la alerta de desconexión
+    private void showDisconnected() {
+        View rootView = findViewById(android.R.id.content); // Obtiene la vista raíz
+        Snackbar.make(rootView, "Conexión finalizada", Snackbar.LENGTH_LONG).show();
+    }
+
+
 }

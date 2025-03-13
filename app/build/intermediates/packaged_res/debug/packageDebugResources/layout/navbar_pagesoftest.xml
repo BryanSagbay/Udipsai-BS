@@ -3,21 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:background="@color/black89"
-    android:elevation="8dp"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:padding="7dp">
+    android:gravity="center_vertical">
 
 
     <!-- Icono de regreso (Alineado a la izquierda) -->
-    <ImageView
+    <ImageButton
         android:id="@+id/backIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/ic_back"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitCenter"
         android:padding="8dp"/>
+
 
     <TextView
         android:id="@+id/universityText"
@@ -39,19 +39,21 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="end"
+        android:gravity="center"
         android:orientation="horizontal"
         >
 
         <!-- Logo izquierdo -->
+
+        <!-- Espaciado pequeño entre logos -->
         <ImageView
             android:id="@+id/logoLeft"
             android:layout_width="140dp"
             android:layout_height="45dp"
-            android:src="@drawable/lg_ucacuelogo"
-            android:scaleType="fitEnd"/>
+            android:layout_marginEnd="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/lg_ucacuelogo" />
 
-        <!-- Espaciado pequeño entre logos -->
         <View
             android:layout_width="16dp"
             android:layout_height="match_parent"/>
@@ -59,9 +61,10 @@
         <!-- Logo derecho -->
         <ImageView
             android:id="@+id/logoRight"
-            android:layout_width="145dp"
+            android:layout_width="140dp"
             android:layout_height="45dp"
-            android:scaleType="fitEnd"
+            android:layout_marginEnd="16dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/lg_udipsai"/>
 
     </LinearLayout>

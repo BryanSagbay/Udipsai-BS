@@ -3122,8 +3122,11 @@ int id button3 0x7f090065
 int id button4 0x7f090066
 int id buttonContainer 0x7f090067
 int id buttonPanel 0x7f090068
+int id button_enviar_m1 0x7f0901fb
+int id button_regresar 0x7f0901fc
 int id cancel_button 0x7f090069
 int id cardView 0x7f09006a
+int id card_datos 0x7f0901fd
 int id center 0x7f09006b
 int id centerCrop 0x7f09006c
 int id centerInside 0x7f09006d
@@ -3223,6 +3226,7 @@ int id graph_wrap 0x7f0900ca
 int id gridButtons 0x7f0900cb
 int id group_divider 0x7f0900cc
 int id groups 0x7f0900cd
+int id guidelineCenter 0x7f0901fe
 int id hardware 0x7f0900ce
 int id header_title 0x7f0900cf
 int id hex 0x7f0900d0
@@ -3475,6 +3479,7 @@ int id textSpacerNoTitle 0x7f0901c4
 int id textStart 0x7f0901c5
 int id textTest 0x7f0901c6
 int id textTop 0x7f0901c7
+int id text_datos 0x7f0901ff
 int id text_input_end_icon 0x7f0901c8
 int id text_input_error_icon 0x7f0901c9
 int id text_input_start_icon 0x7f0901ca
