@@ -64,6 +64,8 @@ id button3
 id button4
 id buttonContainer
 id button_enviar_m1
+id button_enviar_m2
+id button_enviar_m3
 id button_regresar
 id cardView
 id card_datos
