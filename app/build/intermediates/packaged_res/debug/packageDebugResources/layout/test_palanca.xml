@@ -137,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/yellow20"
         android:contentDescription="Reiniciar"
         android:src="@android:drawable/ic_menu_revert"
         android:visibility="gone"

@@ -26,6 +26,7 @@ color yellow20
 drawable btn_rounded
 drawable btn_roundedtest
 drawable card_testview
+drawable dibujo
 drawable ic_back
 drawable ic_clear_white_24dp
 drawable ic_delete_white_24dp
@@ -43,6 +44,8 @@ drawable lg_ofertafond
 drawable lg_ucacue
 drawable lg_ucacuelogo
 drawable lg_udipsai
+drawable linea_de_meta
+drawable reloj_de_arena
 drawable test_bennett
 drawable test_btn_1
 drawable test_btn_2
@@ -89,6 +92,7 @@ id etPassword
 id fab_play
 id fab_reset
 id fragment
+id gif_status
 id guidelineCenter
 id hex
 id iconPacientes

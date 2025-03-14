@@ -9,11 +9,13 @@ import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -29,12 +31,16 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
     private StringBuilder fullReceivedData = new StringBuilder();
     private boolean isBound = false;
 
+    private ImageView gifStatus;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_riel);
 
         receivedDataText = findViewById(R.id.text_datosR);
+        gifStatus = findViewById(R.id.gif_status);
         Button sendButton = findViewById(R.id.button_enviar_m1R);
         ImageButton backButton = findViewById(R.id.button_regresarR);
         FloatingActionButton playButton = findViewById(R.id.button_play);
@@ -43,6 +49,10 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
         sendButton.setEnabled(false);
         resetButton.setVisibility(View.GONE);
+
+        // Cargar GIF de espera al inicio
+        loadGif(R.drawable.reloj_de_arena);
+        receivedDataText.setText("Esperando, presione Comenzar..");
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
@@ -57,15 +67,19 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         // Botón Enviar M1: Enviar comando y deshabilitar
         sendButton.setOnClickListener(v -> {
             sendData("M1");
-            sendButton.setEnabled(false); // Deshabilitar después de presionar
+            sendButton.setEnabled(false);
+            loadGif(R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el juego...");
         });
 
         // Botón de reinicio: Enviar comando "S" y limpiar datos
         resetButton.setOnClickListener(v -> {
             sendData("S"); // Enviar el comando de reinicio
-            receivedDataText.setText("Esperando datos..."); // Limpiar datos
-            sendButton.setEnabled(false); // Deshabilitar botón Enviar M1
-            resetButton.setVisibility(View.GONE); // Ocultar botón de reinicio nuevamente
+            receivedDataText.setText("Esperando datos...");
+            sendButton.setEnabled(false);
+            resetButton.setVisibility(View.GONE);
+            loadGif(R.drawable.reloj_de_arena);
+
         });
 
         // Botón para regresar y desconectar Bluetooth
@@ -78,6 +92,12 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
     }
 
 
+    private void loadGif(int gifResource) {
+        Glide.with(this)
+                .asGif()
+                .load(gifResource)
+                .into(gifStatus);
+    }
     /**
      * Enviar datos al dispositivo Bluetooth
      */
@@ -108,12 +128,35 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
                 }
             }
 
-            // Mostrar los datos completos en el TextView
-            if (receivedDataText != null) {
-                receivedDataText.setText("Datos recibidos: " + fullReceivedData.toString());
+            // Procesar los datos recibidos
+            if (fullReceivedData.length() > 0) {
+                String receivedString = fullReceivedData.toString().trim();
+
+                // Dividir los datos usando la coma como separador
+                String[] values = receivedString.split(",");
+
+                if (values.length == 2) { // Asegurar que se reciban dos valores
+                    String errores = values[0]; // Primer valor (errores)
+                    String tiempoEjecucion = values[1]; // Segundo valor (tiempo de ejecución)
+
+                    // Formatear la salida deseada
+                    String formattedText = "Errores:\n" + errores + "\nTiempo de Ejecución: \n" + tiempoEjecucion;
+
+                    // Mostrar los datos formateados en el TextView
+                    if (receivedDataText != null) {
+                        receivedDataText.setText(formattedText);
+                    }
+
+                    // Mostrar GIF de línea de meta
+                    loadGif(R.drawable.linea_de_meta);
+
+                    // Limpiar el StringBuilder después de procesar los datos
+                    fullReceivedData.setLength(0);
+                }
             }
         });
     }
+
 
     /**
      * Manejo de conexión y errores Bluetooth

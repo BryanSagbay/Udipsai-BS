@@ -106,7 +106,6 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
                     e.printStackTrace();
                 }
             }
-
             // Mostrar los datos completos en el TextView
             if (receivedDataText != null) {
                 receivedDataText.setText("Datos recibidos: " + fullReceivedData.toString());
