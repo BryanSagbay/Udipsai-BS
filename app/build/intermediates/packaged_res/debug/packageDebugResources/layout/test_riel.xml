@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.test.test_Palanca">
+    tools:context=".UI.test.test_Riel">
 
     <!-- AppBar (Toolbar) -->
     <androidx.appcompat.widget.Toolbar
@@ -148,8 +148,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_datos"
-        android:layout_width="688dp"
-        android:layout_height="281dp"
+        android:layout_width="695dp"
+        android:layout_height="290dp"
         android:layout_marginTop="240dp"
         android:layout_marginEnd="44dp"
         android:background="@drawable/card_testview"
@@ -175,10 +175,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/gif_status"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="90dp"
+            android:id="@+id/gif_statusR"
+            android:layout_width="170dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="120dp"
             android:layout_marginStart="270dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -40,7 +40,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         setContentView(R.layout.test_riel);
 
         receivedDataText = findViewById(R.id.text_datosR);
-        gifStatus = findViewById(R.id.gif_status);
+        gifStatus = findViewById(R.id.gif_statusR);
         Button sendButton = findViewById(R.id.button_enviar_m1R);
         ImageButton backButton = findViewById(R.id.button_regresarR);
         FloatingActionButton playButton = findViewById(R.id.button_play);
@@ -156,7 +156,6 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
             }
         });
     }
-
 
     /**
      * Manejo de conexión y errores Bluetooth

@@ -3146,6 +3146,7 @@ id button_rojo
 id button_verde
 id cancel_button
 id card_datos
+id card_datosP
 id center
 id centerCrop
 id centerInside
@@ -3239,7 +3240,8 @@ id fragment_container_view_tag
 id fullscreen_header
 id ghost_view
 id ghost_view_holder
-id gif_status
+id gif_statusP
+id gif_statusR
 id glide_custom_view_target_tag
 id gone
 id graph

@@ -3145,6 +3145,7 @@ int id button_rojo 0x7f090074
 int id button_verde 0x7f090075
 int id cancel_button 0x7f090076
 int id card_datos 0x7f090077
+int id card_datosP 0x7f09020b
 int id center 0x7f090078
 int id centerCrop 0x7f090079
 int id centerInside 0x7f09007a
@@ -3238,7 +3239,8 @@ int id fragment_container_view_tag 0x7f0900d1
 int id fullscreen_header 0x7f0900d2
 int id ghost_view 0x7f0900d3
 int id ghost_view_holder 0x7f0900d4
-int id gif_status 0x7f090209
+int id gif_statusP 0x7f09020c
+int id gif_statusR 0x7f09020d
 int id glide_custom_view_target_tag 0x7f09020a
 int id gone 0x7f0900d5
 int id graph 0x7f0900d6

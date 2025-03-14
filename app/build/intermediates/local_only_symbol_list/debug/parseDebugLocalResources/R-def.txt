@@ -85,6 +85,7 @@ id button_resetP
 id button_rojo
 id button_verde
 id card_datos
+id card_datosP
 id clear
 id eagleImage
 id etEmail
@@ -92,7 +93,8 @@ id etPassword
 id fab_play
 id fab_reset
 id fragment
-id gif_status
+id gif_statusP
+id gif_statusR
 id guidelineCenter
 id hex
 id iconPacientes

@@ -136,6 +136,10 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-35:/drawable/lg_fondo.png"
     },
     {
+        "merged": "ucacue.edu.udipsai.app-debug-33:/layout_test_palanca.xml.flat",
+        "source": "ucacue.edu.udipsai.app-main-35:/layout/test_palanca.xml"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-33:/drawable_ic_soporte.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-35:/drawable/ic_soporte.png"
     },
