@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- Color de fondo del botón -->
-    <solid android:color="@color/white80"/>
+    <solid android:color="@color/white"/>
 
     <!-- Bordes redondeados -->
     <corners android:radius="20dp"/>
