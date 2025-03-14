@@ -31,7 +31,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
     private StringBuilder fullReceivedData = new StringBuilder();
     private boolean isBound = false;
 
-    private ImageView gifStatus;
+    private ImageView gifStatusR;
 
 
     @Override
@@ -40,7 +40,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         setContentView(R.layout.test_riel);
 
         receivedDataText = findViewById(R.id.text_datosR);
-        gifStatus = findViewById(R.id.gif_statusR);
+        gifStatusR = findViewById(R.id.gif_statusR);
         Button sendButton = findViewById(R.id.button_enviar_m1R);
         ImageButton backButton = findViewById(R.id.button_regresarR);
         FloatingActionButton playButton = findViewById(R.id.button_play);
@@ -91,12 +91,12 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         });
     }
 
-
+    // Cargar GIFs
     private void loadGif(int gifResource) {
         Glide.with(this)
                 .asGif()
                 .load(gifResource)
-                .into(gifStatus);
+                .into(gifStatusR);
     }
     /**
      * Enviar datos al dispositivo Bluetooth

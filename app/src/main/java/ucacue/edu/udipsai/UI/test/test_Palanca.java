@@ -30,7 +30,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
     private TextView receivedDataText;
     private StringBuilder fullReceivedData = new StringBuilder(); // Para acumular datos recibidos
     private boolean isBound = false;
-    private ImageView gifStatus;
+    private ImageView gifStatusP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         setContentView(R.layout.test_palanca);
 
         receivedDataText = findViewById(R.id.text_datosP);
-        gifStatus = findViewById(R.id.gif_statusP);
+        gifStatusP = findViewById(R.id.gif_statusP);
         Button sendButton = findViewById(R.id.button_enviar_m1P);
         ImageButton backButton = findViewById(R.id.button_regresarP);
         FloatingActionButton playButton = findViewById(R.id.button_playP);
@@ -94,7 +94,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         Glide.with(this)
                 .asGif()
                 .load(gifResource)
-                .into(gifStatus);
+                .into(gifStatusP);
     }
 
     /**
