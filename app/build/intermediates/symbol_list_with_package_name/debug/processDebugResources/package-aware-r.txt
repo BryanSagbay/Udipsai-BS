@@ -3132,9 +3132,13 @@ id button_enviar_m1R
 id button_enviar_m2
 id button_enviar_m3
 id button_horario
+id button_play
+id button_playP
 id button_regresar
 id button_regresarP
 id button_regresarR
+id button_reset
+id button_resetP
 id button_rojo
 id button_verde
 id cancel_button

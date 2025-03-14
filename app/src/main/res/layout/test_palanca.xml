@@ -116,6 +116,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Botón Flotante Play -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_playP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/blue"
+        android:contentDescription="Iniciar"
+        android:src="@android:drawable/ic_media_play"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Botón Flotante Reinicio (Inicialmente oculto) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_resetP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/yellow20"
+        android:contentDescription="Reiniciar"
+        android:src="@android:drawable/ic_menu_revert"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_playP" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_datos"
         android:layout_width="688dp"

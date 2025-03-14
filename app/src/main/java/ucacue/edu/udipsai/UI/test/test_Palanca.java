@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -34,14 +37,36 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         receivedDataText = findViewById(R.id.text_datosP);
         Button sendButton = findViewById(R.id.button_enviar_m1P);
         ImageButton backButton = findViewById(R.id.button_regresarP);
+        FloatingActionButton playButton = findViewById(R.id.button_playP);
+        FloatingActionButton resetButton = findViewById(R.id.button_resetP);
+
+        // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
+        sendButton.setEnabled(false);
+        resetButton.setVisibility(View.GONE);
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
         bindService(intent, this, Context.BIND_AUTO_CREATE);
 
-        // Botón para enviar "M1" al dispositivo
-        sendButton.setOnClickListener(v -> sendData("M1"));
+        // Botón Play: Habilita "Enviar M1" y muestra "Reinicio"
+        playButton.setOnClickListener(v -> {
+            sendButton.setEnabled(true); // Habilitar botón Enviar M1
+            resetButton.setVisibility(View.VISIBLE); // Mostrar botón de reinicio
+        });
 
+        // Botón Enviar M1: Enviar comando y deshabilitar
+        sendButton.setOnClickListener(v -> {
+            sendData("M1");
+            sendButton.setEnabled(false); // Deshabilitar después de presionar
+        });
+
+        // Botón de reinicio: Enviar comando "S" y limpiar datos
+        resetButton.setOnClickListener(v -> {
+            sendData("S"); // Enviar el comando de reinicio
+            receivedDataText.setText("Esperando datos..."); // Limpiar datos
+            sendButton.setEnabled(false); // Deshabilitar botón Enviar M1
+            resetButton.setVisibility(View.GONE); // Ocultar botón de reinicio nuevamente
+        });
 
         // Botón para regresar y desconectar Bluetooth
         backButton.setOnClickListener(v -> {
