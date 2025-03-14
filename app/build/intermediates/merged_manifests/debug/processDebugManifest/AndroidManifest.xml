@@ -38,6 +38,7 @@
         <activity
             android:name="ucacue.edu.udipsai.UI.home.HomePage"
             android:exported="true"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,22 +47,27 @@
             </intent-filter>
         </activity>
 
-        <!-- Nueva actividad para Test -->
+        <!-- Pages of Test -->
         <activity
             android:name="ucacue.edu.udipsai.UI.test.HomeTest"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name="ucacue.edu.udipsai.UI.test.test_Monotonia"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name="ucacue.edu.udipsai.UI.test.test_Riel"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name="ucacue.edu.udipsai.UI.test.test_Palanca"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name="ucacue.edu.udipsai.UI.test.test_Bennett"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
 
         <service
             android:name="ucacue.edu.udipsai.Services.SerialService"

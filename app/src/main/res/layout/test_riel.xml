@@ -5,9 +5,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.test.test_Riel">
+    tools:context=".UI.test.test_Palanca">
+
+    <!-- AppBar (Toolbar) -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Contenedor para elementos personalizados de la Toolbar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Botón Regresar correctamente posicionado -->
+            <ImageButton
+                android:id="@+id/button_regresarR"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Regresar"
+                android:padding="6dp"
+                android:src="@android:drawable/ic_menu_revert"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Título de la página -->
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Sistema de Motricidad"
+                android:textColor="@android:color/white"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/logo1"
+                app:layout_constraintStart_toEndOf="@id/button_regresarR"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Logo 1 -->
+            <ImageView
+                android:id="@+id/logo1"
+                android:layout_width="140dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Logo 1"
+                android:src="@drawable/lg_ucacuelogo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/logo2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Logo 2 -->
+            <ImageView
+                android:id="@+id/logo2"
+                android:layout_width="140dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Logo 2"
+                android:src="@drawable/lg_udipsai"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Contenedor del cuerpo con fondo -->
 
     <!-- Guía vertical para dividir la pantalla en dos columnas -->
+
+    <View
+        android:id="@+id/body_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/lg_ofertafond"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCenter"
         android:layout_width="wrap_content"
@@ -16,50 +101,42 @@
         app:layout_constraintGuide_percent="0.4"/>  <!-- 40% de la pantalla para la columna izquierda -->
 
     <!-- Botón Enviar M1 -->
-    <Button
-        android:id="@+id/button_enviar_m1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Enviar M1"
-        android:padding="8dp"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"/>
-
-    <!-- Botón Regresar -->
-    <Button
-        android:id="@+id/button_regresar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Regresar"
-        android:padding="8dp"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/button_enviar_m1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"/>
 
     <!-- CardView para mostrar los datos -->
+
+    <Button
+        android:id="@+id/button_enviar_m1R"
+        android:layout_width="406dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/btn_roundedtest"
+        android:padding="8dp"
+        android:text="Enviar M1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_datos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="688dp"
+        android:layout_height="281dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/card_testview"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="8dp"
-        android:layout_margin="16dp"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guidelineCenter"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/text_datos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Esperando datos..."
-            android:textSize="18sp"
+            android:id="@+id/text_datosR"
+            android:layout_width="679dp"
+            android:layout_height="match_parent"
             android:padding="16dp"
-            android:textColor="@android:color/black"/>
+            android:text="Esperando datos..."
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

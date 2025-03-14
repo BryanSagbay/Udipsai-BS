@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +32,9 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_riel);
 
-        receivedDataText = findViewById(R.id.text_datos);
-        Button sendButton = findViewById(R.id.button_enviar_m1);
-        Button backButton = findViewById(R.id.button_regresar);
+        receivedDataText = findViewById(R.id.text_datosR);
+        Button sendButton = findViewById(R.id.button_enviar_m1R);
+        ImageButton backButton = findViewById(R.id.button_regresarR);
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);

@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,9 +31,9 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_palanca);
 
-        receivedDataText = findViewById(R.id.text_datos);
-        Button sendButton = findViewById(R.id.button_enviar_m1);
-        Button backButton = findViewById(R.id.button_regresar);
+        receivedDataText = findViewById(R.id.text_datosP);
+        Button sendButton = findViewById(R.id.button_enviar_m1P);
+        ImageButton backButton = findViewById(R.id.button_regresarP);
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
@@ -41,6 +41,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
 
         // Botón para enviar "M1" al dispositivo
         sendButton.setOnClickListener(v -> sendData("M1"));
+
 
         // Botón para regresar y desconectar Bluetooth
         backButton.setOnClickListener(v -> {

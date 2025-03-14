@@ -7,7 +7,94 @@
     android:layout_height="match_parent"
     tools:context=".UI.test.test_Palanca">
 
-    <!-- Guía vertical para dividir la pantalla en dos columnas -->
+    <!-- AppBar (Toolbar) -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Contenedor para elementos personalizados de la Toolbar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Botón de regreso (flecha) -->
+            <ImageButton
+                android:id="@+id/button_regresar"
+                android:layout_width="88dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Regresar"
+                android:src="@drawable/ic_back"
+                android:scaleType="centerInside"
+                android:padding="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Título de la página -->
+
+            <!-- Logo 1 -->
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Test de Palanca"
+                android:textColor="@android:color/white"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/logo1"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/button_regresar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/logo1"
+                android:layout_width="95dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Logo 1"
+                android:src="@drawable/lg_ucacuelogo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/logo2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Logo 2 -->
+            <ImageView
+                android:id="@+id/logo2"
+                android:layout_width="95dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Logo 2"
+                android:src="@drawable/lg_udipsai"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Contenedor del cuerpo (body) con fondo diferente -->
+
+    <View
+        android:id="@+id/body_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/lg_ofertafond"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="1.0" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCenter"
         android:layout_width="wrap_content"
@@ -15,75 +102,92 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.4"/>  <!-- 40% de la pantalla para la columna izquierda -->
 
-    <!-- Botón Enviar M1 -->
-    <Button
-        android:id="@+id/button_enviar_m1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Enviar M1"
-        android:padding="8dp"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"/>
-
-    <!-- Botón Enviar M2 -->
-    <Button
-        android:id="@+id/button_enviar_m2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Enviar M2"
-        android:padding="8dp"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/button_enviar_m1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"/>
-
-    <!-- Botón Enviar M3 -->
-    <Button
-        android:id="@+id/button_enviar_m3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:text="Enviar M3"
-        app:layout_constraintTop_toBottomOf="@id/button_enviar_m2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineCenter" />
-
-    <!-- Botón Regresar (Debajo de M3) -->
-    <Button
-        android:id="@+id/button_regresar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:text="Regresar"
-        app:layout_constraintTop_toBottomOf="@id/button_enviar_m3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineCenter" />
-
     <!-- CardView para mostrar los datos -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_enviar_m1"
+        style="@style/MyCustomButton"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="42dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/btn_rounded"
+        android:padding="16dp"
+        android:text="TRAYECTORIA 1"
+        app:cornerRadius="132dp"
+        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/blue"
+        app:strokeColor="@color/black91"
+        app:strokeWidth="2dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="285dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_enviar_m2"
+        style="@style/MyCustomButton"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="42dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/btn_rounded"
+        android:padding="16dp"
+        android:text="TRAYECTORIA 2"
+        app:cornerRadius="132dp"
+        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/blue"
+        app:strokeColor="@color/black91"
+        app:strokeWidth="2dp"
+        tools:layout_editor_absoluteY="375dp"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_enviar_m3"
+        style="@style/MyCustomButton"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="42dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/btn_rounded"
+        android:padding="16dp"
+        android:text="TRAYECTORIA 3"
+        app:cornerRadius="132dp"
+        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/blue"
+        app:strokeColor="@color/black91"
+        app:strokeWidth="2dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="460dp" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_datos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="180dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="8dp"
-        android:layout_margin="16dp"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/guidelineCenter"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/text_datos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Esperando datos..."
-            android:textSize="18sp"
-            android:padding="16dp"
-            android:textColor="@android:color/black"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints">
     </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/text_datos"
+        android:layout_width="700dp"
+        android:layout_height="380dp"
+        android:background="@drawable/card_testview"
+        android:padding="16dp"
+        android:text="Esperando datos..."
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="545dp"
+        tools:layout_editor_absoluteY="215dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

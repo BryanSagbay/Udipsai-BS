@@ -5,6 +5,7 @@ array newline_values
 color black
 color black89
 color black90
+color black91
 color blue
 color bluedark
 color colorAccent
@@ -23,6 +24,8 @@ color white
 color white80
 color yellow20
 drawable btn_rounded
+drawable btn_roundedtest
+drawable card_testview
 drawable ic_back
 drawable ic_clear_white_24dp
 drawable ic_delete_white_24dp
@@ -51,6 +54,7 @@ drawable test_riel
 id backIcon
 id backgroundImage
 id backgroundNotification
+id body_background
 id bt_refresh
 id bt_settings
 id btnBennett
@@ -63,10 +67,14 @@ id button_aletorio
 id button_amarillo
 id button_azul
 id button_enviar_m1
+id button_enviar_m1P
+id button_enviar_m1R
 id button_enviar_m2
 id button_enviar_m3
 id button_horario
 id button_regresar
+id button_regresarP
+id button_regresarR
 id button_rojo
 id button_verde
 id card_datos
@@ -82,6 +90,8 @@ id hex
 id iconPacientes
 id iconSoporte
 id iconTest
+id logo1
+id logo2
 id logoLeft
 id logoRight
 id logoutIcon
@@ -99,7 +109,10 @@ id textPacientes
 id textSoporte
 id textTest
 id text_datos
+id text_datosP
+id text_datosR
 id toolbar
+id toolbar_title
 id tvForgotPassword
 id tvRegister
 id universityText
@@ -114,6 +127,7 @@ layout login_activity
 layout navbar_home
 layout navbar_pagesoftest
 layout navbar_test
+layout test
 layout test_bennett
 layout test_monotonia
 layout test_palanca
@@ -127,3 +141,4 @@ string bluetooth_permission_grant
 string bluetooth_permission_title
 string devices
 style AppTheme
+style MyCustomButton

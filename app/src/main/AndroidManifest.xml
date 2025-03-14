@@ -22,6 +22,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".UI.home.HomePage"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:exported="true">
             <intent-filter>
@@ -30,13 +31,31 @@
             </intent-filter>
         </activity>
 
-        <!-- Nueva actividad para Test -->
-        <activity android:name=".UI.test.HomeTest" android:exported="true"/>
+        <!--  Pages of Test -->
+        <activity
+            android:name=".UI.test.HomeTest"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
 
-        <activity android:name=".UI.test.test_Monotonia" android:exported="true"/>
-        <activity android:name=".UI.test.test_Riel" android:exported="true"/>
-        <activity android:name=".UI.test.test_Palanca" android:exported="true"/>
-        <activity android:name=".UI.test.test_Bennett" android:exported="true"/>
+        <activity
+            android:name=".UI.test.test_Monotonia"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
+
+        <activity
+            android:name=".UI.test.test_Riel"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
+
+        <activity
+            android:name=".UI.test.test_Palanca"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
+
+        <activity
+            android:name=".UI.test.test_Bennett"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
 
         <service
             android:name=".Services.SerialService"

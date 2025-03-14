@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#d84315</color>
+    <color name="colorPrimary">#000000DD</color>
     <color name="colorPrimaryDark">#000000DD</color>
-    <color name="colorAccent">#ff6e40</color>
+    <color name="colorAccent">#000000DD</color>
 
     <!--Login-->
     <color name="gray_light">#F5F5F5</color>
@@ -21,6 +21,8 @@
     <color name="yellow20">#FFEB3B</color>
     <color name="bluedark">#0023FF</color>
     <color name="greendark">#1E6A1F</color>
+    <color name="black91">#242323</color>
+
 
     <color name="colorRecieveText">#00FF00</color>
     <color name="colorSendText">#82CAFF</color>
