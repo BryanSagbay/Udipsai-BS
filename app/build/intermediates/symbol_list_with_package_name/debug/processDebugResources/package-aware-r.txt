@@ -3154,6 +3154,7 @@ id card_datos
 id card_datosB
 id card_datosM
 id card_datosP
+id card_espera
 id center
 id centerCrop
 id centerInside
@@ -3249,6 +3250,7 @@ id gif_statusB
 id gif_statusM
 id gif_statusP
 id gif_statusR
+id gif_status_resultado
 id glide_custom_view_target_tag
 id gone
 id graph
@@ -3513,6 +3515,7 @@ id text_datosR
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
+id text_titulo_datosM
 id textinput_counter
 id textinput_error
 id textinput_helper_text
@@ -3539,6 +3542,10 @@ id transition_transform
 id triangle
 id tvForgotPassword
 id tvRegister
+id tv_aciertos
+id tv_errores
+id tv_tiempo_ejecucion
+id tv_tiempo_reaccion
 id unchecked
 id uniform
 id universityText

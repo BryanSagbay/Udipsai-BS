@@ -93,6 +93,7 @@ id card_datos
 id card_datosB
 id card_datosM
 id card_datosP
+id card_espera
 id clear
 id eagleImage
 id etEmail
@@ -102,6 +103,7 @@ id gif_statusB
 id gif_statusM
 id gif_statusP
 id gif_statusR
+id gif_status_resultado
 id guidelineCenter
 id hex
 id iconPacientes
@@ -129,10 +131,15 @@ id text_datosB
 id text_datosM
 id text_datosP
 id text_datosR
+id text_titulo_datosM
 id toolbar
 id toolbar_title
 id tvForgotPassword
 id tvRegister
+id tv_aciertos
+id tv_errores
+id tv_tiempo_ejecucion
+id tv_tiempo_reaccion
 id universityText
 layout activity_main
 layout device_list_header

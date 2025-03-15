@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,18 +31,30 @@ import ucacue.edu.udipsai.Services.SerialService;
 
 public class test_Monotonia extends AppCompatActivity implements SerialListener, ServiceConnection {
     private SerialService service;
-    private TextView receivedDataText;
-    private StringBuilder fullReceivedData = new StringBuilder(); // Para acumular datos recibidos
     private boolean isBound = false;
-    private ImageView gifStatusM;
+
+    // Elementos de la UI
+    private TextView receivedDataText, tvAciertos, tvErrores, tvTiempoEjecucion, tvTiempoReaccion, tvTituloDatos;
+    private ImageView gifStatusM, gifStatusResultado;
+    private CardView cardEspera, cardDatosM;
     private Spinner spinnerOptionsM;
+    private StringBuilder fullReceivedData = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_monotonia);
 
+        cardEspera = findViewById(R.id.card_espera);
+        cardDatosM = findViewById(R.id.card_datosM);
         receivedDataText = findViewById(R.id.text_datosM);
+        gifStatusM = findViewById(R.id.gif_statusM);
+        gifStatusResultado = findViewById(R.id.gif_status_resultado);
+        tvAciertos = findViewById(R.id.tv_aciertos);
+        tvErrores = findViewById(R.id.tv_errores);
+        tvTiempoEjecucion = findViewById(R.id.tv_tiempo_ejecucion);
+        tvTiempoReaccion = findViewById(R.id.tv_tiempo_reaccion);
+        tvTituloDatos = findViewById(R.id.text_titulo_datosM);
         gifStatusM = findViewById(R.id.gif_statusM);
         spinnerOptionsM = findViewById(R.id.spinner_optionsM);
         Button sendButton1 = findViewById(R.id.button_rojoM);
@@ -66,9 +79,15 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         sendButton4.setEnabled(false);
         resetButton.setVisibility(View.GONE);
 
-        // Cargar GIF de espera al inicio
-        loadGif(R.drawable.reloj_de_arena);
-        receivedDataText.setText("Esperando, presione Comenzar..");
+        // Inicialización de valores iniciales
+        cardDatosM.setVisibility(View.GONE);
+        loadGif(gifStatusM, R.drawable.reloj_de_arena);
+        receivedDataText.setText("Esperando, presione Comenzar...");
+        tvTituloDatos.setText("Esperando datos...");
+        tvAciertos.setText("-");
+        tvErrores.setText("-");
+        tvTiempoEjecucion.setText("- seg");
+        tvTiempoReaccion.setText("- seg");
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
@@ -120,8 +139,8 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
             sendButton4.setEnabled(false);
-            loadGif(R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el juego...");
+            loadGif(gifStatusM, R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el test...");
         };
 
         sendButton1.setOnClickListener(v -> {
@@ -147,14 +166,20 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         // Botón de reinicio: Enviar comando "S" y limpiar datos
         resetButton.setOnClickListener(v -> {
             sendData("S");
-            receivedDataText.setText("Esperando datos...");
             sendButton1.setEnabled(false);
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
             sendButton4.setEnabled(false);
             spinnerOptionsM.setEnabled(false);
+            tvTituloDatos.setText("Esperando datos...");
+            tvAciertos.setText("-");
+            tvErrores.setText("-");
+            tvTiempoEjecucion.setText("- seg");
+            tvTiempoReaccion.setText("- seg");
             resetButton.setVisibility(View.GONE);
-            loadGif(R.drawable.reloj_de_arena);
+            loadGif(gifStatusM, R.drawable.reloj_de_arena);
+            cardEspera.setVisibility(View.VISIBLE);
+            cardDatosM.setVisibility(View.GONE);
         });
 
         // Botón para regresar y desconectar Bluetooth
@@ -167,11 +192,8 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
     }
 
     // Cargar GIFs
-    private void loadGif(int gifResource) {
-        Glide.with(this)
-                .asGif()
-                .load(gifResource)
-                .into(gifStatusM);
+    private void loadGif(ImageView imageView, int gifResource) {
+        Glide.with(this).asGif().load(gifResource).into(imageView);
     }
 
     /**
@@ -198,17 +220,14 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         runOnUiThread(() -> {
             for (byte[] data : datas) {
                 try {
-                    fullReceivedData.append(new String(data, "UTF-8")); // Acumular los datos recibidos
+                    fullReceivedData.append(new String(data, "UTF-8"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
-            // Procesar los datos recibidos
             if (fullReceivedData.length() > 0) {
                 String receivedString = fullReceivedData.toString().trim();
-
-                // Dividir los datos usando la coma como separador
                 String[] values = receivedString.split(",");
 
                 if (values.length == 4) {
@@ -217,14 +236,18 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     String tiempoEjecucion = values[2];
                     String tiempoReaccion = values[3];
 
-                    String formattedText = "Aciertos:\n"+ acierto+ "\nErrores:\n" + errores + "\nTiempo de Ejecución:\n" + tiempoEjecucion + "\nReacción:\n" + tiempoReaccion;
+                    // Ocultar la card de espera y mostrar la de resultados
+                    cardEspera.setVisibility(View.GONE);
+                    cardDatosM.setVisibility(View.VISIBLE);
 
-                    if (receivedDataText != null) {
-                        receivedDataText.setText(formattedText);
-                    }
+                    // Actualizar los datos
+                    tvTituloDatos.setText("Resultados del Test");
+                    tvAciertos.setText(acierto);
+                    tvErrores.setText(errores);
+                    tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
+                    tvTiempoReaccion.setText(tiempoReaccion + " seg");
 
-                    loadGif(R.drawable.linea_de_meta);
-
+                    loadGif(gifStatusResultado, R.drawable.linea_de_meta);
                     fullReceivedData.setLength(0);
                 }
             }

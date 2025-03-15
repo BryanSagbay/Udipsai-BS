@@ -3153,6 +3153,7 @@ int id card_datos 0x7f090077
 int id card_datosB 0x7f090214
 int id card_datosM 0x7f090221
 int id card_datosP 0x7f09020b
+int id card_espera 0x7f090228
 int id center 0x7f090078
 int id centerCrop 0x7f090079
 int id centerInside 0x7f09007a
@@ -3248,6 +3249,7 @@ int id gif_statusB 0x7f090215
 int id gif_statusM 0x7f090222
 int id gif_statusP 0x7f09020c
 int id gif_statusR 0x7f09020d
+int id gif_status_resultado 0x7f090229
 int id glide_custom_view_target_tag 0x7f09020a
 int id gone 0x7f0900d5
 int id graph 0x7f0900d6
@@ -3512,6 +3514,7 @@ int id text_datosR 0x7f0901d7
 int id text_input_end_icon 0x7f0901d8
 int id text_input_error_icon 0x7f0901d9
 int id text_input_start_icon 0x7f0901da
+int id text_titulo_datosM 0x7f09022a
 int id textinput_counter 0x7f0901db
 int id textinput_error 0x7f0901dc
 int id textinput_helper_text 0x7f0901dd
@@ -3538,6 +3541,10 @@ int id transition_transform 0x7f0901f1
 int id triangle 0x7f0901f2
 int id tvForgotPassword 0x7f0901f3
 int id tvRegister 0x7f0901f4
+int id tv_aciertos 0x7f09022b
+int id tv_errores 0x7f09022c
+int id tv_tiempo_ejecucion 0x7f09022d
+int id tv_tiempo_reaccion 0x7f09022e
 int id unchecked 0x7f0901f5
 int id uniform 0x7f0901f6
 int id universityText 0x7f0901f7
