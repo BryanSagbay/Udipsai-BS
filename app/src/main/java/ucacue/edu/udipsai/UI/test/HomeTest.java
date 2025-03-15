@@ -16,16 +16,17 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
-
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -45,6 +46,8 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     private String currentMacAddress = null;
     private MediaPlayer mediaPlayer;
 
+    private FrameLayout loadingOverlay;
+    private ImageView loadingGif;
 
     // Diccionario de botones y direcciones MAC
     private final Map<Integer, String> macAddresses = new HashMap<Integer, String>() {{
@@ -78,6 +81,14 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         patientName = findViewById(R.id.patientName);
         patientName.setText("Juan Pérez");
 
+        loadingOverlay = findViewById(R.id.loadingOverlay);
+        loadingGif = findViewById(R.id.loadingGif);
+
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.bluetooth)
+                .into(loadingGif);
+
         disconnect();
 
         startService(new Intent(this, SerialService.class));
@@ -85,7 +96,10 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
 
         // Vinculamos cada botón con su dirección MAC y actividad
         for (Map.Entry<Integer, String> entry : macAddresses.entrySet()) {
-            findViewById(entry.getKey()).setOnClickListener(v -> connectToDevice(entry.getValue(), testActivities.get(entry.getKey())));
+            findViewById(entry.getKey()).setOnClickListener(v -> {
+                showLoadingSpinner(); // Mostrar el spinner solo cuando el usuario haga clic
+                connectToDevice(entry.getValue(), testActivities.get(entry.getKey()));
+            });
         }
 
         // Verificar si el Intent tiene el Extra "disconnected"
@@ -106,6 +120,26 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     }
 
     /**
+     * Muestra el spinner de carga
+     */
+    private void showLoadingSpinner() {
+        runOnUiThread(() -> {
+            loadingOverlay.setVisibility(View.VISIBLE);
+            loadingGif.setVisibility(View.VISIBLE);
+        });
+    }
+
+    /**
+     * Oculta el spinner de carga
+     */
+    private void hideLoadingSpinner() {
+        runOnUiThread(() -> {
+            loadingOverlay.setVisibility(View.GONE);
+            loadingGif.setVisibility(View.GONE);
+        });
+    }
+
+    /**
      * Inicia la conexión con el dispositivo Bluetooth según su dirección MAC.
      */
     private static final int REQUEST_BLUETOOTH_CONNECT = 1;
@@ -116,6 +150,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
                 ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             // Solicitar el permiso
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_BLUETOOTH_CONNECT);
+            hideLoadingSpinner();
             return;
         }
 
@@ -124,6 +159,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
             playAudio(errorAudio);
             Toast.makeText(this, "Bluetooth no disponible o desactivado", Toast.LENGTH_LONG).show();
+            hideLoadingSpinner();
             return;
         }
 
@@ -131,6 +167,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         if (device == null) {
             playAudio(errorAudio);
             Toast.makeText(this, "Dispositivo no encontrado", Toast.LENGTH_SHORT).show();
+            hideLoadingSpinner();
             return;
         }
 
@@ -143,6 +180,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         } catch (IOException e) {
             playAudio(errorAudio);
             Toast.makeText(this, "Error al conectar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            hideLoadingSpinner();
         }
     }
 
@@ -165,6 +203,8 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     public void onSerialConnect() {
         runOnUiThread(() -> {
             Toast.makeText(this, "Conexión exitosa", Toast.LENGTH_SHORT).show();
+            hideLoadingSpinner();
+
             int buttonId = getCurrentButtonId();
 
             if (buttonId != -1) {
@@ -187,6 +227,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     public void onSerialConnectError(Exception e) {
         playAudio(errorAudio);
         runOnUiThread(() -> Toast.makeText(this, "Error de conexión: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        hideLoadingSpinner();
         disconnect();
     }
 
@@ -202,6 +243,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     public void onSerialIoError(Exception e) {
         runOnUiThread(() -> {
             showDisconnectedDialog();
+            hideLoadingSpinner();
             disconnect();
             Intent intent = new Intent(this, HomeTest.class);
             startActivity(intent);

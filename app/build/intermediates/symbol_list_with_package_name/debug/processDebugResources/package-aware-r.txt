@@ -2895,6 +2895,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bluetooth
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -2907,6 +2908,7 @@ drawable btn_rounded
 drawable btn_roundedtest
 drawable card_testview
 drawable cardr_results
+drawable cargando
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3292,6 +3294,8 @@ id line3
 id linear
 id listMode
 id list_item
+id loadingGif
+id loadingOverlay
 id logo1
 id logo2
 id logoLeft
