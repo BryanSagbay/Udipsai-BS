@@ -71,6 +71,8 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOptionsM.setAdapter(adapter);
 
+        spinnerOptionsM.setSelection(0);
+
         // Inicialmente, deshabilitar el Spinner y los botones
         spinnerOptionsM.setEnabled(false);
         sendButton1.setEnabled(false);
@@ -96,7 +98,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         // Botón Play: Habilita el Spinner
         playButton.setOnClickListener(v -> {
             spinnerOptionsM.setEnabled(true);
-            resetButton.setVisibility(View.VISIBLE); // Mostrar botón de reinicio
+            resetButton.setVisibility(View.VISIBLE);
         });
 
         // Configurar el evento de selección del Spinner
@@ -111,6 +113,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     sendButton2.setEnabled(true);
                     sendButton3.setEnabled(true);
                     sendButton4.setEnabled(true);
+                    spinnerOptionsM.setEnabled(false);
                 }
 
                 switch (selectedOption) {
@@ -170,6 +173,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
             sendButton4.setEnabled(false);
+            spinnerOptionsM.setSelection(0);
             spinnerOptionsM.setEnabled(false);
             tvTituloDatos.setText("Esperando datos...");
             tvAciertos.setText("-");
@@ -188,6 +192,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             Intent homeIntent = new Intent(test_Monotonia.this, HomeTest.class);
             startActivity(homeIntent);
             finish();
+            Toast.makeText(this, "Desconectado", Toast.LENGTH_SHORT).show();
         });
     }
 
