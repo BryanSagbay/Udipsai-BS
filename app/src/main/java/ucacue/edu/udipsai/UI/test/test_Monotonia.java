@@ -152,6 +152,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
             sendButton4.setEnabled(false);
+            spinnerOptionsM.setEnabled(false);
             resetButton.setVisibility(View.GONE);
             loadGif(R.drawable.reloj_de_arena);
         });
@@ -164,7 +165,6 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             finish();
         });
     }
-
 
     // Cargar GIFs
     private void loadGif(int gifResource) {
@@ -217,7 +217,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     String tiempoEjecucion = values[2];
                     String tiempoReaccion = values[3];
 
-                    String formattedText = "Aciertos:\n"+ acierto+ "\nErrores:\n" + errores + "\nTiempo de Ejecución: \n" + tiempoEjecucion + "Reacción:/n" + tiempoReaccion;
+                    String formattedText = "Aciertos:\n"+ acierto+ "\nErrores:\n" + errores + "\nTiempo de Ejecución:\n" + tiempoEjecucion + "\nReacción:\n" + tiempoReaccion;
 
                     if (receivedDataText != null) {
                         receivedDataText.setText(formattedText);

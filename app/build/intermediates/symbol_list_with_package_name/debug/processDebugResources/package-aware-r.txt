@@ -2017,6 +2017,7 @@ color tooltip_background_dark
 color tooltip_background_light
 color white
 color white80
+color white90
 color yellow20
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
@@ -2905,6 +2906,7 @@ drawable btn_radio_on_to_off_mtrl_animation
 drawable btn_rounded
 drawable btn_roundedtest
 drawable card_testview
+drawable cardr_results
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off

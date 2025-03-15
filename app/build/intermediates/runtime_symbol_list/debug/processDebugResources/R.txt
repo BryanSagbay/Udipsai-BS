@@ -2016,6 +2016,7 @@ int color tooltip_background_dark 0x7f0602f5
 int color tooltip_background_light 0x7f0602f6
 int color white 0x7f0602f7
 int color white80 0x7f0602f8
+int color white90 0x7f0602fa
 int color yellow20 0x7f0602f9
 int dimen abc_action_bar_content_inset_material 0x7f070000
 int dimen abc_action_bar_content_inset_with_nav 0x7f070001
@@ -2904,6 +2905,7 @@ int drawable btn_radio_on_to_off_mtrl_animation 0x7f080080
 int drawable btn_rounded 0x7f080081
 int drawable btn_roundedtest 0x7f080082
 int drawable card_testview 0x7f080083
+int drawable cardr_results 0x7f0800fc
 int drawable design_fab_background 0x7f080084
 int drawable design_ic_visibility 0x7f080085
 int drawable design_ic_visibility_off 0x7f080086

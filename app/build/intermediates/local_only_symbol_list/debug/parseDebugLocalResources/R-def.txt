@@ -23,10 +23,12 @@ color primary
 color red89
 color white
 color white80
+color white90
 color yellow20
 drawable btn_rounded
 drawable btn_roundedtest
 drawable card_testview
+drawable cardr_results
 drawable dibujo
 drawable ic_back
 drawable ic_clear_white_24dp
