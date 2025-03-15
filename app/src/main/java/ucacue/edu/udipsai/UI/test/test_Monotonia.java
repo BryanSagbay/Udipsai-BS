@@ -7,12 +7,18 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -27,52 +33,128 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
     private TextView receivedDataText;
     private StringBuilder fullReceivedData = new StringBuilder(); // Para acumular datos recibidos
     private boolean isBound = false;
-    
+    private ImageView gifStatusM;
+    private Spinner spinnerOptionsM;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_monotonia);
 
-        receivedDataText = findViewById(R.id.text_datos);
-        Button sendButtonS1 = findViewById(R.id.button_aletorio);
-        Button sendButtonS2 = findViewById(R.id.button_horario);
-        Button sendButtonS3 = findViewById(R.id.button_Antihorario);
-        Button sendButton1 = findViewById(R.id.button_rojo);
-        Button sendButton2 = findViewById(R.id.button_amarillo);
-        Button sendButton3 = findViewById(R.id.button_azul);
-        Button sendButton4 = findViewById(R.id.button_verde);
-        Button backButton = findViewById(R.id.button_regresar);
+        receivedDataText = findViewById(R.id.text_datosM);
+        gifStatusM = findViewById(R.id.gif_statusM);
+        spinnerOptionsM = findViewById(R.id.spinner_optionsM);
+        Button sendButton1 = findViewById(R.id.button_rojoM);
+        Button sendButton2 = findViewById(R.id.button_amarilloM);
+        Button sendButton3 = findViewById(R.id.button_azulM);
+        Button sendButton4 = findViewById(R.id.button_verdeM);
+        ImageButton backButton = findViewById(R.id.button_regresarM);
+        FloatingActionButton playButton = findViewById(R.id.button_playM);
+        FloatingActionButton resetButton = findViewById(R.id.button_resetM);
 
-        // Botón flotante Play
-        FloatingActionButton fabPlay = findViewById(R.id.fab_play);
-        FloatingActionButton fabReset = findViewById(R.id.fab_reset);
+        // Configurar Spinner con opciones
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOptionsM.setAdapter(adapter);
+
+        // Inicialmente, deshabilitar el Spinner y los botones
+        spinnerOptionsM.setEnabled(false);
+        sendButton1.setEnabled(false);
+        sendButton2.setEnabled(false);
+        sendButton3.setEnabled(false);
+        sendButton4.setEnabled(false);
+        resetButton.setVisibility(View.GONE);
+
+        // Cargar GIF de espera al inicio
+        loadGif(R.drawable.reloj_de_arena);
+        receivedDataText.setText("Esperando, presione Comenzar..");
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
         bindService(intent, this, Context.BIND_AUTO_CREATE);
 
-        // Botón para habilitar los botones
-        fabPlay.setOnClickListener(v -> {
-            habilitarBotones();
-            fabReset.setVisibility(View.VISIBLE); // Mostrar botón reset
-            Toast.makeText(this, "Botones habilitados", Toast.LENGTH_SHORT).show();
+        // Botón Play: Habilita el Spinner
+        playButton.setOnClickListener(v -> {
+            spinnerOptionsM.setEnabled(true);
+            resetButton.setVisibility(View.VISIBLE); // Mostrar botón de reinicio
         });
 
-        // Botón para resetear y deshabilitar botones
-        fabReset.setOnClickListener(v -> {
-            deshabilitarBotones();
-            fabReset.setVisibility(View.GONE); // Ocultar botón reset
-            Toast.makeText(this, "Botones deshabilitados", Toast.LENGTH_SHORT).show();
+        // Configurar el evento de selección del Spinner
+        spinnerOptionsM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedOption = parent.getItemAtPosition(position).toString();
+
+                // Habilitar los botones al seleccionar una opción válida
+                if (!selectedOption.equals("Seleccionar")) {
+                    sendButton1.setEnabled(true);
+                    sendButton2.setEnabled(true);
+                    sendButton3.setEnabled(true);
+                    sendButton4.setEnabled(true);
+                }
+
+                switch (selectedOption) {
+                    case "Aleatorio":
+                        sendData("M1");
+                        break;
+                    case "Horario":
+                        sendData("M2");
+                        break;
+                    case "Antihorario":
+                        sendData("M3");
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
-        // Botones de envío de datos
-        sendButtonS1.setOnClickListener(v -> sendData("M1"));
-        sendButtonS2.setOnClickListener(v -> sendData("M2"));
-        sendButtonS3.setOnClickListener(v -> sendData("M3"));
-        sendButton1.setOnClickListener(v -> sendData("rojo"));
-        sendButton2.setOnClickListener(v -> sendData("amarillo"));
-        sendButton3.setOnClickListener(v -> sendData("azul"));
-        sendButton4.setOnClickListener(v -> sendData("verde"));
+        // Configurar los eventos de los botones para deshabilitarlos tras ser presionados
+        View.OnClickListener buttonClickListener = v -> {
+            sendButton1.setEnabled(false);
+            sendButton2.setEnabled(false);
+            sendButton3.setEnabled(false);
+            sendButton4.setEnabled(false);
+            loadGif(R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el juego...");
+        };
+
+        sendButton1.setOnClickListener(v -> {
+            sendData("rojo");
+            buttonClickListener.onClick(v);
+        });
+
+        sendButton2.setOnClickListener(v -> {
+            sendData("amarillo");
+            buttonClickListener.onClick(v);
+        });
+
+        sendButton3.setOnClickListener(v -> {
+            sendData("azul");
+            buttonClickListener.onClick(v);
+        });
+
+        sendButton4.setOnClickListener(v -> {
+            sendData("verde");
+            buttonClickListener.onClick(v);
+        });
+
+        // Botón de reinicio: Enviar comando "S" y limpiar datos
+        resetButton.setOnClickListener(v -> {
+            sendData("S");
+            receivedDataText.setText("Esperando datos...");
+            sendButton1.setEnabled(false);
+            sendButton2.setEnabled(false);
+            sendButton3.setEnabled(false);
+            sendButton4.setEnabled(false);
+            resetButton.setVisibility(View.GONE);
+            loadGif(R.drawable.reloj_de_arena);
+        });
 
         // Botón para regresar y desconectar Bluetooth
         backButton.setOnClickListener(v -> {
@@ -81,51 +163,16 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             startActivity(homeIntent);
             finish();
         });
-
-        // Deshabilitar botones al inicio
-        deshabilitarBotones();
     }
 
-    /**
-     * Método para habilitar los botones
-     */
-    private void habilitarBotones() {
-        Button[] botones = {
-                findViewById(R.id.button_aletorio),
-                findViewById(R.id.button_horario),
-                findViewById(R.id.button_Antihorario),
-                findViewById(R.id.button_rojo),
-                findViewById(R.id.button_amarillo),
-                findViewById(R.id.button_azul),
-                findViewById(R.id.button_verde)
-        };
 
-        for (Button btn : botones) {
-            btn.setEnabled(true);
-            btn.setAlpha(1.0f); // Quitar opacidad
-        }
+    // Cargar GIFs
+    private void loadGif(int gifResource) {
+        Glide.with(this)
+                .asGif()
+                .load(gifResource)
+                .into(gifStatusM);
     }
-
-    /**
-     * Método para deshabilitar los botones
-     */
-    private void deshabilitarBotones() {
-        Button[] botones = {
-                findViewById(R.id.button_aletorio),
-                findViewById(R.id.button_horario),
-                findViewById(R.id.button_Antihorario),
-                findViewById(R.id.button_rojo),
-                findViewById(R.id.button_amarillo),
-                findViewById(R.id.button_azul),
-                findViewById(R.id.button_verde)
-        };
-
-        for (Button btn : botones) {
-            btn.setEnabled(false);
-            btn.setAlpha(0.5f); // Poner opacidad para indicar que están deshabilitados
-        }
-    }
-
 
     /**
      * Enviar datos al dispositivo Bluetooth
@@ -157,9 +204,29 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                 }
             }
 
-            // Mostrar los datos completos en el TextView
-            if (receivedDataText != null) {
-                receivedDataText.setText("Datos recibidos: " + fullReceivedData.toString());
+            // Procesar los datos recibidos
+            if (fullReceivedData.length() > 0) {
+                String receivedString = fullReceivedData.toString().trim();
+
+                // Dividir los datos usando la coma como separador
+                String[] values = receivedString.split(",");
+
+                if (values.length == 4) {
+                    String acierto = values[0];
+                    String errores = values[1];
+                    String tiempoEjecucion = values[2];
+                    String tiempoReaccion = values[3];
+
+                    String formattedText = "Aciertos:\n"+ acierto+ "\nErrores:\n" + errores + "\nTiempo de Ejecución: \n" + tiempoEjecucion + "Reacción:/n" + tiempoReaccion;
+
+                    if (receivedDataText != null) {
+                        receivedDataText.setText(formattedText);
+                    }
+
+                    loadGif(R.drawable.linea_de_meta);
+
+                    fullReceivedData.setLength(0);
+                }
             }
         });
     }

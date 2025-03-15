@@ -196,6 +196,10 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-35:/mipmap-hdpi/ic_launcher.png"
     },
     {
+        "merged": "ucacue.edu.udipsai.app-debug-33:/layout_test_monotonia.xml.flat",
+        "source": "ucacue.edu.udipsai.app-main-35:/layout/test_monotonia.xml"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-33:/drawable_test_btn_4.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-35:/drawable/test_btn_4.xml"
     },

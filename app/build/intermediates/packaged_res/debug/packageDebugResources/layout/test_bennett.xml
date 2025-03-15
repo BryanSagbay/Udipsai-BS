@@ -98,11 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4"/>  <!-- 40% de la pantalla para la columna izquierda -->
-
-    <!-- Botón Enviar M1 -->
-
-    <!-- CardView para mostrar los datos -->
+        app:layout_constraintGuide_percent="0.4"/>
 
     <Button
         android:id="@+id/button_enviar_m1B"
@@ -206,7 +202,7 @@
             android:layout_marginStart="260dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_datosR" />
+            app:layout_constraintTop_toBottomOf="@id/text_datosB" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

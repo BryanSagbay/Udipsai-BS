@@ -182,7 +182,7 @@
             android:layout_marginStart="260dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_datosR" />
+            app:layout_constraintTop_toBottomOf="@id/text_datosP" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
