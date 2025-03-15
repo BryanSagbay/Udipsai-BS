@@ -3,6 +3,7 @@ package ucacue.edu.udipsai.UI.test;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
+import android.media.MediaPlayer;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
@@ -42,6 +43,8 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     private SerialSocket socket;
     private boolean isConnected = false;
     private String currentMacAddress = null;
+    private MediaPlayer mediaPlayer;
+
 
     // Diccionario de botones y direcciones MAC
     private final Map<Integer, String> macAddresses = new HashMap<Integer, String>() {{
@@ -50,6 +53,15 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         put(R.id.btnPalanca, "00:22:03:01:3C:45");
         put(R.id.btnBennett, "98:D3:11:FC:3B:3D");
     }};
+
+    private final Map<Integer, Integer> audioMap = new HashMap<Integer, Integer>() {{
+        put(R.id.btnMonotonia, R.raw.monotonia);
+        put(R.id.btnRiel, R.raw.motricidad);
+        put(R.id.btnPalanca, R.raw.palanca);
+        put(R.id.btnBennett, R.raw.bennett);
+    }};
+
+    private final int errorAudio = R.raw.error;
 
     private final Map<Integer, Class<?>> testActivities = new HashMap<Integer, Class<?>>() {{
         put(R.id.btnMonotonia, test_Monotonia.class);
@@ -110,12 +122,14 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         // Continuar con la conexión si el permiso está concedido
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            playAudio(errorAudio);
             Toast.makeText(this, "Bluetooth no disponible o desactivado", Toast.LENGTH_LONG).show();
             return;
         }
 
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(macAddress);
         if (device == null) {
+            playAudio(errorAudio);
             Toast.makeText(this, "Dispositivo no encontrado", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -127,6 +141,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
             service.connect(socket);
             Toast.makeText(this, "Conectando a " + macAddress, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
+            playAudio(errorAudio);
             Toast.makeText(this, "Error al conectar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -150,14 +165,27 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     public void onSerialConnect() {
         runOnUiThread(() -> {
             Toast.makeText(this, "Conexión exitosa", Toast.LENGTH_SHORT).show();
-            // Redirigir al usuario a la actividad correspondiente después de la conexión
-            Intent intent = new Intent(this, testActivities.get(getCurrentButtonId()));
-            startActivity(intent);
+            int buttonId = getCurrentButtonId();
+
+            if (buttonId != -1) {
+                playAudio(audioMap.get(buttonId));
+                Intent intent = new Intent(this, testActivities.get(buttonId));
+                startActivity(intent);
+            }
         });
+    }
+
+    private void playAudio(int audioRes) {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+        mediaPlayer = MediaPlayer.create(this, audioRes);
+        mediaPlayer.start();
     }
 
     @Override
     public void onSerialConnectError(Exception e) {
+        playAudio(errorAudio);
         runOnUiThread(() -> Toast.makeText(this, "Error de conexión: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         disconnect();
     }
@@ -206,6 +234,10 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     @Override
     protected void onDestroy() {
         disconnect();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
         super.onDestroy();
     }
     /**

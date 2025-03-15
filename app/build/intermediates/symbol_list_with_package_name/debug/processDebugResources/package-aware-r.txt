@@ -3774,6 +3774,11 @@ menu menu_devices
 menu menu_terminal
 mipmap ic_launcher
 plurals mtrl_badge_content_description
+raw bennett
+raw error
+raw monotonia
+raw motricidad
+raw palanca
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

@@ -159,6 +159,11 @@ layout test_riel
 menu menu_devices
 menu menu_terminal
 mipmap ic_launcher
+raw bennett
+raw error
+raw monotonia
+raw motricidad
+raw palanca
 string app_name
 string bluetooth_permission_denied
 string bluetooth_permission_grant
