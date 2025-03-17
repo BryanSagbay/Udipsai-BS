@@ -1,35 +1,24 @@
 package ucacue.edu.udipsai;
 
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
+import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import ucacue.edu.udipsai.Services.DevicesFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AppCompatActivity {
+
+    FirebaseAuth auth;
+    Button button;
+    TextView textView;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
-        if (savedInstanceState == null)
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment, new DevicesFragment(), "devices").commit();
-        else
-            onBackStackChanged();
-    }
-
-    @Override
-    public void onBackStackChanged() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(getSupportFragmentManager().getBackStackEntryCount()>0);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

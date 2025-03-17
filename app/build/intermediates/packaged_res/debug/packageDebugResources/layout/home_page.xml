@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="     〉Sé un águila roja〈"
                     android:textSize="40sp"
-                    android:textColor="@color/red89"
+                    android:textColor="@android:color/holo_red_dark"
                     android:alpha="0"
                     android:translationX="300dp"/> <!-- Inicia fuera de la pantalla -->
             </LinearLayout>

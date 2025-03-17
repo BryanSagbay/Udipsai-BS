@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/iconPacientes"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_paciente"
             android:scaleType="centerInside"/>
 
@@ -41,8 +41,8 @@
 
         <ImageView
             android:id="@+id/iconTest"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_test"
             android:scaleType="centerInside"/>
 
@@ -66,8 +66,8 @@
 
         <ImageView
             android:id="@+id/iconSoporte"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_soporte"
             android:scaleType="centerInside"/>
 

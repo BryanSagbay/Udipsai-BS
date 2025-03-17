@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "ucacue.edu.udipsai.app-mergeDebugResources-31:/values-ldrtl-v17/values-ldrtl-v17.xml",
+            "outputFile": "ucacue.edu.udipsai.app-mergeDebugResources-40:/values-ldrtl-v17/values-ldrtl-v17.xml",
             "map": [
                 {
-                    "source": "/Users/bryansagbay/.gradle/caches/8.10.2/transforms/8045ff922730674f1717ee77d2c5096e/transformed/material-1.10.0/res/values-ldrtl-v17/values-ldrtl-v17.xml",
+                    "source": "/Users/bryansagbay/.gradle/caches/8.10.2/transforms/3e54c6bdeada3b2d26ae0c354b91f836/transformed/material-1.10.0/res/values-ldrtl-v17/values-ldrtl-v17.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

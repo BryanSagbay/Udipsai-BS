@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.test.test_Bennett">
+    tools:context=".UI.test.test_Monotonia">
 
     <!-- AppBar (Toolbar) -->
     <androidx.appcompat.widget.Toolbar
@@ -225,7 +225,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- 📌 CardView de Resultados (Oculta al inicio) -->
+    <!-- CardView de Resultados (Oculta al inicio) -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_datosM"
         android:layout_width="695dp"

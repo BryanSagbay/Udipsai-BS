@@ -14,6 +14,7 @@ import android.widget.Toast;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,10 +28,11 @@ import ucacue.edu.udipsai.Services.SerialService;
 
 public class test_Palanca extends AppCompatActivity implements SerialListener, ServiceConnection {
     private SerialService service;
-    private TextView receivedDataText;
-    private StringBuilder fullReceivedData = new StringBuilder(); // Para acumular datos recibidos
+    private TextView receivedDataText, tvErrores, tvTiempoEjecucion, tvTituloDatos;
+    private CardView cardEspera, cardDatos;
+    private ImageView gifStatusResultado, gifStatusP;
+    private StringBuilder fullReceivedData = new StringBuilder();
     private boolean isBound = false;
-    private ImageView gifStatusP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,12 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
 
         receivedDataText = findViewById(R.id.text_datosP);
         gifStatusP = findViewById(R.id.gif_statusP);
+        cardEspera = findViewById(R.id.card_espera);
+        cardDatos = findViewById(R.id.card_datosP);
+        gifStatusResultado = findViewById(R.id.gif_status_resultado);
+        tvErrores = findViewById(R.id.tv_errores);
+        tvTiempoEjecucion = findViewById(R.id.tv_tiempo_ejecucion);
+        tvTituloDatos = findViewById(R.id.text_titulo_datosP);
         Button sendButton = findViewById(R.id.button_enviar_m1P);
         ImageButton backButton = findViewById(R.id.button_regresarP);
         FloatingActionButton playButton = findViewById(R.id.button_playP);
@@ -48,9 +56,13 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         sendButton.setEnabled(false);
         resetButton.setVisibility(View.GONE);
 
-        // Cargar GIF de espera al inicio
-        loadGif(R.drawable.reloj_de_arena);
-        receivedDataText.setText("Esperando, presione Comenzar..");
+        // Inicialización de valores iniciales
+        cardDatos.setVisibility(View.GONE);
+        loadGif(gifStatusP, R.drawable.reloj_de_arena);
+        receivedDataText.setText("Esperando, presione Comenzar...");
+        tvTituloDatos.setText("Esperando datos...");
+        tvErrores.setText("-");
+        tvTiempoEjecucion.setText("- seg");
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
@@ -58,26 +70,32 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
 
         // Botón Play: Habilita "Enviar M1" y muestra "Reinicio"
         playButton.setOnClickListener(v -> {
-            sendButton.setEnabled(true); // Habilitar botón Enviar M1
-            resetButton.setVisibility(View.VISIBLE); // Mostrar botón de reinicio
+            sendButton.setEnabled(true);
+            resetButton.setVisibility(View.VISIBLE);
         });
 
         // Botón Enviar M1: Enviar comando y deshabilitar
         sendButton.setOnClickListener(v -> {
             sendData("M1");
             sendButton.setEnabled(false);
-            loadGif(R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el juego...");
+            loadGif(gifStatusP, R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el Test...");
         });
 
         // Botón de reinicio: Enviar comando "S" y limpiar datos
         resetButton.setOnClickListener(v -> {
-            sendData("S"); // Enviar el comando de reinicio
+            sendData("S");
             receivedDataText.setText("Esperando datos...");
             sendButton.setEnabled(false);
             resetButton.setVisibility(View.GONE);
-            loadGif(R.drawable.reloj_de_arena);
-
+            receivedDataText.setText("Esperando, presione Comenzar...");
+            tvTituloDatos.setText("Esperando datos...");
+            tvErrores.setText("-");
+            tvTiempoEjecucion.setText("- seg");
+            resetButton.setVisibility(View.GONE);
+            loadGif(gifStatusP, R.drawable.reloj_de_arena);
+            cardEspera.setVisibility(View.VISIBLE);
+            cardDatos.setVisibility(View.GONE);
         });
 
         // Botón para regresar y desconectar Bluetooth
@@ -87,14 +105,6 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
             startActivity(homeIntent);
             finish();
         });
-    }
-
-    // Cargar GIFs
-    private void loadGif(int gifResource) {
-        Glide.with(this)
-                .asGif()
-                .load(gifResource)
-                .into(gifStatusP);
     }
 
     /**
@@ -121,35 +131,37 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         runOnUiThread(() -> {
             for (byte[] data : datas) {
                 try {
-                    fullReceivedData.append(new String(data, "UTF-8")); // Acumular los datos recibidos
+                    fullReceivedData.append(new String(data, "UTF-8"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
-            // Procesar los datos recibidos
             if (fullReceivedData.length() > 0) {
                 String receivedString = fullReceivedData.toString().trim();
-
-                // Dividir los datos usando la coma como separador
                 String[] values = receivedString.split(",");
 
                 if (values.length == 2) {
                     String errores = values[0];
                     String tiempoEjecucion = values[1];
 
-                    String formattedText = "Errores:\n" + errores + "\nTiempo de Ejecución: \n" + tiempoEjecucion;
+                    cardEspera.setVisibility(View.GONE);
+                    cardDatos.setVisibility(View.VISIBLE);
 
-                    if (receivedDataText != null) {
-                        receivedDataText.setText(formattedText);
-                    }
+                    tvTituloDatos.setText("Resultados del Test");
+                    tvErrores.setText(errores);
+                    tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
 
-                    loadGif(R.drawable.linea_de_meta);
-
+                    loadGif(gifStatusResultado, R.drawable.check);
                     fullReceivedData.setLength(0);
                 }
             }
         });
+    }
+
+    // Cargar GIFs
+    private void loadGif(ImageView imageView, int gifResource) {
+        Glide.with(this).asGif().load(gifResource).into(imageView);
     }
 
     /**

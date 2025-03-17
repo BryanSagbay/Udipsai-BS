@@ -16,5 +16,10 @@
         <item name="strokeWidth">2dp</item>
     </style>
 
+    <style name="EditTextCursorStyle">
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+    </style>
+
+
 </resources>
 

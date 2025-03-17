@@ -43,10 +43,19 @@
     <string name="bluetooth_permission_grant">Bluetooth permission is required by this App. Please grant in next dialog.</string>
     <string name="bluetooth_permission_title">Bluetooth permission</string>
     <string name="devices">Bluetooth Devices</string>
+    <string name="gcm_defaultSenderId" translatable="false">527942724325</string>
+    <string name="google_api_key" translatable="false">AIzaSyAoTsjoXldb5AAet3kNKzXJG2IBFQCIyLo</string>
+    <string name="google_app_id" translatable="false">1:527942724325:android:c32f5a1f5744f2a48ec20c</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAoTsjoXldb5AAet3kNKzXJG2IBFQCIyLo</string>
+    <string name="google_storage_bucket" translatable="false">udipsai-bs.firebasestorage.app</string>
+    <string name="project_id" translatable="false">udipsai-bs</string>
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="EditTextCursorStyle">
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
     </style>
     <style name="MyCustomButton" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/white</item>

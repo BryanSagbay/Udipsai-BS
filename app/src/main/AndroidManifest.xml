@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-sdk tools:overrideLibrary="com.google.android.material"/>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
@@ -21,7 +22,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".UI.home.HomePage"
+            android:name=".UI.login.LoginActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:exported="true">
@@ -30,6 +31,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".UI.register.RegisterActivity"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
+
+        <activity
+            android:name=".UI.home.HomePage"
+            android:screenOrientation="landscape"
+            android:exported="true"/>
+
+        <activity
+            android:name=".UI.patient.PatientHome"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"/>
 
         <!--  Pages of Test -->
         <activity

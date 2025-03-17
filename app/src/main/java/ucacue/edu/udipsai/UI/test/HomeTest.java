@@ -17,6 +17,7 @@ import android.os.IBinder;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import ucacue.edu.udipsai.R;
 import ucacue.edu.udipsai.Services.SerialListener;
 import ucacue.edu.udipsai.Services.SerialService;
 import ucacue.edu.udipsai.Services.SerialSocket;
+import ucacue.edu.udipsai.UI.home.HomePage;
 
 public class HomeTest extends AppCompatActivity implements SerialListener, ServiceConnection {
     private TextView patientName;
@@ -84,6 +86,8 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         loadingOverlay = findViewById(R.id.loadingOverlay);
         loadingGif = findViewById(R.id.loadingGif);
 
+        ImageButton backButton = findViewById(R.id.button_regresarH);
+
         Glide.with(this)
                 .asGif()
                 .load(R.drawable.bluetooth)
@@ -97,7 +101,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         // Vinculamos cada botón con su dirección MAC y actividad
         for (Map.Entry<Integer, String> entry : macAddresses.entrySet()) {
             findViewById(entry.getKey()).setOnClickListener(v -> {
-                showLoadingSpinner(); // Mostrar el spinner solo cuando el usuario haga clic
+                showLoadingSpinner();
                 connectToDevice(entry.getValue(), testActivities.get(entry.getKey()));
             });
         }
@@ -108,6 +112,13 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         }
 
         startEagleFloatingAnimation();
+
+        // Botón para regresar y desconectar Bluetooth
+        backButton.setOnClickListener(v -> {
+            Intent homeIntent = new Intent(HomeTest.this, HomePage.class);
+            startActivity(homeIntent);
+            finish();
+        });
     }
 
     private void startEagleFloatingAnimation() {

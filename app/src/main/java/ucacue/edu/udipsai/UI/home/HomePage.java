@@ -9,14 +9,23 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import ucacue.edu.udipsai.R;
+import ucacue.edu.udipsai.UI.login.LoginActivity;
+import ucacue.edu.udipsai.UI.patient.PatientHome;
 import ucacue.edu.udipsai.UI.test.HomeTest;
 
 public class HomePage extends AppCompatActivity {
-    private ImageView eagleImage;
+    private ImageView eagleImage, logout, iconTest, iconPatient;
     private TextView universityText, mottoText;
     private Handler animationHandler = new Handler();
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +36,42 @@ public class HomePage extends AppCompatActivity {
         eagleImage = findViewById(R.id.eagleImage);
         universityText = findViewById(R.id.universityText);
         mottoText = findViewById(R.id.mottoText);
-        ImageView iconTest = findViewById(R.id.iconTest);
+        iconTest = findViewById(R.id.iconTest);
+        iconPatient = findViewById(R.id.iconPacientes);
+        logout = findViewById(R.id.logoutIcon);
+        auth = FirebaseAuth.getInstance();
+
+        user = auth.getCurrentUser();
+        if(user==null){
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            //Toast.makeText("asd",)
+        }
+
+        logout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(HomePage.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // Iniciar la animación en bucle
         startAnimationLoop();
+
+        // Evento click para redirigir a PatientActivity
+        iconPatient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, PatientHome.class);
+                startActivity(intent);
+            }
+        });
+
 
         // Evento click para redirigir al TestActivity
         iconTest.setOnClickListener(new View.OnClickListener() {

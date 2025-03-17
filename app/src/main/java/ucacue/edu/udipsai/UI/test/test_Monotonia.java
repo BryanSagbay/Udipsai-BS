@@ -143,7 +143,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             sendButton3.setEnabled(false);
             sendButton4.setEnabled(false);
             loadGif(gifStatusM, R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el test...");
+            receivedDataText.setText("Ejecutando el Test...");
         };
 
         sendButton1.setOnClickListener(v -> {
@@ -175,6 +175,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             sendButton4.setEnabled(false);
             spinnerOptionsM.setSelection(0);
             spinnerOptionsM.setEnabled(false);
+            receivedDataText.setText("Esperando, presione Comenzar...");
             tvTituloDatos.setText("Esperando datos...");
             tvAciertos.setText("-");
             tvErrores.setText("-");
@@ -252,7 +253,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
                     tvTiempoReaccion.setText(tiempoReaccion + " seg");
 
-                    loadGif(gifStatusResultado, R.drawable.linea_de_meta);
+                    loadGif(gifStatusResultado, R.drawable.check);
                     fullReceivedData.setLength(0);
                 }
             }

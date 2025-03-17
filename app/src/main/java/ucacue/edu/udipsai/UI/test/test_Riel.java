@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,11 +28,11 @@ import ucacue.edu.udipsai.Services.SerialService;
 
 public class test_Riel extends AppCompatActivity implements SerialListener, ServiceConnection {
     private SerialService service;
-    private TextView receivedDataText;
     private StringBuilder fullReceivedData = new StringBuilder();
     private boolean isBound = false;
-
-    private ImageView gifStatusR;
+    private TextView receivedDataText, tvErrores, tvTiempoEjecucion, tvTituloDatos;
+    private CardView cardEspera, cardDatos;
+    private ImageView gifStatusResultado, gifStatusR;
 
 
     @Override
@@ -41,18 +42,28 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
 
         receivedDataText = findViewById(R.id.text_datosR);
         gifStatusR = findViewById(R.id.gif_statusR);
+        cardEspera = findViewById(R.id.card_esperaR);
+        cardDatos = findViewById(R.id.card_datosR);
+        gifStatusResultado = findViewById(R.id.gif_status_resultadoR);
+        tvErrores = findViewById(R.id.tv_errores);
+        tvTiempoEjecucion = findViewById(R.id.tv_tiempo_ejecucion);
+        tvTituloDatos = findViewById(R.id.text_titulo_datosR);
         Button sendButton = findViewById(R.id.button_enviar_m1R);
         ImageButton backButton = findViewById(R.id.button_regresarR);
-        FloatingActionButton playButton = findViewById(R.id.button_play);
-        FloatingActionButton resetButton = findViewById(R.id.button_reset);
+        FloatingActionButton playButton = findViewById(R.id.button_playR);
+        FloatingActionButton resetButton = findViewById(R.id.button_resetR);
 
         // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
         sendButton.setEnabled(false);
         resetButton.setVisibility(View.GONE);
 
-        // Cargar GIF de espera al inicio
-        loadGif(R.drawable.reloj_de_arena);
-        receivedDataText.setText("Esperando, presione Comenzar..");
+        // Inicialización de valores iniciales
+        cardDatos.setVisibility(View.GONE);
+        loadGif(gifStatusR, R.drawable.reloj_de_arena);
+        receivedDataText.setText("Esperando, presione Comenzar...");
+        tvTituloDatos.setText("Esperando datos...");
+        tvErrores.setText("-");
+        tvTiempoEjecucion.setText("- seg");
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
@@ -68,18 +79,23 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         sendButton.setOnClickListener(v -> {
             sendData("M1");
             sendButton.setEnabled(false);
-            loadGif(R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el juego...");
+            loadGif(gifStatusR, R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el Test...");
         });
 
         // Botón de reinicio: Enviar comando "S" y limpiar datos
         resetButton.setOnClickListener(v -> {
-            sendData("S"); // Enviar el comando de reinicio
-            receivedDataText.setText("Esperando datos...");
+            sendData("S");
+            receivedDataText.setText("Esperando, presione Comenzar...");
             sendButton.setEnabled(false);
             resetButton.setVisibility(View.GONE);
-            loadGif(R.drawable.reloj_de_arena);
-
+            tvTituloDatos.setText("Esperando datos...");
+            tvErrores.setText("-");
+            tvTiempoEjecucion.setText("- seg");
+            resetButton.setVisibility(View.GONE);
+            loadGif(gifStatusR, R.drawable.reloj_de_arena);
+            cardEspera.setVisibility(View.VISIBLE);
+            cardDatos.setVisibility(View.GONE);
         });
 
         // Botón para regresar y desconectar Bluetooth
@@ -91,13 +107,6 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         });
     }
 
-    // Cargar GIFs
-    private void loadGif(int gifResource) {
-        Glide.with(this)
-                .asGif()
-                .load(gifResource)
-                .into(gifStatusR);
-    }
     /**
      * Enviar datos al dispositivo Bluetooth
      */
@@ -122,39 +131,37 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         runOnUiThread(() -> {
             for (byte[] data : datas) {
                 try {
-                    fullReceivedData.append(new String(data, "UTF-8")); // Acumular los datos recibidos
+                    fullReceivedData.append(new String(data, "UTF-8"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
-            // Procesar los datos recibidos
             if (fullReceivedData.length() > 0) {
                 String receivedString = fullReceivedData.toString().trim();
-
-                // Dividir los datos usando la coma como separador
                 String[] values = receivedString.split(",");
 
-                if (values.length == 2) { // Asegurar que se reciban dos valores
-                    String errores = values[0]; // Primer valor (errores)
-                    String tiempoEjecucion = values[1]; // Segundo valor (tiempo de ejecución)
+                if (values.length == 2) {
+                    String errores = values[0];
+                    String tiempoEjecucion = values[1];
 
-                    // Formatear la salida deseada
-                    String formattedText = "Errores:\n" + errores + "\nTiempo de Ejecución: \n" + tiempoEjecucion;
+                    cardEspera.setVisibility(View.GONE);
+                    cardDatos.setVisibility(View.VISIBLE);
 
-                    // Mostrar los datos formateados en el TextView
-                    if (receivedDataText != null) {
-                        receivedDataText.setText(formattedText);
-                    }
+                    tvTituloDatos.setText("Resultados del Test");
+                    tvErrores.setText(errores);
+                    tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
 
-                    // Mostrar GIF de línea de meta
-                    loadGif(R.drawable.linea_de_meta);
-
-                    // Limpiar el StringBuilder después de procesar los datos
+                    loadGif(gifStatusResultado, R.drawable.check);
                     fullReceivedData.setLength(0);
                 }
             }
         });
+    }
+
+    // Cargar GIFs
+    private void loadGif(ImageView imageView, int gifResource) {
+        Glide.with(this).asGif().load(gifResource).into(imageView);
     }
 
     /**

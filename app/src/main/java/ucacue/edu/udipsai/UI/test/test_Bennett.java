@@ -163,7 +163,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             if (receivedDataText != null) {
                 receivedDataText.setText("Datos recibidos: " + fullReceivedData.toString());
             }
-            loadGif(R.drawable.linea_de_meta);
+            loadGif(R.drawable.check);
         });
     }
 

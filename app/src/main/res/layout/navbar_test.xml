@@ -10,14 +10,14 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <!-- Icono de regreso (Alineado a la izquierda) -->
-    <ImageView
-        android:id="@+id/backIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_back"
-        android:scaleType="fitCenter"
-        android:padding="8dp"/>
+    <ImageButton
+        android:id="@+id/button_regresarH"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Regresar"
+        android:padding="6dp"
+        android:src="@android:drawable/ic_menu_revert"/>
 
     <!-- Espaciador para empujar las imágenes a la derecha -->
     <View
