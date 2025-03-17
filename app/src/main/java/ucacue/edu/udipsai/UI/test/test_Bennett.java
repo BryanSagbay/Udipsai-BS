@@ -36,6 +36,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
     private ImageButton backButton;
     private FloatingActionButton playButton, resetButton;
     private Button sendButton1, sendButton2, sendButton3;
+    private int currentStep = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,40 +81,32 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         // Botón Play: Habilita "Enviar M1" y muestra "Reinicio"
         playButton.setOnClickListener(v -> {
             sendButton1.setEnabled(true);
-            sendButton2.setEnabled(true);
-            sendButton3.setEnabled(true);
             resetButton.setVisibility(View.VISIBLE);
+            currentStep = 1; // Estado inicial después de Play
         });
 
-        // Botón Enviar M1: Enviar comando y deshabilitar
         sendButton1.setOnClickListener(v -> {
             sendData("M1");
             sendButton1.setEnabled(false);
-            sendButton2.setEnabled(false);
-            sendButton3.setEnabled(false);
+            currentStep = 2; // M1 enviado, esperando respuesta
             loadGif(gifStatusB, R.drawable.dibujo);
             receivedDataText.setText("Ejecutando el Test...");
         });
 
         sendButton2.setOnClickListener(v -> {
             sendData("M2");
-            sendButton1.setEnabled(false);
             sendButton2.setEnabled(false);
-            sendButton3.setEnabled(false);
+            currentStep = 4; // M2 enviado, esperando respuesta
             loadGif(gifStatusB, R.drawable.dibujo);
             receivedDataText.setText("Ejecutando el Test...");
         });
 
         sendButton3.setOnClickListener(v -> {
             sendData("M3");
-            sendButton1.setEnabled(false);
-            sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
-            loadGif(gifStatusB, R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el Test...");
+            currentStep = 6; // M3 enviado, no hay más pasos
         });
 
-        // Botón de reinicio: Enviar comando "S" y limpiar datos
         resetButton.setOnClickListener(v -> {
             sendData("S");
             sendButton1.setEnabled(false);
@@ -127,7 +120,6 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             loadGif(gifStatusB, R.drawable.reloj_de_arena);
             cardEspera.setVisibility(View.VISIBLE);
             cardDatos.setVisibility(View.GONE);
-
         });
 
         // Botón para regresar y desconectar Bluetooth
@@ -166,49 +158,64 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
     @Override
     public void onSerialRead(ArrayDeque<byte[]> datas) {
         runOnUiThread(() -> {
+            // Procesa los datos recibidos
             for (byte[] data : datas) {
                 try {
-                    fullReceivedData.append(new String(data, "UTF-8"));
+                    fullReceivedData.append(new String(data, "UTF-8")); // Acumula los datos recibidos
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
+            // Si hay datos recibidos
             if (fullReceivedData.length() > 0) {
-                String receivedString = fullReceivedData.toString().trim();
+                String receivedString = fullReceivedData.toString().trim(); // Convierte los datos a String
+                receivedString = receivedString.replace("\n", ","); // Reemplaza saltos de línea por comas
+                String[] values = receivedString.split(","); // Divide los valores por comas
 
-                // Reemplazar cualquier salto de línea por una coma para unificar formato
-                receivedString = receivedString.replace("\n", ",");
-
-                String[] values = receivedString.split(",");
-
+                // Si hay al menos 2 valores (tiempo y errores)
                 if (values.length >= 2) {
+                    // Muestra los datos en la interfaz
                     cardEspera.setVisibility(View.GONE);
                     cardDatos.setVisibility(View.VISIBLE);
                     tvTituloDatos.setText("Resultados del Test");
 
-                    String tiempoEjecucion = values[0];
-                    String errores = values[1];
-                    String erroresFormatted = formatErrors(errores);
+                    // Muestra el tiempo de ejecución y los errores
+                    tvTiempoEjecucion.setText(values[0] + " seg");
+                    tvErrores.setText(formatErrors(values[1]));
 
-                    tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
-                    tvErrores.setText(erroresFormatted);
-
+                    // Si hay un tercer valor (dato extra), lo muestra
                     if (values.length == 3) {
-                        String extraDato = values[2];
-                        tvExtraDato.setText(extraDato);
+                        tvExtraDato.setText(values[2]);
                         cardExtraDato.setVisibility(View.VISIBLE);
                     } else {
                         cardExtraDato.setVisibility(View.GONE);
                     }
 
+                    // Cambia el GIF a un estado de éxito
                     loadGif(gifStatusResultado, R.drawable.check);
+
+                    // Habilita el siguiente botón según el paso actual
+                    switch (currentStep) {
+                        case 2: // Respuesta recibida después de M1
+                            sendButton2.setEnabled(true); // Habilita el botón 2
+                            currentStep = 3; // Actualiza el estado
+                            break;
+                        case 4: // Respuesta recibida después de M2
+                            sendButton3.setEnabled(true); // Habilita el botón 3
+                            currentStep = 5; // Actualiza el estado
+                            break;
+                        case 6: // Respuesta recibida después de M3
+                            // No hay más botones que habilitar
+                            break;
+                    }
+
+                    // Limpia los datos acumulados
                     fullReceivedData.setLength(0);
                 }
             }
         });
     }
-
 
     /**
      * Método para formatear errores, reemplazando 1 por ❌ y 0 por ✅
