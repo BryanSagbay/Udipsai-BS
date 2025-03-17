@@ -33,6 +33,9 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
     private TextView receivedDataText, tvErrores, tvTiempoEjecucion, tvTituloDatos, tvExtraDato;
     private CardView cardEspera, cardDatos, cardExtraDato;
     private ImageView gifStatusResultado, gifStatusB;
+    private ImageButton backButton;
+    private FloatingActionButton playButton, resetButton;
+    private Button sendButton1, sendButton2, sendButton3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +52,12 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         tvTituloDatos = findViewById(R.id.text_titulo_datosB);
         tvExtraDato = findViewById(R.id.tv_extra_dato);
         cardExtraDato = findViewById(R.id.card_extra_dato);
-        Button sendButton1 = findViewById(R.id.button_enviar_m1B);
-        Button sendButton2 = findViewById(R.id.button_enviar_m2B);
-        Button sendButton3 = findViewById(R.id.button_enviar_m3B);
-        ImageButton backButton = findViewById(R.id.button_regresarB);
-        FloatingActionButton playButton = findViewById(R.id.button_playB);
-        FloatingActionButton resetButton = findViewById(R.id.button_resetB);
+        sendButton1 = findViewById(R.id.button_enviar_m1B);
+        sendButton2 = findViewById(R.id.button_enviar_m2B);
+        sendButton3 = findViewById(R.id.button_enviar_m3B);
+        backButton = findViewById(R.id.button_regresarB);
+        playButton = findViewById(R.id.button_playB);
+        resetButton = findViewById(R.id.button_resetB);
 
         // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
         sendButton1.setEnabled(false);

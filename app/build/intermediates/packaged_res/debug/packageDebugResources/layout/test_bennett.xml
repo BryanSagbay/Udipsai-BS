@@ -345,7 +345,7 @@
 
             </LinearLayout>
 
-            <!-- Nuevo contenedor para el tercer dato -->
+            <!-- Teimpo de Total de Ejecución -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -382,7 +382,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Dato Extra"
+                                android:text="Tiempo Total de Ejecución"
                                 android:textColor="#1B5E20"
                                 android:textSize="16sp" />
 
