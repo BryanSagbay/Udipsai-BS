@@ -2919,7 +2919,6 @@ drawable abc_vector_test
 drawable accesologin
 drawable avd_hide_password
 drawable avd_show_password
-drawable background
 drawable bluetooth
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
@@ -3219,7 +3218,9 @@ id card_datosM
 id card_datosP
 id card_datosR
 id card_espera
+id card_esperaB
 id card_esperaR
+id card_extra_dato
 id center
 id centerCrop
 id centerInside
@@ -3328,6 +3329,7 @@ id gif_statusM
 id gif_statusP
 id gif_statusR
 id gif_status_resultado
+id gif_status_resultadoB
 id gif_status_resultadoR
 id glide_custom_view_target_tag
 id gone
@@ -3599,6 +3601,7 @@ id text_datosR
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
+id text_titulo_datosB
 id text_titulo_datosM
 id text_titulo_datosP
 id text_titulo_datosR
@@ -3630,6 +3633,7 @@ id tvLoginR
 id tvRegister
 id tv_aciertos
 id tv_errores
+id tv_extra_dato
 id tv_tiempo_ejecucion
 id tv_tiempo_reaccion
 id txtFecha

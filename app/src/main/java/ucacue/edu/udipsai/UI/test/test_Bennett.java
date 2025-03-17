@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,10 +28,11 @@ import ucacue.edu.udipsai.Services.SerialService;
 
 public class test_Bennett extends AppCompatActivity implements SerialListener, ServiceConnection {
     private SerialService service;
-    private TextView receivedDataText;
     private StringBuilder fullReceivedData = new StringBuilder(); // Para acumular datos recibidos
     private boolean isBound = false;
-    private ImageView gifStatusB;
+    private TextView receivedDataText, tvErrores, tvTiempoEjecucion, tvTituloDatos, tvExtraDato;
+    private CardView cardEspera, cardDatos, cardExtraDato;
+    private ImageView gifStatusResultado, gifStatusB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,14 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
 
         receivedDataText = findViewById(R.id.text_datosB);
         gifStatusB = findViewById(R.id.gif_statusB);
+        cardEspera = findViewById(R.id.card_esperaB);
+        cardDatos = findViewById(R.id.card_datosB);
+        gifStatusResultado = findViewById(R.id.gif_status_resultadoB);
+        tvErrores = findViewById(R.id.tv_errores);
+        tvTiempoEjecucion = findViewById(R.id.tv_tiempo_ejecucion);
+        tvTituloDatos = findViewById(R.id.text_titulo_datosB);
+        tvExtraDato = findViewById(R.id.tv_extra_dato);
+        cardExtraDato = findViewById(R.id.card_extra_dato);
         Button sendButton1 = findViewById(R.id.button_enviar_m1B);
         Button sendButton2 = findViewById(R.id.button_enviar_m2B);
         Button sendButton3 = findViewById(R.id.button_enviar_m3B);
@@ -48,17 +58,17 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
 
         // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
         sendButton1.setEnabled(false);
-        resetButton.setVisibility(View.GONE);
-
         sendButton2.setEnabled(false);
-        resetButton.setVisibility(View.GONE);
-
         sendButton3.setEnabled(false);
         resetButton.setVisibility(View.GONE);
 
-        // Cargar GIF de espera al inicio
-        loadGif(R.drawable.reloj_de_arena);
-        receivedDataText.setText("Esperando, presione Comenzar..");
+        // Inicialización de valores iniciales
+        cardDatos.setVisibility(View.GONE);
+        loadGif(gifStatusB, R.drawable.reloj_de_arena);
+        receivedDataText.setText("Esperando, presione Comenzar...");
+        tvTituloDatos.setText("Esperando datos...");
+        tvErrores.setText("-");
+        tvTiempoEjecucion.setText("- seg");
 
         // Iniciar y vincular servicio Bluetooth
         Intent intent = new Intent(this, SerialService.class);
@@ -78,8 +88,8 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             sendButton1.setEnabled(false);
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
-            loadGif(R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el juego...");
+            loadGif(gifStatusB, R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el Test...");
         });
 
         sendButton2.setOnClickListener(v -> {
@@ -87,8 +97,8 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             sendButton1.setEnabled(false);
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
-            loadGif(R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el juego...");
+            loadGif(gifStatusB, R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el Test...");
         });
 
         sendButton3.setOnClickListener(v -> {
@@ -96,19 +106,24 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             sendButton1.setEnabled(false);
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
-            loadGif(R.drawable.dibujo);
-            receivedDataText.setText("Ejecutando el juego...");
+            loadGif(gifStatusB, R.drawable.dibujo);
+            receivedDataText.setText("Ejecutando el Test...");
         });
 
         // Botón de reinicio: Enviar comando "S" y limpiar datos
         resetButton.setOnClickListener(v -> {
-            sendData("S"); // Enviar el comando de reinicio
-            receivedDataText.setText("Esperando datos...");
+            sendData("S");
             sendButton1.setEnabled(false);
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
             resetButton.setVisibility(View.GONE);
-            loadGif(R.drawable.reloj_de_arena);
+            receivedDataText.setText("Esperando, presione Comenzar...");
+            tvTituloDatos.setText("Esperando datos...");
+            tvErrores.setText("-");
+            tvTiempoEjecucion.setText("- seg");
+            loadGif(gifStatusB, R.drawable.reloj_de_arena);
+            cardEspera.setVisibility(View.VISIBLE);
+            cardDatos.setVisibility(View.GONE);
 
         });
 
@@ -122,11 +137,8 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
     }
 
     // Cargar GIFs
-    private void loadGif(int gifResource) {
-        Glide.with(this)
-                .asGif()
-                .load(gifResource)
-                .into(gifStatusB);
+    private void loadGif(ImageView imageView, int gifResource) {
+        Glide.with(this).asGif().load(gifResource).into(imageView);
     }
 
     /**
@@ -153,18 +165,63 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         runOnUiThread(() -> {
             for (byte[] data : datas) {
                 try {
-                    fullReceivedData.append(new String(data, "UTF-8")); // Acumular los datos recibidos
+                    fullReceivedData.append(new String(data, "UTF-8"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
-            // Mostrar los datos completos en el TextView
-            if (receivedDataText != null) {
-                receivedDataText.setText("Datos recibidos: " + fullReceivedData.toString());
+            if (fullReceivedData.length() > 0) {
+                String receivedString = fullReceivedData.toString().trim();
+
+                // Reemplazar cualquier salto de línea por una coma para unificar formato
+                receivedString = receivedString.replace("\n", ",");
+
+                String[] values = receivedString.split(",");
+
+                if (values.length >= 2) {
+                    cardEspera.setVisibility(View.GONE);
+                    cardDatos.setVisibility(View.VISIBLE);
+                    tvTituloDatos.setText("Resultados del Test");
+
+                    String tiempoEjecucion = values[0];
+                    String errores = values[1];
+                    String erroresFormatted = formatErrors(errores);
+
+                    tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
+                    tvErrores.setText(erroresFormatted);
+
+                    if (values.length == 3) {
+                        String extraDato = values[2];
+                        tvExtraDato.setText(extraDato);
+                        cardExtraDato.setVisibility(View.VISIBLE);
+                    } else {
+                        cardExtraDato.setVisibility(View.GONE);
+                    }
+
+                    loadGif(gifStatusResultado, R.drawable.check);
+                    fullReceivedData.setLength(0);
+                }
             }
-            loadGif(R.drawable.check);
         });
+    }
+
+
+    /**
+     * Método para formatear errores, reemplazando 1 por ❌ y 0 por ✅
+     */
+    private String formatErrors(String errores) {
+        StringBuilder erroresFormatted = new StringBuilder();
+        for (char c : errores.toCharArray()) {
+            if (c == '1') {
+                erroresFormatted.append("❌");
+            } else if (c == '0') {
+                erroresFormatted.append("✅");
+            } else {
+                erroresFormatted.append(c);
+            }
+        }
+        return erroresFormatted.toString();
     }
 
     /**

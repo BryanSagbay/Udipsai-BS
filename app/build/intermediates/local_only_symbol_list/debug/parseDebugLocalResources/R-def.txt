@@ -26,7 +26,6 @@ color white80
 color white90
 color yellow20
 drawable accesologin
-drawable background
 drawable bluetooth
 drawable btn_rounded
 drawable btn_roundedtest
@@ -104,7 +103,9 @@ id card_datosM
 id card_datosP
 id card_datosR
 id card_espera
+id card_esperaB
 id card_esperaR
+id card_extra_dato
 id clear
 id eagleImage
 id edtApellido
@@ -126,6 +127,7 @@ id gif_statusM
 id gif_statusP
 id gif_statusR
 id gif_status_resultado
+id gif_status_resultadoB
 id gif_status_resultadoR
 id guidelineCenter
 id hex
@@ -157,6 +159,7 @@ id text_datosB
 id text_datosM
 id text_datosP
 id text_datosR
+id text_titulo_datosB
 id text_titulo_datosM
 id text_titulo_datosP
 id text_titulo_datosR
@@ -166,6 +169,7 @@ id tvLoginR
 id tvRegister
 id tv_aciertos
 id tv_errores
+id tv_extra_dato
 id tv_tiempo_ejecucion
 id tv_tiempo_reaccion
 id txtFecha
