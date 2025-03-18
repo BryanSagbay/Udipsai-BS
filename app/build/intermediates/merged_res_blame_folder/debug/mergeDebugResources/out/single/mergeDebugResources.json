@@ -216,10 +216,6 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_riel.xml"
     },
     {
-        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_footer_home.xml.flat",
-        "source": "ucacue.edu.udipsai.app-main-44:/layout/footer_home.xml"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_aguila.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_aguila.png"
     },
@@ -258,6 +254,10 @@
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "ucacue.edu.udipsai.app-debug-42:/raw_motricidad.mp3.flat",
+        "source": "ucacue.edu.udipsai.app-main-44:/raw/motricidad.mp3"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_btn_rounded.xml.flat",

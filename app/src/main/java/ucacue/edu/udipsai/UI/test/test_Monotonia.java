@@ -267,7 +267,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     cardDatosM.setVisibility(View.VISIBLE);
 
                     // Actualizar los datos
-                    tvTituloDatos.setText("Resultados del Test");
+                    tvTituloDatos.setText("Resultados del Test de Monotonía");
                     tvAciertos.setText(acierto);
                     tvErrores.setText(errores);
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");

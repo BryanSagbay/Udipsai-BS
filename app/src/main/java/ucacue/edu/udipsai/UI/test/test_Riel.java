@@ -169,7 +169,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
                     cardEspera.setVisibility(View.GONE);
                     cardDatos.setVisibility(View.VISIBLE);
 
-                    tvTituloDatos.setText("Resultados del Test de Palanca");
+                    tvTituloDatos.setText("Resultados del Test de Sistema de Motricidad");
                     tvErrores.setText(errores);
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
 
