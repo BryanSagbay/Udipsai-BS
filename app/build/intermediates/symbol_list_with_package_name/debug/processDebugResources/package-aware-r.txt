@@ -1287,6 +1287,7 @@ color abc_tint_edittext
 color abc_tint_seek_thumb
 color abc_tint_spinner
 color abc_tint_switch_track
+color accent_color
 color accent_material_dark
 color accent_material_light
 color androidx_core_ripple_material_light
@@ -1313,6 +1314,7 @@ color browser_actions_text_color
 color browser_actions_title_color
 color button_material_dark
 color button_material_light
+color card_background
 color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
@@ -1334,6 +1336,7 @@ color common_google_signin_btn_text_light_disabled
 color common_google_signin_btn_text_light_focused
 color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
+color control_normal
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -2034,6 +2037,7 @@ color switch_thumb_material_dark
 color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
+color text_primary
 color tooltip_background_dark
 color tooltip_background_light
 color white
@@ -2930,9 +2934,11 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable btn_rounded
 drawable btn_roundedtest
+drawable calendar_backround
 drawable card_testview
 drawable cardr_results
 drawable check
+drawable circle
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -2982,6 +2988,7 @@ drawable ic_other_sign_in
 drawable ic_paciente
 drawable ic_passkey
 drawable ic_password
+drawable ic_pdf
 drawable ic_salir
 drawable ic_search_black_24
 drawable ic_send_white_24dp
@@ -3067,6 +3074,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable pdf
 drawable reloj_de_arena
 drawable test_bennett
 drawable test_btn_1
@@ -3127,6 +3135,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id actionCard
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -3184,13 +3193,16 @@ id bt_refresh
 id bt_settings
 id btnAgregar
 id btnBennett
+id btnCancelar
 id btnEditar
 id btnEliminar
+id btnGenerarPDF
 id btnLogin
 id btnMonotonia
 id btnPalanca
 id btnRegisterR
 id btnRiel
+id btnSeleccionarFecha
 id buttonPanel
 id button_amarilloM
 id button_azulM
@@ -3258,6 +3270,8 @@ id custom
 id customPanel
 id cut
 id dark
+id dateCard
+id datePicker
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -3353,7 +3367,7 @@ id homeAsUp
 id honorRequest
 id icon
 id iconPacientes
-id iconSoporte
+id iconPdf
 id iconTest
 id icon_group
 id icon_only
@@ -3363,6 +3377,7 @@ id ignoreRequest
 id image
 id indeterminate
 id info
+id infoCard
 id invisible
 id inward
 id italic
@@ -3386,7 +3401,6 @@ id logo1
 id logo2
 id logoLeft
 id logoRight
-id logout
 id logoutIcon
 id lottie_layer_name
 id m3_side_sheet
@@ -3600,6 +3614,8 @@ id textSpacerNoTitle
 id textStart
 id textTest
 id textTop
+id textViewCorreo
+id textViewFechaSeleccionada
 id text_datosB
 id text_datosM
 id text_datosP
@@ -3653,7 +3669,6 @@ id universityText
 id unlabeled
 id up
 id useLogo
-id user
 id view_offset_helper
 id view_tree_lifecycle_owner
 id view_tree_on_back_pressed_dispatcher_owner
@@ -3782,7 +3797,6 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_main
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
@@ -3868,6 +3882,7 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout pdf_home
 layout register
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
@@ -4373,6 +4388,7 @@ style Base_Widget_MaterialComponents_TextView
 style CardView
 style CardView_Dark
 style CardView_Light
+style DatePickerTheme
 style EditTextCursorStyle
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation

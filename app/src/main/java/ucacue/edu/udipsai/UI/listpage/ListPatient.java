@@ -67,9 +67,16 @@ public class ListPatient extends AppCompatActivity {
     }
 
     private void onPatientSelected(Patient patient) {
+        String nombrePaciente = patient.getNombre() + " " + patient.getApellido();
+
+        // Guardar en SharedPreferences para mantener el paciente seleccionado
+        getSharedPreferences("PatientPrefs", MODE_PRIVATE)
+                .edit()
+                .putString("patient_name", nombrePaciente)
+                .apply();
+
         Intent intent = new Intent(this, HomeTest.class);
-        intent.putExtra("patient_name", patient.getNombre() + " " + patient.getApellido());
+        intent.putExtra("patient_name", nombrePaciente);
         startActivity(intent);
     }
 }
-

@@ -217,10 +217,10 @@
     <!-- CardView de Resultados (Oculta al inicio) -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_datosB"
-        android:layout_width="695dp"
-        android:layout_height="320dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="700dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/card_testview"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="16dp"

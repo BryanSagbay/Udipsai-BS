@@ -19,10 +19,10 @@ import ucacue.edu.udipsai.R;
 import ucacue.edu.udipsai.UI.listpage.ListPatient;
 import ucacue.edu.udipsai.UI.login.LoginActivity;
 import ucacue.edu.udipsai.UI.patient.PatientHome;
-import ucacue.edu.udipsai.UI.test.HomeTest;
+import ucacue.edu.udipsai.UI.pdf.Pdf;
 
 public class HomePage extends AppCompatActivity {
-    private ImageView eagleImage, logout, iconTest, iconPatient;
+    private ImageView eagleImage, logout, iconTest, iconPatient, iconPdf;
     private TextView universityText, mottoText;
     private Handler animationHandler = new Handler();
     FirebaseAuth auth;
@@ -39,21 +39,20 @@ public class HomePage extends AppCompatActivity {
         mottoText = findViewById(R.id.mottoText);
         iconTest = findViewById(R.id.iconTest);
         iconPatient = findViewById(R.id.iconPacientes);
+        iconPdf = findViewById(R.id.iconPdf);
         logout = findViewById(R.id.logoutIcon);
         auth = FirebaseAuth.getInstance();
 
         user = auth.getCurrentUser();
-        if(user==null){
+        if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
-        }else {
-            //Toast.makeText("asd",)
         }
 
-        logout.setOnClickListener(new View.OnClickListener(){
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(HomePage.this, LoginActivity.class);
                 startActivity(intent);
@@ -73,12 +72,20 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-
         // Evento click para redirigir al TestActivity
         iconTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePage.this, ListPatient.class);
+                startActivity(intent);
+            }
+        });
+
+        // Evento click para redirigir al PdfActivity
+        iconPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, Pdf.class);
                 startActivity(intent);
             }
         });

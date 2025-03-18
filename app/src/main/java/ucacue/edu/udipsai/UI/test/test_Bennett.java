@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -270,10 +271,8 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         String correoUsuario = (user != null) ? user.getEmail() : "No autenticado";
 
         // Obtener el nombre del paciente
-        String nombrePaciente = getIntent().getStringExtra("patient_name");
-        if (nombrePaciente == null) {
-            nombrePaciente = "Paciente Desconocido";
-        }
+        SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
+        String nombrePaciente = preferences.getString("patient_name", "Paciente Desconocido");
 
         Map<String, Object> datos = new HashMap<>();
         datos.put("timestamp", System.currentTimeMillis());
@@ -287,7 +286,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         datos.put("erroresM3", currentStep >= 6 ? erroresM3 : "0");
         datos.put("datoExtraM3", currentStep >= 6 ? datoExtraM3 : "-");
 
-        db.collection("testBennettResultados")
+        db.collection("testResultados")
                 .add(datos)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Datos guardados", Toast.LENGTH_SHORT).show();

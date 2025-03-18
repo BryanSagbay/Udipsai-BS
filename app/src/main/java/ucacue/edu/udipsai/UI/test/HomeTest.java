@@ -128,8 +128,11 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
 
         // Botón para regresar y desconectar Bluetooth
         backButton.setOnClickListener(v -> {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove("patient_name");
+            editor.apply();
+
             Intent homeIntent = new Intent(HomeTest.this, HomePage.class);
-            preferences.edit().remove("patient_name").apply();
             startActivity(homeIntent);
             finish();
         });
@@ -234,10 +237,6 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
 
             if (buttonId != -1) {
                 playAudio(audioMap.get(buttonId));
-
-                // Guardar nombre del paciente antes de iniciar la actividad de prueba
-                SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
-                preferences.edit().putString("patient_name", getIntent().getStringExtra("patient_name")).apply();
 
                 new android.os.Handler().postDelayed(() -> {
                     hideLoadingSpinner();

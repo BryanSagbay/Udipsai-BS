@@ -16,24 +16,28 @@
         <item>Horario</item>
         <item>Antihorario</item>
     </string-array>
+    <color name="accent_color">#5D9CEC</color>
     <color name="black">#000000</color>
     <color name="black89">#000000DD</color>
     <color name="black90">#000000DD</color>
     <color name="black91">#242323</color>
     <color name="blue">#2196F3</color>
     <color name="bluedark">#0023FF</color>
+    <color name="card_background">#FFFFFF</color>
     <color name="colorAccent">#000000DD</color>
     <color name="colorPrimary">#000000DD</color>
     <color name="colorPrimaryDark">#000000DD</color>
     <color name="colorRecieveText">#00FF00</color>
     <color name="colorSendText">#82CAFF</color>
     <color name="colorStatusText">#FFDB58</color>
+    <color name="control_normal">#78909C</color>
     <color name="gray">#BDBDBD</color>
     <color name="gray_dark">#707070</color>
     <color name="gray_light">#F5F5F5</color>
     <color name="greendark">#1E6A1F</color>
     <color name="primary">#3F51B5</color>
     <color name="red89">#680303</color>
+    <color name="text_primary">#37474F</color>
     <color name="white">#FFFFFF</color>
     <color name="white80">#99FFFFFF</color>
     <color name="white90">#809B9B9B</color>
@@ -53,6 +57,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="DatePickerTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/gray_dark</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:colorControlNormal">@color/control_normal</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="EditTextCursorStyle">
         <item name="android:textCursorDrawable">@drawable/cursor</item>

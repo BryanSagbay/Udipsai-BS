@@ -24,10 +24,6 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/menu/menu_devices.xml"
     },
     {
-        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_test_monotonia.xml.flat",
-        "source": "ucacue.edu.udipsai.app-main-44:/layout/test_monotonia.xml"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_listado_pacientes.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/listado_pacientes.xml"
     },
@@ -148,6 +144,10 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xhdpi/ic_notification.png"
     },
     {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_calendar_backround.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/calendar_backround.xml"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxxhdpi_ic_notification.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxxhdpi/ic_notification.png"
     },
@@ -162,6 +162,10 @@
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_test.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_test.png"
+    },
+    {
+        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_test_bennett.xml.flat",
+        "source": "ucacue.edu.udipsai.app-main-44:/layout/test_bennett.xml"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_footer_home.xml.flat",
@@ -236,6 +240,14 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_btn_2.xml"
     },
     {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_circle.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/circle.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_pdf.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_pdf.png"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_ucacuelogo.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_ucacuelogo.png"
     },
@@ -284,6 +296,10 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/list_patient.xml"
     },
     {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_pdf.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/pdf.png"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxhdpi_ic_clear_white_24dp.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxhdpi/ic_clear_white_24dp.png"
     },
@@ -322,6 +338,10 @@
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/mipmap-mdpi_ic_launcher.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_pdf_home.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/pdf_home.xml"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_modal_paciente.xml.flat",

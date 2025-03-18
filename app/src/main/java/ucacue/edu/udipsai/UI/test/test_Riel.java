@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -205,10 +206,8 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         }
 
         // Obtener el nombre del paciente
-        String nombrePaciente = getIntent().getStringExtra("patient_name");
-        if (nombrePaciente == null) {
-            nombrePaciente = "Paciente Desconocido";
-        }
+        SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
+        String nombrePaciente = preferences.getString("patient_name", "Paciente Desconocido");
 
         // Obtener el correo del usuario autenticado
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -225,7 +224,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
 
         // Guardar en Firestore en la colección "testResultados"
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("testMotricidadResultados")
+        db.collection("testResultados")
                 .add(datos)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();

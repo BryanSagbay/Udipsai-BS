@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/iconPacientes"
-            android:layout_width="50dp"
+            android:layout_width="450dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_paciente"
             android:scaleType="centerInside"/>
@@ -41,7 +41,7 @@
 
         <ImageView
             android:id="@+id/iconTest"
-            android:layout_width="50dp"
+            android:layout_width="450dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_test"
             android:scaleType="centerInside"/>
@@ -65,17 +65,19 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/iconSoporte"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_soporte"
+            android:id="@+id/iconPdf"
+            android:layout_width="450dp"
+            android:layout_height="40dp"
+            android:src="@drawable/pdf"
+            android:tint="#FFFF"
             android:scaleType="centerInside"/>
 
         <TextView
             android:id="@+id/textSoporte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Soporte TI"
+            android:text="Archivos"
+            android:paddingTop="3dp"
             android:textSize="12sp"
             android:textColor="@android:color/white"
             android:gravity="center"/>

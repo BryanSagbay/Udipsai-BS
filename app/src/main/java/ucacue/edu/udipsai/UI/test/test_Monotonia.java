@@ -216,11 +216,14 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         saveButton.setOnClickListener(v -> guardarDatos());
 
         SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
-        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        String nombrePaciente = preferences.getString("patient_name", "");
 
-        if (nombrePaciente != null) {
+        // Si el intent tiene un nombre, lo actualizamos
+        if (getIntent().getStringExtra("patient_name") != null) {
+            nombrePaciente = getIntent().getStringExtra("patient_name");
             preferences.edit().putString("patient_name", nombrePaciente).apply();
         }
+
     }
 
     // Cargar GIFs
@@ -325,7 +328,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         datos.put("correoUsuario", correoUsuario);
 
         // Guardar en Firestore
-        db.collection("testMonotoniaResultados")
+        db.collection("testResultados")
                 .add(datos)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
@@ -334,7 +337,6 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
-
 
     /**
      * Manejo de conexión y errores Bluetooth
