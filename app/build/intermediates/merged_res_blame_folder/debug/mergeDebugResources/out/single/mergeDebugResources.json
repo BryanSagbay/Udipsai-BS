@@ -120,6 +120,10 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_back.png"
     },
     {
+        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_alert_patient.xml.flat",
+        "source": "ucacue.edu.udipsai.app-main-44:/layout/alert_patient.xml"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_bennett.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_bennett.xml"
     },

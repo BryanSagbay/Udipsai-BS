@@ -77,6 +77,8 @@ id body_background
 id btnAgregar
 id btnBennett
 id btnCancelar
+id btnCancelarEliminar
+id btnConfirmarEliminar
 id btnEditar
 id btnEliminar
 id btnGenerarPDF
@@ -193,6 +195,7 @@ id txtNombre
 id txtNombrePaciente
 id txtTelefono
 id universityText
+layout alert_patient
 layout footer_home
 layout home_page
 layout home_patient

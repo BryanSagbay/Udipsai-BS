@@ -3189,6 +3189,8 @@ int id browser_actions_menu_view 0x7f090065
 int id btnAgregar 0x7f090068
 int id btnBennett 0x7f090069
 int id btnCancelar 0x7f09006a
+int id btnCancelarEliminar 0x7f090253
+int id btnConfirmarEliminar 0x7f090254
 int id btnEditar 0x7f09006b
 int id btnEliminar 0x7f09006c
 int id btnGenerarPDF 0x7f09006d
@@ -3789,6 +3791,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0c0018
 int layout abc_search_view 0x7f0c0019
 int layout abc_select_dialog_material 0x7f0c001a
 int layout abc_tooltip 0x7f0c001b
+int layout alert_patient 0x7f0c007c
 int layout browser_actions_context_menu_page 0x7f0c001c
 int layout browser_actions_context_menu_row 0x7f0c001d
 int layout custom_dialog 0x7f0c001e

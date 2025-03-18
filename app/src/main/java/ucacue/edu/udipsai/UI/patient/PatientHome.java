@@ -41,11 +41,9 @@ public class PatientHome extends AppCompatActivity {
     private List<Patient> listaPacientes;
     private PatientAdapter adapter;
 
-    // Nuevos componentes para las alertas personalizadas
-    private FrameLayout loadingOverlay;
-    private FrameLayout errorOverlay;
+    // Componentes de alerta personalizada
+    private FrameLayout loadingOverlay, errorOverlay;
     private TextView errorMessage;
-
     private ImageView loadingGif, errorloadingGif;
 
     @Override
@@ -53,12 +51,13 @@ public class PatientHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_patient);
 
+        // Inicialización de vistas
         recyclerView = findViewById(R.id.recyclerViewPacientes);
         txtNoDatos = findViewById(R.id.txtNoDatos);
         fabAdd = findViewById(R.id.fab_add);
         backButton = findViewById(R.id.back_button);
 
-        // Inicializar los componentes de alerta
+        // Inicializar los overlays de alerta
         loadingOverlay = findViewById(R.id.loadingOverlay);
         errorOverlay = findViewById(R.id.errorOverlay);
         errorMessage = findViewById(R.id.errorMessage);
@@ -69,37 +68,38 @@ public class PatientHome extends AppCompatActivity {
         Glide.with(this).asGif().load(R.drawable.ic_carpeta).into(loadingGif);
         Glide.with(this).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);
 
-
+        // Inicializar Firestore y RecyclerView
         db = FirebaseFirestore.getInstance();
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         listaPacientes = new ArrayList<>();
         adapter = new PatientAdapter(listaPacientes, this);
         recyclerView.setAdapter(adapter);
 
+        // Acciones de botones
         backButton.setOnClickListener(v -> {
             Intent homeIntent = new Intent(PatientHome.this, HomePage.class);
             startActivity(homeIntent);
             finish();
         });
 
-        cargarPacientes();
-
         fabAdd.setOnClickListener(v -> mostrarDialogoAgregarPaciente());
 
-        // Configurar los listeners para cerrar las alertas al hacer clic en ellas
-        loadingOverlay.setOnClickListener(v -> hideSuccessAlert());
-        errorOverlay.setOnClickListener(v -> hideErrorAlert());
+        // Cargar pacientes desde Firestore
+        cargarPacientes();
+
+        // Listeners para cerrar alertas al hacer clic en ellas
+        loadingOverlay.setOnClickListener(v -> ocultarAlertaCorrecto());
+        errorOverlay.setOnClickListener(v -> ocultarAlertaError());
     }
 
     /**
-     * Carga los pacientes desde Firestore y los ordena por fechaRegistro en orden descendente.
+     * Carga los pacientes desde Firestore y los ordena por fecha de registro en orden descendente.
      */
     private void cargarPacientes() {
         db.collection("pacientes").orderBy("fechaRegistro", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
-                        showErrorAlert("Error al cargar datos: " + error.getMessage());
+                        mostrarAlertaError("Error al cargar datos: " + error.getMessage());
                         return;
                     }
 
@@ -145,17 +145,12 @@ public class PatientHome extends AppCompatActivity {
             String direccion = edtDireccion.getText().toString().trim();
             String telefono = edtTelefono.getText().toString().trim();
 
-            // Obtener el género seleccionado
+            // Obtener género seleccionado
             int selectedId = radioGroupGenero.getCheckedRadioButtonId();
-            String genero = "";
-            if (selectedId == R.id.rbMasculino) {
-                genero = "Masculino";
-            } else if (selectedId == R.id.rbFemenino) {
-                genero = "Femenino";
-            }
+            String genero = selectedId == R.id.rbMasculino ? "Masculino" : "Femenino";
 
             if (nombre.isEmpty() || apellido.isEmpty() || genero.isEmpty() || edadStr.isEmpty() || direccion.isEmpty() || telefono.isEmpty()) {
-                showErrorAlert("Todos los campos son obligatorios");
+                mostrarAlertaError("Todos los campos son obligatorios");
                 return;
             }
 
@@ -166,73 +161,52 @@ public class PatientHome extends AppCompatActivity {
     }
 
     /**
-     * Agrega un nuevo paciente a Firestore con ID basado en timestamp.
+     * Agrega un nuevo paciente a Firestore.
      */
     private void agregarPaciente(String nombre, String apellido, String genero, int edad, String direccion, String telefono) {
-        long timestamp = System.currentTimeMillis(); // Usar timestamp como ID
-
+        long timestamp = System.currentTimeMillis();
         Patient paciente = new Patient(nombre, apellido, genero, edad, direccion, telefono);
 
-        // Mostrar overlay de carga
-        showLoadingIndicator();
+        mostrarAlertaCargando();
 
         db.collection("pacientes").document(String.valueOf(timestamp))
                 .set(paciente)
                 .addOnSuccessListener(aVoid -> {
-                    // Mostrar alerta de éxito
-                    showSuccessAlert();
+                    mostrarAlertaCorrecto("Paciente agregado con éxito");
                     cargarPacientes();
                 })
-                .addOnFailureListener(e -> {
-                    // Mostrar alerta de error
-                    showErrorAlert("Error al agregar paciente: " + e.getMessage());
-                });
+                .addOnFailureListener(e -> mostrarAlertaError("Error al agregar paciente: " + e.getMessage()));
     }
 
     /**
-     * Muestra el indicador de carga
+     * Métodos de alertas personalizadas
      */
-    private void showLoadingIndicator() {
+    public void mostrarAlertaCargando() {
         loadingOverlay.setVisibility(View.VISIBLE);
+        loadingGif.setVisibility(View.VISIBLE);
     }
 
-    /**
-     * Muestra la alerta de éxito y la oculta automáticamente después de un tiempo
-     */
-    private void showSuccessAlert() {
-        // Primero ocultamos el indicador de carga si estaba visible
+    public void mostrarAlertaCorrecto(String mensaje) {
         loadingOverlay.setVisibility(View.VISIBLE);
         loadingGif.setVisibility(View.VISIBLE);
 
-        // Auto-ocultar después de 2 segundos
-        new Handler().postDelayed(this::hideSuccessAlert, 2000);
+        new Handler().postDelayed(this::ocultarAlertaCorrecto, 2000);
     }
 
-    /**
-     * Oculta la alerta de éxito
-     */
-    private void hideSuccessAlert() {
+    public void ocultarAlertaCorrecto() {
         loadingOverlay.setVisibility(View.GONE);
         loadingGif.setVisibility(View.GONE);
     }
 
-    /**
-     * Muestra la alerta de error con un mensaje personalizado
-     * @param message Mensaje de error a mostrar
-     */
-    private void showErrorAlert(String message) {
-        errorMessage.setText(message);
+    public void mostrarAlertaError(String mensaje) {
+        errorMessage.setText(mensaje);
         errorOverlay.setVisibility(View.VISIBLE);
         errorloadingGif.setVisibility(View.VISIBLE);
 
-        // Auto-ocultar después de 3 segundos
-        new Handler().postDelayed(this::hideErrorAlert, 3000);
+        new Handler().postDelayed(this::ocultarAlertaError, 3000);
     }
 
-    /**
-     * Oculta la alerta de error
-     */
-    private void hideErrorAlert() {
+    public void ocultarAlertaError() {
         errorOverlay.setVisibility(View.GONE);
         errorloadingGif.setVisibility(View.GONE);
     }

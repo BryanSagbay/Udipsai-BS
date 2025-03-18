@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,13 +36,12 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
     private TextView errorMessage;
     private ImageView loadingGif, errorloadingGif;
 
-
     public PatientAdapter(List<Patient> listaPacientes, Context context) {
         this.listaPacientes = listaPacientes;
         this.context = context;
         this.db = FirebaseFirestore.getInstance();
 
-        // Obtener referencias a los overlays si estamos en PatientHome
+        // Verificar si el contexto es una instancia de PatientHome para acceder a las alertas
         if (context instanceof PatientHome) {
             PatientHome activity = (PatientHome) context;
             loadingOverlay = activity.findViewById(R.id.loadingOverlay);
@@ -52,7 +50,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
             loadingGif = activity.findViewById(R.id.loadingGif);
             errorloadingGif = activity.findViewById(R.id.errorloadingGif);
 
-            // Cargar los GIFs con Glide
+            // Cargar imágenes animadas con Glide
             Glide.with(activity).asGif().load(R.drawable.ic_check).into(loadingGif);
             Glide.with(activity).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);
         }
@@ -78,6 +76,9 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
         holder.btnEliminar.setOnClickListener(v -> eliminarPaciente(paciente));
     }
 
+    /**
+     * Muestra el diálogo para editar paciente
+     */
     private void mostrarDialogoEditar(Patient paciente) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -109,43 +110,52 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
             String edadStr = edtEdad.getText().toString().trim();
 
             if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || direccion.isEmpty() || edadStr.isEmpty()) {
-                showErrorAlert("Todos los campos son obligatorios");
+                mostrarAlertaError("Todos los campos son obligatorios");
                 return;
             }
 
             int edad = Integer.parseInt(edadStr);
             dialog.dismiss();
-            showLoadingIndicator();
+            mostrarAlertaCargando();
 
             // Actualizar datos en Firestore
             db.collection("pacientes").document(String.valueOf(paciente.getId()))
                     .update("nombre", nombre, "apellido", apellido, "telefono", telefono, "direccion", direccion, "edad", edad)
                     .addOnSuccessListener(aVoid -> {
-                        showSuccessAlert();
+                        mostrarAlertaCorrecto("Paciente actualizado con éxito");
                         notifyDataSetChanged();
                     })
-                    .addOnFailureListener(e -> showErrorAlert("Error al actualizar: " + e.getMessage()));
+                    .addOnFailureListener(e -> mostrarAlertaError("Error al actualizar: " + e.getMessage()));
         });
     }
 
+    /**
+     * Muestra el diálogo para eliminar un paciente
+     */
     private void eliminarPaciente(Patient paciente) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Eliminar paciente")
-                .setMessage("¿Está seguro de que desea eliminar este paciente?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    showLoadingIndicator();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.alert_patient, null);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-                    db.collection("pacientes").document(String.valueOf(paciente.getId()))
-                            .delete()
-                            .addOnSuccessListener(aVoid -> {
-                                showSuccessAlert();
-                                listaPacientes.remove(paciente);
-                                notifyDataSetChanged();
-                            })
-                            .addOnFailureListener(e -> showErrorAlert("Error al eliminar: " + e.getMessage()));
-                })
-                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
-                .show();
+        Button btnConfirmar = dialogView.findViewById(R.id.btnConfirmarEliminar);
+        Button btnCancelar = dialogView.findViewById(R.id.btnCancelarEliminar);
+
+        btnConfirmar.setOnClickListener(v -> {
+            db.collection("pacientes").document(String.valueOf(paciente.getId()))
+                    .delete()
+                    .addOnSuccessListener(aVoid -> {
+                        mostrarAlertaCorrecto("Paciente eliminado con éxito");
+                        listaPacientes.remove(paciente);
+                        notifyDataSetChanged();
+                        dialog.dismiss();
+                    })
+                    .addOnFailureListener(e -> mostrarAlertaError("Error al eliminar paciente"));
+        });
+
+        btnCancelar.setOnClickListener(v -> dialog.dismiss());
     }
 
     @Override
@@ -154,59 +164,24 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
     }
 
     /**
-     * Muestra el indicador de carga
+     * Métodos para mostrar alertas personalizadas
      */
-    private void showLoadingIndicator() {
+    private void mostrarAlertaCargando() {
         if (loadingOverlay != null) {
             loadingOverlay.setVisibility(View.VISIBLE);
             loadingGif.setVisibility(View.VISIBLE);
         }
     }
 
-    /**
-     * Muestra la alerta de éxito
-     */
-    private void showSuccessAlert() {
-        if (loadingOverlay != null) {
-            // Mostrar el overlay de éxito
-            loadingOverlay.setVisibility(View.VISIBLE);
-            loadingGif.setVisibility(View.VISIBLE);
-            // Auto-ocultar después de 2 segundos
-            new Handler().postDelayed(this::hideSuccessAlert, 2000);
+    private void mostrarAlertaCorrecto(String mensaje) {
+        if (context instanceof PatientHome) {
+            ((PatientHome) context).mostrarAlertaCorrecto(mensaje);
         }
     }
 
-    /**
-     * Oculta la alerta de éxito
-     */
-    private void hideSuccessAlert() {
-        if (loadingOverlay != null) {
-            loadingOverlay.setVisibility(View.GONE);
-            loadingGif.setVisibility(View.GONE);
-        }
-    }
-
-    /**
-     * Muestra la alerta de error
-     */
-    private void showErrorAlert(String message) {
-        if (errorOverlay != null && errorMessage != null) {
-            errorMessage.setText(message);
-            errorOverlay.setVisibility(View.VISIBLE);
-            errorloadingGif.setVisibility(View.VISIBLE);
-
-            // Auto-ocultar después de 3 segundos
-            new Handler().postDelayed(this::hideErrorAlert, 3000);
-        }
-    }
-
-    /**
-     * Oculta la alerta de error
-     */
-    private void hideErrorAlert() {
-        if (errorOverlay != null) {
-            errorOverlay.setVisibility(View.GONE);
-            errorloadingGif.setVisibility(View.GONE);
+    private void mostrarAlertaError(String mensaje) {
+        if (context instanceof PatientHome) {
+            ((PatientHome) context).mostrarAlertaError(mensaje);
         }
     }
 
