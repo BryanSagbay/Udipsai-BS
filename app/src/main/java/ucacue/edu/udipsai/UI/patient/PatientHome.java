@@ -22,16 +22,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ucacue.edu.udipsai.Model.Patient;
 import ucacue.edu.udipsai.R;
 import ucacue.edu.udipsai.Services.PatientAdapter;
 import ucacue.edu.udipsai.UI.home.HomePage;
-import ucacue.edu.udipsai.UI.test.HomeTest;
-import ucacue.edu.udipsai.UI.test.test_Monotonia;
 
 public class PatientHome extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -69,8 +65,11 @@ public class PatientHome extends AppCompatActivity {
         fabAdd.setOnClickListener(v -> mostrarDialogoAgregarPaciente());
     }
 
+    /**
+     * Carga los pacientes desde Firestore y los ordena por fechaRegistro en orden descendente.
+     */
     private void cargarPacientes() {
-        db.collection("pacientes").orderBy("id", Query.Direction.DESCENDING)
+        db.collection("pacientes").orderBy("fechaRegistro", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Toast.makeText(this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
@@ -82,7 +81,6 @@ public class PatientHome extends AppCompatActivity {
                         for (DocumentSnapshot doc : value.getDocuments()) {
                             Patient paciente = doc.toObject(Patient.class);
                             if (paciente != null) {
-                                paciente.setId(doc.getId()); // Asegurar que el ID se asigna correctamente
                                 listaPacientes.add(paciente);
                             }
                         }
@@ -94,6 +92,9 @@ public class PatientHome extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Muestra un diálogo para agregar un nuevo paciente.
+     */
     private void mostrarDialogoAgregarPaciente() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -109,12 +110,6 @@ public class PatientHome extends AppCompatActivity {
         EditText edtDireccion = dialogView.findViewById(R.id.edtDireccion);
         EditText edtTelefono = dialogView.findViewById(R.id.edtTelefono);
         Button btnAgregar = dialogView.findViewById(R.id.btnAgregar);
-
-        edtNombre.setOnFocusChangeListener((v, hasFocus) -> { if (hasFocus) mostrarTeclado(v); });
-        edtApellido.setOnFocusChangeListener((v, hasFocus) -> { if (hasFocus) mostrarTeclado(v); });
-        edtEdad.setOnFocusChangeListener((v, hasFocus) -> { if (hasFocus) mostrarTeclado(v); });
-        edtDireccion.setOnFocusChangeListener((v, hasFocus) -> { if (hasFocus) mostrarTeclado(v); });
-        edtTelefono.setOnFocusChangeListener((v, hasFocus) -> { if (hasFocus) mostrarTeclado(v); });
 
         btnAgregar.setOnClickListener(v -> {
             String nombre = edtNombre.getText().toString().trim();
@@ -138,44 +133,25 @@ public class PatientHome extends AppCompatActivity {
             }
 
             int edad = Integer.parseInt(edadStr);
-            long fechaRegistro = System.currentTimeMillis();
-
-            agregarPaciente(nombre, apellido, genero, edad, direccion, telefono, fechaRegistro);
+            agregarPaciente(nombre, apellido, genero, edad, direccion, telefono);
             dialog.dismiss();
         });
     }
 
-    private void agregarPaciente(String nombre, String apellido, String genero, int edad, String direccion, String telefono, long fechaRegistro) {
-        String id = db.collection("pacientes").document().getId(); // Generar un ID único
+    /**
+     * Agrega un nuevo paciente a Firestore con ID basado en timestamp.
+     */
+    private void agregarPaciente(String nombre, String apellido, String genero, int edad, String direccion, String telefono) {
+        long timestamp = System.currentTimeMillis(); // Usar timestamp como ID
 
-        Map<String, Object> paciente = new HashMap<>();
-        paciente.put("id", id);
-        paciente.put("nombre", nombre);
-        paciente.put("apellido", apellido);
-        paciente.put("genero", genero);
-        paciente.put("edad", edad);
-        paciente.put("direccion", direccion);
-        paciente.put("telefono", telefono);
-        paciente.put("fechaRegistro", fechaRegistro);
+        Patient paciente = new Patient(nombre, apellido, genero, edad, direccion, telefono);
 
-        db.collection("pacientes").document(id).set(paciente)
+        db.collection("pacientes").document(String.valueOf(timestamp)) // Usar timestamp como ID
+                .set(paciente)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Paciente agregado con éxito", Toast.LENGTH_SHORT).show();
                     cargarPacientes();
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Error al agregar paciente", Toast.LENGTH_SHORT).show());
     }
-
-    private void mostrarTeclado(View view) {
-        view.requestFocus();
-        view.post(() -> {
-            android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager)
-                    getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.showSoftInput(view, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
-            }
-        });
-    }
-
 }
-

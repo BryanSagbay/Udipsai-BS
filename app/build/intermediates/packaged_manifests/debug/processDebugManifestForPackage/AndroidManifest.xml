@@ -58,6 +58,10 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
+            android:name="ucacue.edu.udipsai.UI.listpage.ListPatient"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
             android:name="ucacue.edu.udipsai.UI.patient.PatientHome"
             android:exported="true"
             android:screenOrientation="landscape"

@@ -21,9 +21,14 @@ import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 import ucacue.edu.udipsai.R;
 import ucacue.edu.udipsai.Services.SerialListener;
@@ -39,6 +44,11 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
     private CardView cardEspera, cardDatosM;
     private Spinner spinnerOptionsM;
     private StringBuilder fullReceivedData = new StringBuilder();
+    private Button sendButton1,sendButton2,sendButton3,sendButton4;
+    private ImageButton backButton;
+    private FloatingActionButton playButton, resetButton, saveButton;
+    private FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +67,14 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         tvTituloDatos = findViewById(R.id.text_titulo_datosM);
         gifStatusM = findViewById(R.id.gif_statusM);
         spinnerOptionsM = findViewById(R.id.spinner_optionsM);
-        Button sendButton1 = findViewById(R.id.button_rojoM);
-        Button sendButton2 = findViewById(R.id.button_amarilloM);
-        Button sendButton3 = findViewById(R.id.button_azulM);
-        Button sendButton4 = findViewById(R.id.button_verdeM);
-        ImageButton backButton = findViewById(R.id.button_regresarM);
-        FloatingActionButton playButton = findViewById(R.id.button_playM);
-        FloatingActionButton resetButton = findViewById(R.id.button_resetM);
+        sendButton1 = findViewById(R.id.button_rojoM);
+        sendButton2 = findViewById(R.id.button_amarilloM);
+        sendButton3 = findViewById(R.id.button_azulM);
+        sendButton4 = findViewById(R.id.button_verdeM);
+        backButton = findViewById(R.id.button_regresarM);
+        playButton = findViewById(R.id.button_playM);
+        resetButton = findViewById(R.id.button_resetM);
+        saveButton = findViewById(R.id.button_saveM);
 
         // Configurar Spinner con opciones
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -173,6 +184,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
             sendButton4.setEnabled(false);
+            saveButton.setVisibility(View.GONE);
             spinnerOptionsM.setSelection(0);
             spinnerOptionsM.setEnabled(false);
             receivedDataText.setText("Esperando, presione Comenzar...");
@@ -195,6 +207,12 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             finish();
             Toast.makeText(this, "Desconectado", Toast.LENGTH_SHORT).show();
         });
+
+        // Firebase Firestore
+        db = FirebaseFirestore.getInstance();
+
+        // Configurar botón de guardar
+        saveButton.setOnClickListener(v -> guardarDatos());
     }
 
     // Cargar GIFs
@@ -254,10 +272,61 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     tvTiempoReaccion.setText(tiempoReaccion + " seg");
 
                     loadGif(gifStatusResultado, R.drawable.check);
+
+                    // Mostrar el botón guardar
+                    saveButton.setVisibility(View.VISIBLE);
+
                     fullReceivedData.setLength(0);
                 }
             }
         });
+    }
+
+    /**
+     * Metodo para guardar datos en firestore
+     */
+    private void guardarDatos() {
+        String aciertos = tvAciertos.getText().toString();
+        String errores = tvErrores.getText().toString();
+        String tiempoEjecucion = tvTiempoEjecucion.getText().toString();
+        String tiempoReaccion = tvTiempoReaccion.getText().toString();
+        String titulo = tvTituloDatos.getText().toString();
+
+        if (aciertos.equals("-") || errores.equals("-") || tiempoEjecucion.equals("- seg") || tiempoReaccion.equals("- seg")) {
+            Toast.makeText(this, "No hay datos para guardar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Obtener el nombre del paciente
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        if (nombrePaciente == null) {
+            nombrePaciente = "Paciente Desconocido";
+        }
+
+        // Obtener el correo del usuario autenticado
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String correoUsuario = (user != null) ? user.getEmail() : "No autenticado";
+
+        // Crear datos para Firestore
+        Map<String, Object> datos = new HashMap<>();
+        datos.put("titulo", titulo);
+        datos.put("aciertos", aciertos);
+        datos.put("errores", errores);
+        datos.put("tiempoEjecucion", tiempoEjecucion);
+        datos.put("tiempoReaccion", tiempoReaccion);
+        datos.put("timestamp", System.currentTimeMillis());
+        datos.put("nombrePaciente", nombrePaciente);
+        datos.put("correoUsuario", correoUsuario);
+
+        // Guardar en Firestore
+        db.collection("testMonotoniaResultados")
+                .add(datos)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     /**

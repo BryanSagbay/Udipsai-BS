@@ -71,6 +71,8 @@ id bt_refresh
 id bt_settings
 id btnAgregar
 id btnBennett
+id btnEditar
+id btnEliminar
 id btnLogin
 id btnMonotonia
 id btnPalanca
@@ -97,6 +99,10 @@ id button_resetM
 id button_resetP
 id button_resetR
 id button_rojoM
+id button_saveB
+id button_saveM
+id button_saveP
+id button_saveR
 id button_verdeM
 id card_datosB
 id card_datosM
@@ -175,6 +181,7 @@ id tv_tiempo_reaccion
 id txtFecha
 id txtNoDatos
 id txtNombre
+id txtNombrePaciente
 id txtTelefono
 id universityText
 id user
@@ -183,12 +190,14 @@ layout footer_home
 layout home_page
 layout home_patient
 layout home_test
+layout list_patient
 layout listado_pacientes
 layout login_activity
 layout modal_paciente
 layout navbar_home
 layout navbar_test
 layout register
+layout select_patient
 layout test_bennett
 layout test_monotonia
 layout test_palanca

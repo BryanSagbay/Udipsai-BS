@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import ucacue.edu.udipsai.R;
+import ucacue.edu.udipsai.UI.listpage.ListPatient;
 import ucacue.edu.udipsai.UI.login.LoginActivity;
 import ucacue.edu.udipsai.UI.patient.PatientHome;
 import ucacue.edu.udipsai.UI.test.HomeTest;
@@ -77,7 +78,7 @@ public class HomePage extends AppCompatActivity {
         iconTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePage.this, HomeTest.class);
+                Intent intent = new Intent(HomePage.this, ListPatient.class);
                 startActivity(intent);
             }
         });

@@ -18,9 +18,14 @@ import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 import ucacue.edu.udipsai.R;
 import ucacue.edu.udipsai.Services.SerialListener;
@@ -33,6 +38,11 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
     private ImageView gifStatusResultado, gifStatusP;
     private StringBuilder fullReceivedData = new StringBuilder();
     private boolean isBound = false;
+    private ImageButton backButton;
+    private Button sendButton;
+    private FirebaseFirestore db;
+
+    private FloatingActionButton saveButton,resetButton, playButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +57,16 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         tvErrores = findViewById(R.id.tv_errores);
         tvTiempoEjecucion = findViewById(R.id.tv_tiempo_ejecucion);
         tvTituloDatos = findViewById(R.id.text_titulo_datosP);
-        Button sendButton = findViewById(R.id.button_enviar_m1P);
-        ImageButton backButton = findViewById(R.id.button_regresarP);
-        FloatingActionButton playButton = findViewById(R.id.button_playP);
-        FloatingActionButton resetButton = findViewById(R.id.button_resetP);
+        sendButton = findViewById(R.id.button_enviar_m1P);
+        backButton = findViewById(R.id.button_regresarP);
+        playButton = findViewById(R.id.button_playP);
+        resetButton = findViewById(R.id.button_resetP);
+        saveButton = findViewById(R.id.button_saveP);
 
         // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
         sendButton.setEnabled(false);
         resetButton.setVisibility(View.GONE);
+        saveButton.setVisibility(View.GONE);
 
         // Inicialización de valores iniciales
         cardDatos.setVisibility(View.GONE);
@@ -72,6 +84,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         playButton.setOnClickListener(v -> {
             sendButton.setEnabled(true);
             resetButton.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.GONE);
         });
 
         // Botón Enviar M1: Enviar comando y deshabilitar
@@ -80,6 +93,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
             sendButton.setEnabled(false);
             loadGif(gifStatusP, R.drawable.dibujo);
             receivedDataText.setText("Ejecutando el Test...");
+            saveButton.setVisibility(View.GONE);
         });
 
         // Botón de reinicio: Enviar comando "S" y limpiar datos
@@ -87,6 +101,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
             sendData("S");
             receivedDataText.setText("Esperando datos...");
             sendButton.setEnabled(false);
+            saveButton.setVisibility(View.GONE);
             resetButton.setVisibility(View.GONE);
             receivedDataText.setText("Esperando, presione Comenzar...");
             tvTituloDatos.setText("Esperando datos...");
@@ -105,6 +120,16 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
             startActivity(homeIntent);
             finish();
         });
+
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        if (nombrePaciente == null) {
+            nombrePaciente = "Paciente Desconocido";
+        }
+
+        db = FirebaseFirestore.getInstance();
+        // Botón para guardar los datos en firestore
+        saveButton.setOnClickListener(v -> guardarDatos());
+
     }
 
     /**
@@ -127,7 +152,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
      * Recibir y mostrar datos del dispositivo Bluetooth
      */
     @Override
-    public void onSerialRead(ArrayDeque<byte[]> datas) {
+    public void onSerialRead(java.util.ArrayDeque<byte[]> datas) {
         runOnUiThread(() -> {
             for (byte[] data : datas) {
                 try {
@@ -148,20 +173,69 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
                     cardEspera.setVisibility(View.GONE);
                     cardDatos.setVisibility(View.VISIBLE);
 
-                    tvTituloDatos.setText("Resultados del Test");
+                    tvTituloDatos.setText("Resultados del Test de Palanca");
                     tvErrores.setText(errores);
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
 
                     loadGif(gifStatusResultado, R.drawable.check);
+
+                    saveButton.setVisibility(View.VISIBLE);
+
                     fullReceivedData.setLength(0);
                 }
             }
         });
     }
 
+
     // Cargar GIFs
     private void loadGif(ImageView imageView, int gifResource) {
         Glide.with(this).asGif().load(gifResource).into(imageView);
+    }
+
+    /**
+     * Metodo para guardar datos en firestore
+     */
+    private void guardarDatos() {
+        String errores = tvErrores.getText().toString();
+        String tiempoEjecucion = tvTiempoEjecucion.getText().toString();
+        String titulo = tvTituloDatos.getText().toString();
+
+        // Verificar si hay datos antes de guardar
+        if (errores.equals("-") || tiempoEjecucion.equals("- seg")) {
+            Toast.makeText(this, "No hay datos para guardar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Obtener el nombre del paciente
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        if (nombrePaciente == null) {
+            nombrePaciente = "Paciente Desconocido";
+        }
+
+        // Obtener el correo del usuario autenticado
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String correoUsuario = (user != null) ? user.getEmail() : "No autenticado";
+
+        // Crear el objeto para guardar en Firestore
+        Map<String, Object> datos = new HashMap<>();
+        datos.put("titulo", titulo);
+        datos.put("errores", errores);
+        datos.put("tiempoEjecucion", tiempoEjecucion);
+        datos.put("timestamp", System.currentTimeMillis());
+        datos.put("nombrePaciente", nombrePaciente);
+        datos.put("correoUsuario", correoUsuario);
+
+        // Guardar en Firestore en la colección "testResultados"
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("testPalancaResultados")
+                .add(datos)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     /**

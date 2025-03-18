@@ -138,6 +138,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_playR" />
 
+    <!-- Botón Flotante para Guardar (Inicialmente oculto) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_saveR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/greendark"
+        android:contentDescription="Guardar datos"
+        android:src="@android:drawable/ic_menu_save"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_resetR" />
+
     <!-- CardView Inicial: Esperando / Jugando -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_esperaR"

@@ -18,9 +18,14 @@ import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 import ucacue.edu.udipsai.R;
 import ucacue.edu.udipsai.Services.SerialListener;
@@ -33,6 +38,10 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
     private TextView receivedDataText, tvErrores, tvTiempoEjecucion, tvTituloDatos;
     private CardView cardEspera, cardDatos;
     private ImageView gifStatusResultado, gifStatusR;
+    private Button sendButton;
+    private ImageButton backButton;
+    private FloatingActionButton playButton, resetButton, saveButton;
+    private FirebaseFirestore db;
 
 
     @Override
@@ -48,14 +57,17 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         tvErrores = findViewById(R.id.tv_errores);
         tvTiempoEjecucion = findViewById(R.id.tv_tiempo_ejecucion);
         tvTituloDatos = findViewById(R.id.text_titulo_datosR);
-        Button sendButton = findViewById(R.id.button_enviar_m1R);
-        ImageButton backButton = findViewById(R.id.button_regresarR);
-        FloatingActionButton playButton = findViewById(R.id.button_playR);
-        FloatingActionButton resetButton = findViewById(R.id.button_resetR);
+        sendButton = findViewById(R.id.button_enviar_m1R);
+        backButton = findViewById(R.id.button_regresarR);
+        playButton = findViewById(R.id.button_playR);
+        resetButton = findViewById(R.id.button_resetR);
+        saveButton = findViewById(R.id.button_saveR);
+
 
         // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
         sendButton.setEnabled(false);
         resetButton.setVisibility(View.GONE);
+        saveButton.setVisibility(View.GONE);
 
         // Inicialización de valores iniciales
         cardDatos.setVisibility(View.GONE);
@@ -71,8 +83,10 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
 
         // Botón Play: Habilita "Enviar M1" y muestra "Reinicio"
         playButton.setOnClickListener(v -> {
-            sendButton.setEnabled(true); // Habilitar botón Enviar M1
-            resetButton.setVisibility(View.VISIBLE); // Mostrar botón de reinicio
+            sendButton.setEnabled(true);
+            resetButton.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.GONE);
+
         });
 
         // Botón Enviar M1: Enviar comando y deshabilitar
@@ -81,6 +95,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
             sendButton.setEnabled(false);
             loadGif(gifStatusR, R.drawable.dibujo);
             receivedDataText.setText("Ejecutando el Test...");
+            saveButton.setVisibility(View.GONE);
         });
 
         // Botón de reinicio: Enviar comando "S" y limpiar datos
@@ -89,6 +104,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
             receivedDataText.setText("Esperando, presione Comenzar...");
             sendButton.setEnabled(false);
             resetButton.setVisibility(View.GONE);
+            saveButton.setVisibility(View.GONE);
             tvTituloDatos.setText("Esperando datos...");
             tvErrores.setText("-");
             tvTiempoEjecucion.setText("- seg");
@@ -105,6 +121,11 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
             startActivity(homeIntent);
             finish();
         });
+
+        db = FirebaseFirestore.getInstance();
+        // Botón para guardar los datos en firestore
+        saveButton.setOnClickListener(v -> guardarDatos());
+
     }
 
     /**
@@ -127,7 +148,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
      * Recibir y mostrar datos del dispositivo Bluetooth
      */
     @Override
-    public void onSerialRead(ArrayDeque<byte[]> datas) {
+    public void onSerialRead(java.util.ArrayDeque<byte[]> datas) {
         runOnUiThread(() -> {
             for (byte[] data : datas) {
                 try {
@@ -148,12 +169,16 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
                     cardEspera.setVisibility(View.GONE);
                     cardDatos.setVisibility(View.VISIBLE);
 
-                    tvTituloDatos.setText("Resultados del Test");
+                    tvTituloDatos.setText("Resultados del Test de Palanca");
                     tvErrores.setText(errores);
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
 
                     loadGif(gifStatusResultado, R.drawable.check);
-                    fullReceivedData.setLength(0);
+
+                    // 💡 MOSTRAR EL BOTÓN GUARDAR AL RECIBIR DATOS DEL BLUETOOTH
+                    saveButton.setVisibility(View.VISIBLE);
+
+                    fullReceivedData.setLength(0); // Limpiar buffer de datos
                 }
             }
         });
@@ -162,6 +187,52 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
     // Cargar GIFs
     private void loadGif(ImageView imageView, int gifResource) {
         Glide.with(this).asGif().load(gifResource).into(imageView);
+    }
+
+
+    /**
+     * Metodo para guardar datos en firestore
+     */
+    private void guardarDatos() {
+        String errores = tvErrores.getText().toString();
+        String tiempoEjecucion = tvTiempoEjecucion.getText().toString();
+        String titulo = tvTituloDatos.getText().toString();
+
+        // Verificar si hay datos antes de guardar
+        if (errores.equals("-") || tiempoEjecucion.equals("- seg")) {
+            Toast.makeText(this, "No hay datos para guardar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Obtener el nombre del paciente
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        if (nombrePaciente == null) {
+            nombrePaciente = "Paciente Desconocido";
+        }
+
+        // Obtener el correo del usuario autenticado
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String correoUsuario = (user != null) ? user.getEmail() : "No autenticado";
+
+        // Crear el objeto para guardar en Firestore
+        Map<String, Object> datos = new HashMap<>();
+        datos.put("titulo", titulo);
+        datos.put("errores", errores);
+        datos.put("tiempoEjecucion", tiempoEjecucion);
+        datos.put("timestamp", System.currentTimeMillis());
+        datos.put("nombrePaciente", nombrePaciente);
+        datos.put("correoUsuario", correoUsuario);
+
+        // Guardar en Firestore en la colección "testResultados"
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("testMotricidadResultados")
+                .add(datos)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     /**

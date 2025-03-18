@@ -81,7 +81,10 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         setContentView(R.layout.home_test);
 
         patientName = findViewById(R.id.patientName);
-        patientName.setText("Juan Pérez");
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        if (nombrePaciente != null) {
+            patientName.setText(nombrePaciente);
+        }
 
         loadingOverlay = findViewById(R.id.loadingOverlay);
         loadingGif = findViewById(R.id.loadingGif);
@@ -156,16 +159,15 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     private static final int REQUEST_BLUETOOTH_CONNECT = 1;
 
     private void connectToDevice(String macAddress, Class<?> nextActivity) {
-        // Verificar si el permiso está concedido (Android 12+)
+        showLoadingSpinner();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            // Solicitar el permiso
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_BLUETOOTH_CONNECT);
             hideLoadingSpinner();
             return;
         }
 
-        // Continuar con la conexión si el permiso está concedido
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
             playAudio(errorAudio);
@@ -188,6 +190,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
             isConnected = true;
             service.connect(socket);
             Toast.makeText(this, "Conectando a " + macAddress, Toast.LENGTH_SHORT).show();
+
         } catch (IOException e) {
             playAudio(errorAudio);
             Toast.makeText(this, "Error al conectar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -214,17 +217,23 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     public void onSerialConnect() {
         runOnUiThread(() -> {
             Toast.makeText(this, "Conexión exitosa", Toast.LENGTH_SHORT).show();
-            hideLoadingSpinner();
 
             int buttonId = getCurrentButtonId();
 
             if (buttonId != -1) {
                 playAudio(audioMap.get(buttonId));
-                Intent intent = new Intent(this, testActivities.get(buttonId));
-                startActivity(intent);
+
+                new android.os.Handler().postDelayed(() -> {
+                    hideLoadingSpinner();
+
+                    Intent intent = new Intent(this, testActivities.get(buttonId));
+                    intent.putExtra("patient_name", getIntent().getStringExtra("patient_name"));
+                    startActivity(intent);
+                }, 2000);
             }
         });
     }
+
 
     private void playAudio(int audioRes) {
         if (mediaPlayer != null) {

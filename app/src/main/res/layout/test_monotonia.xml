@@ -99,10 +99,10 @@
 
     <Spinner
         android:id="@+id/spinner_optionsM"
-        android:layout_width="695dp"
+        android:layout_width="700dp"
         android:layout_height="55dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/btn_roundedtest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.917"
@@ -186,13 +186,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_playM" />
 
+    <!-- NUEVO: Botón Flotante para Guardar (Inicialmente oculto) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_saveM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/greendark"
+        android:contentDescription="Guardar datos"
+        android:src="@android:drawable/ic_menu_save"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_resetM" />
+
     <!-- CardView Inicial: Esperando / Jugando -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_espera"
-        android:layout_width="695dp"
-        android:layout_height="290dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="700dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/card_testview"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="12dp"
@@ -228,10 +242,10 @@
     <!-- CardView de Resultados (Oculta al inicio) -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_datosM"
-        android:layout_width="695dp"
-        android:layout_height="320dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="700dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/card_testview"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="16dp"

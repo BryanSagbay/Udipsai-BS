@@ -18,9 +18,14 @@ import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 import ucacue.edu.udipsai.R;
 import ucacue.edu.udipsai.Services.SerialListener;
@@ -28,21 +33,28 @@ import ucacue.edu.udipsai.Services.SerialService;
 
 public class test_Bennett extends AppCompatActivity implements SerialListener, ServiceConnection {
     private SerialService service;
-    private StringBuilder fullReceivedData = new StringBuilder(); // Para acumular datos recibidos
+    private StringBuilder fullReceivedData = new StringBuilder();
     private boolean isBound = false;
     private TextView receivedDataText, tvErrores, tvTiempoEjecucion, tvTituloDatos, tvExtraDato;
     private CardView cardEspera, cardDatos, cardExtraDato;
     private ImageView gifStatusResultado, gifStatusB;
     private ImageButton backButton;
-    private FloatingActionButton playButton, resetButton;
+    private FloatingActionButton playButton, resetButton, saveButton;
     private Button sendButton1, sendButton2, sendButton3;
     private int currentStep = 0;
+    private FirebaseFirestore db;
+
+    // Variables para almacenar datos de cada fase
+    private String tiempoM1 = "0", erroresM1 = "0";
+    private String tiempoM2 = "0", erroresM2 = "0";
+    private String tiempoM3 = "0", erroresM3 = "0", datoExtraM3 = "-";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_bennett);
 
+        // Inicialización de vistas
         receivedDataText = findViewById(R.id.text_datosB);
         gifStatusB = findViewById(R.id.gif_statusB);
         cardEspera = findViewById(R.id.card_esperaB);
@@ -59,14 +71,14 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         backButton = findViewById(R.id.button_regresarB);
         playButton = findViewById(R.id.button_playB);
         resetButton = findViewById(R.id.button_resetB);
+        saveButton = findViewById(R.id.button_saveB);
 
-        // Inicialmente, el botón "Enviar M1" está deshabilitado y el de reinicio está oculto
+        // Inicialización de valores
         sendButton1.setEnabled(false);
         sendButton2.setEnabled(false);
         sendButton3.setEnabled(false);
         resetButton.setVisibility(View.GONE);
-
-        // Inicialización de valores iniciales
+        saveButton.setVisibility(View.GONE);
         cardDatos.setVisibility(View.GONE);
         loadGif(gifStatusB, R.drawable.reloj_de_arena);
         receivedDataText.setText("Esperando, presione Comenzar...");
@@ -78,17 +90,18 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         Intent intent = new Intent(this, SerialService.class);
         bindService(intent, this, Context.BIND_AUTO_CREATE);
 
-        // Botón Play: Habilita "Enviar M1" y muestra "Reinicio"
+        // Listeners de botones
         playButton.setOnClickListener(v -> {
             sendButton1.setEnabled(true);
             resetButton.setVisibility(View.VISIBLE);
-            currentStep = 1; // Estado inicial después de Play
+            currentStep = 1;
         });
 
         sendButton1.setOnClickListener(v -> {
             sendData("M1");
             sendButton1.setEnabled(false);
-            currentStep = 2; // M1 enviado, esperando respuesta
+            currentStep = 2;
+            saveButton.setVisibility(View.GONE);
             loadGif(gifStatusB, R.drawable.dibujo);
             receivedDataText.setText("Ejecutando el Test...");
         });
@@ -96,7 +109,8 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         sendButton2.setOnClickListener(v -> {
             sendData("M2");
             sendButton2.setEnabled(false);
-            currentStep = 4; // M2 enviado, esperando respuesta
+            currentStep = 4;
+            saveButton.setVisibility(View.GONE);
             loadGif(gifStatusB, R.drawable.dibujo);
             receivedDataText.setText("Ejecutando el Test...");
         });
@@ -104,45 +118,41 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         sendButton3.setOnClickListener(v -> {
             sendData("M3");
             sendButton3.setEnabled(false);
-            currentStep = 6; // M3 enviado, no hay más pasos
+            currentStep = 6;
+            saveButton.setVisibility(View.GONE);
         });
 
         resetButton.setOnClickListener(v -> {
             sendData("S");
-            sendButton1.setEnabled(false);
-            sendButton2.setEnabled(false);
-            sendButton3.setEnabled(false);
-            resetButton.setVisibility(View.GONE);
-            receivedDataText.setText("Esperando, presione Comenzar...");
-            tvTituloDatos.setText("Esperando datos...");
-            tvErrores.setText("-");
-            tvTiempoEjecucion.setText("- seg");
-            loadGif(gifStatusB, R.drawable.reloj_de_arena);
-            cardEspera.setVisibility(View.VISIBLE);
-            cardDatos.setVisibility(View.GONE);
+            resetDatos();
+            resetUI();
         });
 
-        // Botón para regresar y desconectar Bluetooth
         backButton.setOnClickListener(v -> {
             disconnectBluetooth();
             Intent homeIntent = new Intent(test_Bennett.this, HomeTest.class);
             startActivity(homeIntent);
             finish();
         });
+
+        // Inicialización de Firestore
+        db = FirebaseFirestore.getInstance();
+
+        // Obtener nombre del paciente
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        if (nombrePaciente == null) {
+            nombrePaciente = "Paciente Desconocido";
+        }
+
+        // Configurar botón de guardado
+        saveButton.setOnClickListener(v -> guardarDatos());
     }
 
-    // Cargar GIFs
-    private void loadGif(ImageView imageView, int gifResource) {
-        Glide.with(this).asGif().load(gifResource).into(imageView);
-    }
-
-    /**
-     * Enviar datos al dispositivo Bluetooth
-     */
+    // Método para enviar datos al dispositivo Bluetooth
     private void sendData(String message) {
         if (service != null) {
             try {
-                service.write(message.getBytes("UTF-8")); // Compatible con API 18+
+                service.write(message.getBytes("UTF-8"));
                 Toast.makeText(this, "Mensaje enviado: " + message, Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 Toast.makeText(this, "Error al enviar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -152,74 +162,94 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         }
     }
 
-    /**
-     * Recibir y mostrar datos del dispositivo Bluetooth
-     */
+    // Método para recibir y procesar datos del dispositivo Bluetooth
     @Override
     public void onSerialRead(ArrayDeque<byte[]> datas) {
         runOnUiThread(() -> {
-            // Procesa los datos recibidos
             for (byte[] data : datas) {
                 try {
-                    fullReceivedData.append(new String(data, "UTF-8")); // Acumula los datos recibidos
+                    fullReceivedData.append(new String(data, "UTF-8"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
-            // Si hay datos recibidos
             if (fullReceivedData.length() > 0) {
-                String receivedString = fullReceivedData.toString().trim(); // Convierte los datos a String
-                receivedString = receivedString.replace("\n", ","); // Reemplaza saltos de línea por comas
-                String[] values = receivedString.split(","); // Divide los valores por comas
+                String receivedString = fullReceivedData.toString().trim();
+                receivedString = receivedString.replace("\n", ",");
+                String[] values = receivedString.split(",");
 
-                // Si hay al menos 2 valores (tiempo y errores)
                 if (values.length >= 2) {
-                    // Muestra los datos en la interfaz
-                    cardEspera.setVisibility(View.GONE);
-                    cardDatos.setVisibility(View.VISIBLE);
-                    tvTituloDatos.setText("Resultados del Test");
+                    saveButton.setVisibility(View.GONE);
 
-                    // Muestra el tiempo de ejecución y los errores
-                    tvTiempoEjecucion.setText(values[0] + " seg");
-                    tvErrores.setText(formatErrors(values[1]));
-
-                    // Si hay un tercer valor (dato extra), lo muestra
-                    if (values.length == 3) {
-                        tvExtraDato.setText(values[2]);
-                        cardExtraDato.setVisibility(View.VISIBLE);
-                    } else {
-                        cardExtraDato.setVisibility(View.GONE);
-                    }
-
-                    // Cambia el GIF a un estado de éxito
-                    loadGif(gifStatusResultado, R.drawable.check);
-
-                    // Habilita el siguiente botón según el paso actual
                     switch (currentStep) {
-                        case 2: // Respuesta recibida después de M1
-                            sendButton2.setEnabled(true); // Habilita el botón 2
-                            currentStep = 3; // Actualiza el estado
+                        case 2: // Respuesta M1
+                            tiempoM1 = values[0];
+                            erroresM1 = formatErrors(values[1]);
                             break;
-                        case 4: // Respuesta recibida después de M2
-                            sendButton3.setEnabled(true); // Habilita el botón 3
-                            currentStep = 5; // Actualiza el estado
+                        case 4: // Respuesta M2
+                            tiempoM2 = values[0];
+                            erroresM2 = formatErrors(values[1]);
                             break;
-                        case 6: // Respuesta recibida después de M3
-                            // No hay más botones que habilitar
+                        case 6: // Respuesta M3
+                            tiempoM3 = values[0];
+                            erroresM3 = formatErrors(values[1]);
+                            if (values.length == 3) {
+                                datoExtraM3 = values[2];
+                            }
+                            saveButton.setVisibility(View.VISIBLE);
                             break;
                     }
 
-                    // Limpia los datos acumulados
+                    // Actualizar UI
+                    updateUI(values);
                     fullReceivedData.setLength(0);
                 }
             }
         });
     }
 
-    /**
-     * Método para formatear errores, reemplazando 1 por ❌ y 0 por ✅
-     */
+    // Método para actualizar la interfaz de usuario
+    private void updateUI(String[] values) {
+        cardEspera.setVisibility(View.GONE);
+        cardDatos.setVisibility(View.VISIBLE);
+        tvTituloDatos.setText("Resultados del Test");
+
+        String nuevosDatos = "Tiempo: " + values[0] + " seg | Errores: " + formatErrors(values[1]);
+        if (values.length == 3) {
+            nuevosDatos += " | Extra: " + values[2];
+        }
+
+        String datosAnteriores = receivedDataText.getText().toString();
+        receivedDataText.setText(datosAnteriores + "\n" + nuevosDatos);
+
+        tvTiempoEjecucion.setText(values[0] + " seg");
+        tvErrores.setText(formatErrors(values[1]));
+
+        if (values.length == 3) {
+            tvExtraDato.setText(values[2]);
+            cardExtraDato.setVisibility(View.VISIBLE);
+        } else {
+            cardExtraDato.setVisibility(View.GONE);
+        }
+
+        loadGif(gifStatusResultado, R.drawable.check);
+
+        switch (currentStep) {
+            case 2:
+                sendButton2.setEnabled(true);
+                currentStep = 3;
+                break;
+            case 4:
+                sendButton3.setEnabled(true);
+                currentStep = 5;
+                break;
+            case 6:
+                break;
+        }
+    }
+
+    // Método para formatear errores
     private String formatErrors(String errores) {
         StringBuilder erroresFormatted = new StringBuilder();
         for (char c : errores.toCharArray()) {
@@ -234,9 +264,89 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         return erroresFormatted.toString();
     }
 
-    /**
-     * Manejo de conexión y errores Bluetooth
-     */
+    // Método para guardar datos en Firestore
+    private void guardarDatos() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String correoUsuario = (user != null) ? user.getEmail() : "No autenticado";
+
+        // Obtener el nombre del paciente
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+        if (nombrePaciente == null) {
+            nombrePaciente = "Paciente Desconocido";
+        }
+
+        Map<String, Object> datos = new HashMap<>();
+        datos.put("timestamp", System.currentTimeMillis());
+        datos.put("nombrePaciente", nombrePaciente);
+        datos.put("correoUsuario", correoUsuario);
+        datos.put("tiempoM1", tiempoM1);
+        datos.put("erroresM1", erroresM1);
+        datos.put("tiempoM2", currentStep >= 4 ? tiempoM2 : "0");
+        datos.put("erroresM2", currentStep >= 4 ? erroresM2 : "0");
+        datos.put("tiempoM3", currentStep >= 6 ? tiempoM3 : "0");
+        datos.put("erroresM3", currentStep >= 6 ? erroresM3 : "0");
+        datos.put("datoExtraM3", currentStep >= 6 ? datoExtraM3 : "-");
+
+        db.collection("testBennettResultados")
+                .add(datos)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Datos guardados", Toast.LENGTH_SHORT).show();
+                    resetDatos();
+                    resetUI();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    // Método para resetear datos
+    private void resetDatos() {
+        tiempoM1 = "0";
+        erroresM1 = "0";
+        tiempoM2 = "0";
+        erroresM2 = "0";
+        tiempoM3 = "0";
+        erroresM3 = "0";
+        datoExtraM3 = "-";
+        currentStep = 0;
+        saveButton.setVisibility(View.GONE);
+    }
+
+    // Método para resetear la interfaz de usuario
+    private void resetUI() {
+        sendButton1.setEnabled(false);
+        sendButton2.setEnabled(false);
+        sendButton3.setEnabled(false);
+        resetButton.setVisibility(View.GONE);
+        saveButton.setVisibility(View.GONE);
+        receivedDataText.setText("Esperando, presione Comenzar...");
+        tvTituloDatos.setText("Esperando datos...");
+        tvErrores.setText("-");
+        tvTiempoEjecucion.setText("- seg");
+        loadGif(gifStatusB, R.drawable.reloj_de_arena);
+        cardEspera.setVisibility(View.VISIBLE);
+        cardDatos.setVisibility(View.GONE);
+    }
+
+    // Método para cargar GIFs
+    private void loadGif(ImageView imageView, int gifResource) {
+        Glide.with(this).asGif().load(gifResource).into(imageView);
+    }
+
+    // Métodos de ServiceConnection y SerialListener
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder binder) {
+        service = ((SerialService.SerialBinder) binder).getService();
+        service.attach(this);
+        isBound = true;
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        service = null;
+        isBound = false;
+    }
+
     @Override
     public void onSerialConnect() {
         runOnUiThread(() -> Toast.makeText(this, "Conexión Bluetooth establecida", Toast.LENGTH_SHORT).show());
@@ -259,9 +369,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         });
     }
 
-    /**
-     * Cerrar conexión Bluetooth
-     */
+    // Método para desconectar Bluetooth
     private void disconnectBluetooth() {
         if (service != null) {
             service.disconnect();
@@ -270,22 +378,6 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             unbindService(this);
             isBound = false;
         }
-    }
-
-    /**
-     * Métodos para el ServiceConnection
-     */
-    @Override
-    public void onServiceConnected(ComponentName name, IBinder binder) {
-        service = ((SerialService.SerialBinder) binder).getService();
-        service.attach(this);
-        isBound = true;
-    }
-
-    @Override
-    public void onServiceDisconnected(ComponentName name) {
-        service = null;
-        isBound = false;
     }
 
     @Override
