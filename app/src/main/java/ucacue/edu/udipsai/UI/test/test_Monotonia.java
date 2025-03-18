@@ -215,15 +215,6 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         // Configurar botón de guardar
         saveButton.setOnClickListener(v -> guardarDatos());
 
-        SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
-        String nombrePaciente = preferences.getString("patient_name", "");
-
-        // Si el intent tiene un nombre, lo actualizamos
-        if (getIntent().getStringExtra("patient_name") != null) {
-            nombrePaciente = getIntent().getStringExtra("patient_name");
-            preferences.edit().putString("patient_name", nombrePaciente).apply();
-        }
-
     }
 
     // Cargar GIFs

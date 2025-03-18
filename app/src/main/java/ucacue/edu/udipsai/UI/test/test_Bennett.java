@@ -139,12 +139,6 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         // Inicialización de Firestore
         db = FirebaseFirestore.getInstance();
 
-        // Obtener nombre del paciente
-        String nombrePaciente = getIntent().getStringExtra("patient_name");
-        if (nombrePaciente == null) {
-            nombrePaciente = "Paciente Desconocido";
-        }
-
         // Configurar botón de guardado
         saveButton.setOnClickListener(v -> guardarDatos());
     }

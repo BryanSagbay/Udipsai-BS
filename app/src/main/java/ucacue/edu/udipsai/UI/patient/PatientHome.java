@@ -51,7 +51,7 @@ public class PatientHome extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         listaPacientes = new ArrayList<>();
-        adapter = new PatientAdapter(listaPacientes);
+        adapter = new PatientAdapter(listaPacientes, this);
         recyclerView.setAdapter(adapter);
 
         backButton.setOnClickListener(v -> {
