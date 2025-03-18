@@ -8,20 +8,8 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_riel.png"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_ucacue.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_ucacue.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_carpeta.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/carpeta.gif"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-mdpi_ic_notification.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-mdpi/ic_notification.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_btn_roundedtest.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/btn_roundedtest.xml"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/menu_menu_devices.xml.flat",
@@ -40,24 +28,8 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-hdpi/ic_clear_white_24dp.png"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_riel.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_riel.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_aguila.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_aguila.png"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xhdpi_ic_clear_white_24dp.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xhdpi/ic_clear_white_24dp.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_definilylogo.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_definilylogo.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxxhdpi_ic_clear_white_24dp.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxxhdpi/ic_clear_white_24dp.png"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_btn_1.xml.flat",
@@ -88,6 +60,178 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/dibujo.gif"
     },
     {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_back.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_back.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_bennett.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_bennett.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_bennett.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_bennett.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_carpeta.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_carpeta.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_datauser.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_datauser.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_salir.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_salir.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-mdpi_ic_clear_white_24dp.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-mdpi/ic_clear_white_24dp.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_no_data.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_no_data.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xhdpi_ic_notification.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xhdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxxhdpi_ic_notification.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxxhdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_home_test.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/home_test.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_accesologin.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_accesologin.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_soporte.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_soporte.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_bluetooth.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/bluetooth.gif"
+    },
+    {
+        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_list_patient.xml.flat",
+        "source": "ucacue.edu.udipsai.app-main-44:/layout/list_patient.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/raw_palanca.mp3.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/raw/palanca.mp3"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxhdpi_ic_notification.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxhdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_select_patient.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/select_patient.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_inclulab_provisional.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_inclulab_provisional.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_fondo.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_fondo.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_alert_patient.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/alert_patient.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_btn_2.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_btn_2.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_pdf.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_pdf.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_circle.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/circle.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_ucacuelogo.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_ucacuelogo.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_error_login.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_error_login.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_palanca.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_palanca.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_dibujo.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_dibujo.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_monotonia.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_monotonia.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_list_patient.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/list_patient.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxhdpi_ic_clear_white_24dp.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxhdpi/ic_clear_white_24dp.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_check.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/check.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_accesologin.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/accesologin.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_login_activity.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/login_activity.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_modal_paciente.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/modal_paciente.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_ucacue.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_ucacue.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_carpeta.gif.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/carpeta.gif"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_btn_roundedtest.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/btn_roundedtest.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_riel.xml.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_riel.xml"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_aguila.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_aguila.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_definilylogo.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_definilylogo.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxxhdpi_ic_clear_white_24dp.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxxhdpi/ic_clear_white_24dp.png"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/mipmap-hdpi/ic_launcher.png"
     },
@@ -112,40 +256,8 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/linea_de_meta.gif"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_back.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_back.png"
-    },
-    {
-        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_alert_patient.xml.flat",
-        "source": "ucacue.edu.udipsai.app-main-44:/layout/alert_patient.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_bennett.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_bennett.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_bennett.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_bennett.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_carpeta.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_carpeta.gif"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_salir.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_salir.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-mdpi_ic_clear_white_24dp.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-mdpi/ic_clear_white_24dp.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_no_data.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_no_data.gif"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_btn_rounded.xml.flat",
@@ -156,24 +268,12 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_send_white_24dp.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xhdpi_ic_notification.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xhdpi/ic_notification.png"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_calendar_backround.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/calendar_backround.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxxhdpi_ic_notification.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxxhdpi/ic_notification.png"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-hdpi_ic_notification.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-hdpi/ic_notification.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_home_test.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/home_test.xml"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_check.gif.flat",
@@ -200,32 +300,12 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/home_page.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_accesologin.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_accesologin.gif"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_soporte.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_soporte.png"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_device_list_item.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/device_list_item.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_bluetooth.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/bluetooth.gif"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/raw_palanca.mp3.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/raw/palanca.mp3"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/raw_bennett.mp3.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/raw/bennett.mp3"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxhdpi_ic_notification.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxhdpi/ic_notification.png"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_udipsai.png.flat",
@@ -234,14 +314,6 @@
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_delete_white_24dp.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_delete_white_24dp.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_select_patient.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/select_patient.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_inclulab_provisional.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_inclulab_provisional.png"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_monotonia.xml.flat",
@@ -256,44 +328,12 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/card_testview.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_fondo.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_fondo.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_alert_patient.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/alert_patient.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_btn_2.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_btn_2.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_circle.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/circle.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_pdf.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_pdf.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_ucacuelogo.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_ucacuelogo.png"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_activity_main.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/activity_main.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_error_login.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_error_login.gif"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/raw_motricidad.mp3.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/raw/motricidad.mp3"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_palanca.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/test_palanca.xml"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_linea_de_meta1.gif.flat",
@@ -304,16 +344,8 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_paciente.png"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_dibujo.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_dibujo.gif"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/menu_menu_terminal.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/menu/menu_terminal.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_monotonia.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_monotonia.png"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_register.xml.flat",
@@ -324,16 +356,8 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/cardr_results.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_list_patient.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/list_patient.xml"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_pdf.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/pdf.png"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xxhdpi_ic_clear_white_24dp.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-xxhdpi/ic_clear_white_24dp.png"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/raw_error.mp3.flat",
@@ -344,18 +368,6 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/background.xml"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_check.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/check.gif"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_accesologin.gif.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/accesologin.gif"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_login_activity.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/login_activity.xml"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_palanca.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_palanca.png"
     },
@@ -364,19 +376,11 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/reloj_de_arena.gif"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/mipmap-mdpi/ic_launcher.png"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_lg_ofertafond.jpg.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/lg_ofertafond.jpg"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_pdf_home.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/pdf_home.xml"
-    },
-    {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_modal_paciente.xml.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/layout/modal_paciente.xml"
     }
 ]

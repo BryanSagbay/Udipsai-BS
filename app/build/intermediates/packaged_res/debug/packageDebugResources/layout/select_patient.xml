@@ -10,6 +10,7 @@
         android:layout_width="600dp"
         android:layout_height="385dp"
         android:layout_centerInParent="true"
+        android:backgroundTint="@color/white"
         android:padding="12dp"
         android:background="@drawable/btn_rounded">
 
@@ -31,21 +32,21 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:padding="10dp"
+            android:background="@drawable/btn_rounded"
             android:textColor="@color/black" />
 
         <!-- Contenedor Scrolleable -->
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="410dp"
+            android:layout_height="400dp"
             android:background="@drawable/btn_rounded"
             android:fillViewport="true">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewPacientes"
-                android:layout_width="600dp"
-                android:layout_height="410dp"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="10dp"
+                android:layout_width="588dp"
+                android:layout_height="390dp"
+                android:layout_marginTop="9dp"
                 android:scrollbars="vertical" />
         </ScrollView>
     </LinearLayout>

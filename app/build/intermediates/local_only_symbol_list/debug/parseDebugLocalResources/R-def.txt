@@ -42,6 +42,7 @@ drawable ic_bluetooth
 drawable ic_carpeta
 drawable ic_check
 drawable ic_clear_white_24dp
+drawable ic_datauser
 drawable ic_dibujo
 drawable ic_error_login
 drawable ic_no_data

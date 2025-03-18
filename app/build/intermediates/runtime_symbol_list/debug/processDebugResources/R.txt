@@ -2971,6 +2971,7 @@ int drawable ic_check 0x7f080122
 int drawable ic_clear_black_24 0x7f0800a8
 int drawable ic_clear_white_24dp 0x7f0800a9
 int drawable ic_clock_black_24dp 0x7f0800aa
+int drawable ic_datauser 0x7f080125
 int drawable ic_dibujo 0x7f080123
 int drawable ic_error_login 0x7f0800ac
 int drawable ic_keyboard_black_24dp 0x7f0800ad
