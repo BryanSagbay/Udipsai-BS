@@ -193,7 +193,7 @@ public class Pdf extends AppCompatActivity {
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 errorOverlay.setVisibility(View.GONE);
                 errorloadingGif.setVisibility(View.GONE);
-                }, 3000);
+            }, 3000);
         });
     }
 

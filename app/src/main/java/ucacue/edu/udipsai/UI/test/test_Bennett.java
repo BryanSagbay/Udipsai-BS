@@ -270,15 +270,15 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
 
         Map<String, Object> datos = new HashMap<>();
         datos.put("timestamp", System.currentTimeMillis());
-        datos.put("nombrePaciente", nombrePaciente);
-        datos.put("correoUsuario", correoUsuario);
-        datos.put("tiempoM1", tiempoM1);
-        datos.put("erroresM1", erroresM1);
-        datos.put("tiempoM2", currentStep >= 4 ? tiempoM2 : "0");
-        datos.put("erroresM2", currentStep >= 4 ? erroresM2 : "0");
-        datos.put("tiempoM3", currentStep >= 6 ? tiempoM3 : "0");
-        datos.put("erroresM3", currentStep >= 6 ? erroresM3 : "0");
-        datos.put("datoExtraM3", currentStep >= 6 ? datoExtraM3 : "-");
+        datos.put("Nombre de Paciente", nombrePaciente);
+        datos.put("Correo Usuario", correoUsuario);
+        datos.put("Tiempo de Ejecución 1", tiempoM1);
+        datos.put("Resultados Fase 1", erroresM1);
+        datos.put("Tiempo de Ejecución 2", currentStep >= 4 ? tiempoM2 : "0");
+        datos.put("Resultados Fase 2", currentStep >= 4 ? erroresM2 : "0");
+        datos.put("Tiempo de Ejecución 3", currentStep >= 6 ? tiempoM3 : "0");
+        datos.put("Resultados Fase 3", currentStep >= 6 ? erroresM3 : "0");
+        datos.put("Tiempo Total", currentStep >= 6 ? datoExtraM3 : "-");
 
         db.collection("testResultados")
                 .add(datos)

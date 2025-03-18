@@ -3087,6 +3087,7 @@ drawable test_palanca
 drawable test_riel
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font deja_vu_sans
 id ALT
 id BOTTOM_END
 id BOTTOM_START

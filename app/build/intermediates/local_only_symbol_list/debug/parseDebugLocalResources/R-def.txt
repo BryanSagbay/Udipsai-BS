@@ -70,6 +70,7 @@ drawable test_btn_4
 drawable test_monotonia
 drawable test_palanca
 drawable test_riel
+font deja_vu_sans
 id actionCard
 id app_bar
 id back_button

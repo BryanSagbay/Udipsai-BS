@@ -24,7 +24,7 @@ public class FirestoreService {
      * para que coincida con la salida del DatePicker.
      */
     private String convertirTimestampAFecha(long timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault()); // 🔥 Corrige el formato
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
         return sdf.format(new Date(timestamp));
     }
 

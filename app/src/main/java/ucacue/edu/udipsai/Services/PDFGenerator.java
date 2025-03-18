@@ -1,6 +1,10 @@
 package ucacue.edu.udipsai.Services;
 
-import com.itextpdf.kernel.pdf.*;
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
@@ -21,21 +25,23 @@ public class PDFGenerator {
         PdfDocument pdfDoc = new PdfDocument(writer);
         Document document = new Document(pdfDoc);
 
+        // Cargar una fuente que soporte caracteres especiales
+        PdfFont font = PdfFontFactory.createFont("assets/fonts/segoe-ui-emoji.ttf", PdfEncodings.IDENTITY_H);
+
         // Agregar información del usuario y la fecha
-        document.add(new Paragraph("📌 Reporte de Resultados").setBold().setFontSize(16));
-        document.add(new Paragraph("Usuario: " + email).setFontSize(12));
-        document.add(new Paragraph("Fecha: " + date).setFontSize(12));
+        document.add(new Paragraph("📌 Reporte de Resultados").setFont(font).setBold().setFontSize(16));
+        document.add(new Paragraph("Usuario: " + email).setFont(font).setFontSize(12));
+        document.add(new Paragraph("Fecha: " + date).setFont(font).setFontSize(12));
         document.add(new Paragraph(" "));
 
         if (dataList.isEmpty()) {
-            document.add(new Paragraph("No hay datos disponibles para esta fecha."));
+            document.add(new Paragraph("No hay datos disponibles para esta fecha.").setFont(font));
         } else {
             for (Map<String, Object> data : dataList) {
-                document.add(new Paragraph("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━").setFontSize(10));
 
                 // Mostrar tipo de test (Ejemplo: "Resultados del Test de Palanca")
                 if (data.containsKey("testTipo")) {
-                    document.add(new Paragraph("📌 " + data.get("testTipo").toString()).setBold().setFontSize(14));
+                    document.add(new Paragraph("📌 " + data.get("testTipo").toString()).setFont(font).setBold().setFontSize(14));
                 }
 
                 document.add(new Paragraph(" "));
@@ -47,8 +53,8 @@ public class PDFGenerator {
 
                     // Excluir campos irrelevantes en el PDF
                     if (!key.equals("timestamp") && !key.equals("correoUsuario") && !key.equals("testTipo")) {
-                        table.addCell(new Cell().add(new Paragraph(key).setBold()));
-                        table.addCell(new Cell().add(new Paragraph(value.toString())));
+                        table.addCell(new Cell().add(new Paragraph(key).setFont(font).setBold()));
+                        table.addCell(new Cell().add(new Paragraph(value.toString()).setFont(font)));
                     }
                 }
 
