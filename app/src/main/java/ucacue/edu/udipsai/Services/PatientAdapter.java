@@ -2,34 +2,60 @@ package ucacue.edu.udipsai.Services;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
 import ucacue.edu.udipsai.Model.Patient;
 import ucacue.edu.udipsai.R;
+import ucacue.edu.udipsai.UI.patient.PatientHome;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PacienteViewHolder> {
     private List<Patient> listaPacientes;
     private Context context;
     private FirebaseFirestore db;
 
+    // Referencias a los overlays de la actividad principal
+    private FrameLayout loadingOverlay;
+    private FrameLayout errorOverlay;
+    private TextView errorMessage;
+    private ImageView loadingGif, errorloadingGif;
+
+
     public PatientAdapter(List<Patient> listaPacientes, Context context) {
         this.listaPacientes = listaPacientes;
         this.context = context;
         this.db = FirebaseFirestore.getInstance();
+
+        // Obtener referencias a los overlays si estamos en PatientHome
+        if (context instanceof PatientHome) {
+            PatientHome activity = (PatientHome) context;
+            loadingOverlay = activity.findViewById(R.id.loadingOverlay);
+            errorOverlay = activity.findViewById(R.id.errorOverlay);
+            errorMessage = activity.findViewById(R.id.errorMessage);
+            loadingGif = activity.findViewById(R.id.loadingGif);
+            errorloadingGif = activity.findViewById(R.id.errorloadingGif);
+
+            // Cargar los GIFs con Glide
+            Glide.with(activity).asGif().load(R.drawable.ic_check).into(loadingGif);
+            Glide.with(activity).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);
+        }
     }
 
     @NonNull
@@ -80,21 +106,25 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
             String apellido = edtApellido.getText().toString().trim();
             String telefono = edtTelefono.getText().toString().trim();
             String direccion = edtDireccion.getText().toString().trim();
-            int edad = Integer.parseInt(edtEdad.getText().toString().trim());
+            String edadStr = edtEdad.getText().toString().trim();
 
-            if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
-                Toast.makeText(context, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || direccion.isEmpty() || edadStr.isEmpty()) {
+                showErrorAlert("Todos los campos son obligatorios");
                 return;
             }
+
+            int edad = Integer.parseInt(edadStr);
+            dialog.dismiss();
+            showLoadingIndicator();
 
             // Actualizar datos en Firestore
             db.collection("pacientes").document(String.valueOf(paciente.getId()))
                     .update("nombre", nombre, "apellido", apellido, "telefono", telefono, "direccion", direccion, "edad", edad)
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(context, "Paciente actualizado", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                        showSuccessAlert();
+                        notifyDataSetChanged();
                     })
-                    .addOnFailureListener(e -> Toast.makeText(context, "Error al actualizar", Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> showErrorAlert("Error al actualizar: " + e.getMessage()));
         });
     }
 
@@ -103,14 +133,16 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
         builder.setTitle("Eliminar paciente")
                 .setMessage("¿Está seguro de que desea eliminar este paciente?")
                 .setPositiveButton("Sí", (dialog, which) -> {
+                    showLoadingIndicator();
+
                     db.collection("pacientes").document(String.valueOf(paciente.getId()))
                             .delete()
                             .addOnSuccessListener(aVoid -> {
-                                Toast.makeText(context, "Paciente eliminado", Toast.LENGTH_SHORT).show();
+                                showSuccessAlert();
                                 listaPacientes.remove(paciente);
                                 notifyDataSetChanged();
                             })
-                            .addOnFailureListener(e -> Toast.makeText(context, "Error al eliminar", Toast.LENGTH_SHORT).show());
+                            .addOnFailureListener(e -> showErrorAlert("Error al eliminar: " + e.getMessage()));
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
                 .show();
@@ -119,6 +151,63 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Paciente
     @Override
     public int getItemCount() {
         return listaPacientes.size();
+    }
+
+    /**
+     * Muestra el indicador de carga
+     */
+    private void showLoadingIndicator() {
+        if (loadingOverlay != null) {
+            loadingOverlay.setVisibility(View.VISIBLE);
+            loadingGif.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * Muestra la alerta de éxito
+     */
+    private void showSuccessAlert() {
+        if (loadingOverlay != null) {
+            // Mostrar el overlay de éxito
+            loadingOverlay.setVisibility(View.VISIBLE);
+            loadingGif.setVisibility(View.VISIBLE);
+            // Auto-ocultar después de 2 segundos
+            new Handler().postDelayed(this::hideSuccessAlert, 2000);
+        }
+    }
+
+    /**
+     * Oculta la alerta de éxito
+     */
+    private void hideSuccessAlert() {
+        if (loadingOverlay != null) {
+            loadingOverlay.setVisibility(View.GONE);
+            loadingGif.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Muestra la alerta de error
+     */
+    private void showErrorAlert(String message) {
+        if (errorOverlay != null && errorMessage != null) {
+            errorMessage.setText(message);
+            errorOverlay.setVisibility(View.VISIBLE);
+            errorloadingGif.setVisibility(View.VISIBLE);
+
+            // Auto-ocultar después de 3 segundos
+            new Handler().postDelayed(this::hideErrorAlert, 3000);
+        }
+    }
+
+    /**
+     * Oculta la alerta de error
+     */
+    private void hideErrorAlert() {
+        if (errorOverlay != null) {
+            errorOverlay.setVisibility(View.GONE);
+            errorloadingGif.setVisibility(View.GONE);
+        }
     }
 
     public static class PacienteViewHolder extends RecyclerView.ViewHolder {

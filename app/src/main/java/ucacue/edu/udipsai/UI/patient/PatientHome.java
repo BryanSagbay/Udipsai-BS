@@ -2,20 +2,23 @@ package ucacue.edu.udipsai.UI.patient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,6 +41,13 @@ public class PatientHome extends AppCompatActivity {
     private List<Patient> listaPacientes;
     private PatientAdapter adapter;
 
+    // Nuevos componentes para las alertas personalizadas
+    private FrameLayout loadingOverlay;
+    private FrameLayout errorOverlay;
+    private TextView errorMessage;
+
+    private ImageView loadingGif, errorloadingGif;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +57,19 @@ public class PatientHome extends AppCompatActivity {
         txtNoDatos = findViewById(R.id.txtNoDatos);
         fabAdd = findViewById(R.id.fab_add);
         backButton = findViewById(R.id.back_button);
+
+        // Inicializar los componentes de alerta
+        loadingOverlay = findViewById(R.id.loadingOverlay);
+        errorOverlay = findViewById(R.id.errorOverlay);
+        errorMessage = findViewById(R.id.errorMessage);
+        loadingGif = findViewById(R.id.loadingGif);
+        errorloadingGif = findViewById(R.id.errorloadingGif);
+
+        // Cargar los GIFs con Glide
+        Glide.with(this).asGif().load(R.drawable.ic_carpeta).into(loadingGif);
+        Glide.with(this).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);
+
+
         db = FirebaseFirestore.getInstance();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -63,6 +86,10 @@ public class PatientHome extends AppCompatActivity {
         cargarPacientes();
 
         fabAdd.setOnClickListener(v -> mostrarDialogoAgregarPaciente());
+
+        // Configurar los listeners para cerrar las alertas al hacer clic en ellas
+        loadingOverlay.setOnClickListener(v -> hideSuccessAlert());
+        errorOverlay.setOnClickListener(v -> hideErrorAlert());
     }
 
     /**
@@ -72,7 +99,7 @@ public class PatientHome extends AppCompatActivity {
         db.collection("pacientes").orderBy("fechaRegistro", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
-                        Toast.makeText(this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
+                        showErrorAlert("Error al cargar datos: " + error.getMessage());
                         return;
                     }
 
@@ -128,13 +155,13 @@ public class PatientHome extends AppCompatActivity {
             }
 
             if (nombre.isEmpty() || apellido.isEmpty() || genero.isEmpty() || edadStr.isEmpty() || direccion.isEmpty() || telefono.isEmpty()) {
-                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                showErrorAlert("Todos los campos son obligatorios");
                 return;
             }
 
             int edad = Integer.parseInt(edadStr);
-            agregarPaciente(nombre, apellido, genero, edad, direccion, telefono);
             dialog.dismiss();
+            agregarPaciente(nombre, apellido, genero, edad, direccion, telefono);
         });
     }
 
@@ -146,12 +173,67 @@ public class PatientHome extends AppCompatActivity {
 
         Patient paciente = new Patient(nombre, apellido, genero, edad, direccion, telefono);
 
-        db.collection("pacientes").document(String.valueOf(timestamp)) // Usar timestamp como ID
+        // Mostrar overlay de carga
+        showLoadingIndicator();
+
+        db.collection("pacientes").document(String.valueOf(timestamp))
                 .set(paciente)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Paciente agregado con éxito", Toast.LENGTH_SHORT).show();
+                    // Mostrar alerta de éxito
+                    showSuccessAlert();
                     cargarPacientes();
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error al agregar paciente", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> {
+                    // Mostrar alerta de error
+                    showErrorAlert("Error al agregar paciente: " + e.getMessage());
+                });
+    }
+
+    /**
+     * Muestra el indicador de carga
+     */
+    private void showLoadingIndicator() {
+        loadingOverlay.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Muestra la alerta de éxito y la oculta automáticamente después de un tiempo
+     */
+    private void showSuccessAlert() {
+        // Primero ocultamos el indicador de carga si estaba visible
+        loadingOverlay.setVisibility(View.VISIBLE);
+        loadingGif.setVisibility(View.VISIBLE);
+
+        // Auto-ocultar después de 2 segundos
+        new Handler().postDelayed(this::hideSuccessAlert, 2000);
+    }
+
+    /**
+     * Oculta la alerta de éxito
+     */
+    private void hideSuccessAlert() {
+        loadingOverlay.setVisibility(View.GONE);
+        loadingGif.setVisibility(View.GONE);
+    }
+
+    /**
+     * Muestra la alerta de error con un mensaje personalizado
+     * @param message Mensaje de error a mostrar
+     */
+    private void showErrorAlert(String message) {
+        errorMessage.setText(message);
+        errorOverlay.setVisibility(View.VISIBLE);
+        errorloadingGif.setVisibility(View.VISIBLE);
+
+        // Auto-ocultar después de 3 segundos
+        new Handler().postDelayed(this::hideErrorAlert, 3000);
+    }
+
+    /**
+     * Oculta la alerta de error
+     */
+    private void hideErrorAlert() {
+        errorOverlay.setVisibility(View.GONE);
+        errorloadingGif.setVisibility(View.GONE);
     }
 }

@@ -16,6 +16,10 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/carpeta.gif"
     },
     {
+        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_home_patient.xml.flat",
+        "source": "ucacue.edu.udipsai.app-main-44:/layout/home_patient.xml"
+    },
+    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-mdpi_ic_notification.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-mdpi/ic_notification.png"
     },
@@ -150,10 +154,6 @@
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_send_white_24dp.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_send_white_24dp.xml"
-    },
-    {
-        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_pdf_home.xml.flat",
-        "source": "ucacue.edu.udipsai.app-main-44:/layout/pdf_home.xml"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-xhdpi_ic_notification.png.flat",

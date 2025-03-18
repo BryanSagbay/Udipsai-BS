@@ -56,11 +56,11 @@ public class Pdf extends AppCompatActivity {
         errorOverlay = findViewById(R.id.errorOverlay);
         errorMessage = findViewById(R.id.errorMessage);
         loadingGif = findViewById(R.id.loadingGif);
-        errorloadingGif = findViewById(R.id.errorloadingGif);  // Nuevo ImageView para el error
+        errorloadingGif = findViewById(R.id.errorloadingGif);
 
         // Cargar los GIFs con Glide
-        Glide.with(this).asGif().load(R.drawable.ic_carpeta).into(loadingGif);  // GIF de carga
-        Glide.with(this).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);  // GIF de error
+        Glide.with(this).asGif().load(R.drawable.ic_carpeta).into(loadingGif);
+        Glide.with(this).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);
 
         // Inicializar FirestoreService
         try {
