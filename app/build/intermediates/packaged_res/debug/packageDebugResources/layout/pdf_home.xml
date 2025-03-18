@@ -66,12 +66,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Línea divisoria sutil -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E0E0E0"
-            app:layout_constraintBottom_toBottomOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,18 +81,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/lg_ofertafond"
-            android:paddingBottom="24dp">
+            android:paddingBottom="25dp">
 
             <!-- Tarjeta de información del usuario -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/infoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="24dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="35dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
                 app:cardBackgroundColor="#F5F5F5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -138,9 +133,9 @@
                 android:id="@+id/dateCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="#F5F5F5"
@@ -172,7 +167,7 @@
                         <TextView
                             android:id="@+id/textViewFechaSeleccionada"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="55dp"
                             android:layout_weight="1"
                             android:text="Sin fecha seleccionada"
                             android:textSize="16sp"
@@ -183,8 +178,8 @@
                         <!-- Botón para seleccionar la fecha -->
                         <ImageButton
                             android:id="@+id/btnSeleccionarFecha"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"
                             android:src="@android:drawable/ic_menu_my_calendar"
                             android:contentDescription="Seleccionar fecha"
                             android:padding="8dp"
@@ -195,11 +190,11 @@
                     <!-- DatePicker con estilo mejorado -->
                     <DatePicker
                         android:id="@+id/datePicker"
-                        android:layout_width="498dp"
+                        android:layout_width="500dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/calendar_backround"
                         android:calendarTextColor="@color/text_primary"
                         android:datePickerMode="calendar"
@@ -214,11 +209,11 @@
                 android:id="@+id/actionCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="24dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
                 app:cardBackgroundColor="#F5F5F5"
                 app:layout_constraintTop_toBottomOf="@id/dateCard"
                 app:layout_constraintStart_toStartOf="parent"
@@ -228,7 +223,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="15dp">
 
                     <!-- Botón para generar el PDF -->
                     <Button
@@ -236,8 +231,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Generar PDF"
-                        android:textSize="16sp"
-                        android:padding="12dp"
+                        android:textSize="15sp"
+                        android:padding="15dp"
                         android:textColor="@android:color/white"/>
 
                     <!-- Barra de progreso (se oculta por defecto) -->
@@ -247,7 +242,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="15dp"
                         android:indeterminate="true"
                         android:indeterminateTint="?attr/colorPrimary"/>
                 </LinearLayout>
