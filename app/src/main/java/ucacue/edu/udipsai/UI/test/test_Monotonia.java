@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -213,6 +214,13 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
 
         // Configurar botón de guardar
         saveButton.setOnClickListener(v -> guardarDatos());
+
+        SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
+        String nombrePaciente = getIntent().getStringExtra("patient_name");
+
+        if (nombrePaciente != null) {
+            preferences.edit().putString("patient_name", nombrePaciente).apply();
+        }
     }
 
     // Cargar GIFs
@@ -297,11 +305,9 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             return;
         }
 
-        // Obtener el nombre del paciente
-        String nombrePaciente = getIntent().getStringExtra("patient_name");
-        if (nombrePaciente == null) {
-            nombrePaciente = "Paciente Desconocido";
-        }
+        // Recuperar el nombre del paciente desde SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
+        String nombrePaciente = preferences.getString("patient_name", "Paciente Desconocido");
 
         // Obtener el correo del usuario autenticado
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -328,6 +334,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     Toast.makeText(this, "Error al guardar datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 
     /**
      * Manejo de conexión y errores Bluetooth

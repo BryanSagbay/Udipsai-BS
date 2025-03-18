@@ -3,6 +3,7 @@ package ucacue.edu.udipsai.UI.test;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -81,8 +82,17 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         setContentView(R.layout.home_test);
 
         patientName = findViewById(R.id.patientName);
+
+        SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
         String nombrePaciente = getIntent().getStringExtra("patient_name");
+
         if (nombrePaciente != null) {
+            preferences.edit().putString("patient_name", nombrePaciente).apply();
+        } else {
+            nombrePaciente = preferences.getString("patient_name", "");
+        }
+
+        if (!nombrePaciente.isEmpty()) {
             patientName.setText(nombrePaciente);
         }
 
@@ -119,6 +129,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
         // Botón para regresar y desconectar Bluetooth
         backButton.setOnClickListener(v -> {
             Intent homeIntent = new Intent(HomeTest.this, HomePage.class);
+            preferences.edit().remove("patient_name").apply();
             startActivity(homeIntent);
             finish();
         });
@@ -213,6 +224,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
     /**
      * Implementación de SerialListener para manejar eventos de conexión Bluetooth.
      */
+    // Modifica la parte donde inicias la actividad después de conectar con Bluetooth
     @Override
     public void onSerialConnect() {
         runOnUiThread(() -> {
@@ -222,6 +234,10 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
 
             if (buttonId != -1) {
                 playAudio(audioMap.get(buttonId));
+
+                // Guardar nombre del paciente antes de iniciar la actividad de prueba
+                SharedPreferences preferences = getSharedPreferences("PatientPrefs", MODE_PRIVATE);
+                preferences.edit().putString("patient_name", getIntent().getStringExtra("patient_name")).apply();
 
                 new android.os.Handler().postDelayed(() -> {
                     hideLoadingSpinner();
@@ -233,6 +249,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
             }
         });
     }
+
 
 
     private void playAudio(int audioRes) {
