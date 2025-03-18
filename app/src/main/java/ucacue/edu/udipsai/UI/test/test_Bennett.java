@@ -81,7 +81,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         resetButton.setVisibility(View.GONE);
         saveButton.setVisibility(View.GONE);
         cardDatos.setVisibility(View.GONE);
-        loadGif(gifStatusB, R.drawable.reloj_de_arena);
+        loadGif(gifStatusB, R.drawable.ic_reloj_de_arena);
         receivedDataText.setText("Esperando, presione Comenzar...");
         tvTituloDatos.setText("Esperando datos...");
         tvErrores.setText("-");
@@ -103,7 +103,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             sendButton1.setEnabled(false);
             currentStep = 2;
             saveButton.setVisibility(View.GONE);
-            loadGif(gifStatusB, R.drawable.dibujo);
+            loadGif(gifStatusB, R.drawable.ic_dibujo);
             receivedDataText.setText("Ejecutando el Test...");
         });
 
@@ -112,7 +112,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             sendButton2.setEnabled(false);
             currentStep = 4;
             saveButton.setVisibility(View.GONE);
-            loadGif(gifStatusB, R.drawable.dibujo);
+            loadGif(gifStatusB, R.drawable.ic_dibujo);
             receivedDataText.setText("Ejecutando el Test...");
         });
 
@@ -228,7 +228,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
             cardExtraDato.setVisibility(View.GONE);
         }
 
-        loadGif(gifStatusResultado, R.drawable.check);
+        loadGif(gifStatusResultado, R.drawable.ic_check);
 
         switch (currentStep) {
             case 2:
@@ -316,7 +316,7 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         tvTituloDatos.setText("Esperando datos...");
         tvErrores.setText("-");
         tvTiempoEjecucion.setText("- seg");
-        loadGif(gifStatusB, R.drawable.reloj_de_arena);
+        loadGif(gifStatusB, R.drawable.ic_reloj_de_arena);
         cardEspera.setVisibility(View.VISIBLE);
         cardDatos.setVisibility(View.GONE);
     }

@@ -95,7 +95,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
 
         // Inicialización de valores iniciales
         cardDatosM.setVisibility(View.GONE);
-        loadGif(gifStatusM, R.drawable.reloj_de_arena);
+        loadGif(gifStatusM, R.drawable.ic_reloj_de_arena);
         receivedDataText.setText("Esperando, presione Comenzar...");
         tvTituloDatos.setText("Esperando datos...");
         tvAciertos.setText("-");
@@ -154,7 +154,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             sendButton2.setEnabled(false);
             sendButton3.setEnabled(false);
             sendButton4.setEnabled(false);
-            loadGif(gifStatusM, R.drawable.dibujo);
+            loadGif(gifStatusM, R.drawable.ic_dibujo);
             receivedDataText.setText("Ejecutando el Test...");
         };
 
@@ -195,7 +195,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
             tvTiempoEjecucion.setText("- seg");
             tvTiempoReaccion.setText("- seg");
             resetButton.setVisibility(View.GONE);
-            loadGif(gifStatusM, R.drawable.reloj_de_arena);
+            loadGif(gifStatusM, R.drawable.ic_reloj_de_arena);
             cardEspera.setVisibility(View.VISIBLE);
             cardDatosM.setVisibility(View.GONE);
         });
@@ -273,7 +273,7 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
                     tvTiempoReaccion.setText(tiempoReaccion + " seg");
 
-                    loadGif(gifStatusResultado, R.drawable.check);
+                    loadGif(gifStatusResultado, R.drawable.ic_check);
 
                     // Mostrar el botón guardar
                     saveButton.setVisibility(View.VISIBLE);

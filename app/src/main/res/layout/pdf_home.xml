@@ -234,20 +234,97 @@
                         android:textSize="15sp"
                         android:padding="15dp"
                         android:textColor="@android:color/white"/>
-
-                    <!-- Barra de progreso (se oculta por defecto) -->
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:layout_marginTop="15dp"
-                        android:indeterminate="true"
-                        android:indeterminateTint="?attr/colorPrimary"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="10dp"
+        android:visibility="gone">
+
+        <!-- Contenedor que permitirá centrar el spinner -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/btn_rounded"
+                android:padding="24dp">
+
+                <ImageView
+                    android:id="@+id/loadingGif"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Generando PDF..."
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!-- Alerta de Error -->
+    <FrameLayout
+        android:id="@+id/errorOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="10dp"
+        android:visibility="gone">
+
+        <!-- Contenedor que permitirá centrar el spinner -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/btn_rounded"
+                android:padding="24dp">
+
+                <ImageView
+                    android:id="@+id/errorloadingGif"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/errorMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Error al Generar el PDF..."
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </FrameLayout>
 </RelativeLayout>

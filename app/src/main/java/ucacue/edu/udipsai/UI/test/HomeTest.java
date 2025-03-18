@@ -103,7 +103,7 @@ public class HomeTest extends AppCompatActivity implements SerialListener, Servi
 
         Glide.with(this)
                 .asGif()
-                .load(R.drawable.bluetooth)
+                .load(R.drawable.ic_bluetooth)
                 .into(loadingGif);
 
         disconnect();

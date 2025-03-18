@@ -24,7 +24,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
-import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,7 +70,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
 
         // Inicialización de valores iniciales
         cardDatos.setVisibility(View.GONE);
-        loadGif(gifStatusP, R.drawable.reloj_de_arena);
+        loadGif(gifStatusP, R.drawable.ic_reloj_de_arena);
         receivedDataText.setText("Esperando, presione Comenzar...");
         tvTituloDatos.setText("Esperando datos...");
         tvErrores.setText("-");
@@ -92,7 +91,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         sendButton.setOnClickListener(v -> {
             sendData("M1");
             sendButton.setEnabled(false);
-            loadGif(gifStatusP, R.drawable.dibujo);
+            loadGif(gifStatusP, R.drawable.ic_dibujo);
             receivedDataText.setText("Ejecutando el Test...");
             saveButton.setVisibility(View.GONE);
         });
@@ -109,7 +108,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
             tvErrores.setText("-");
             tvTiempoEjecucion.setText("- seg");
             resetButton.setVisibility(View.GONE);
-            loadGif(gifStatusP, R.drawable.reloj_de_arena);
+            loadGif(gifStatusP, R.drawable.ic_reloj_de_arena);
             cardEspera.setVisibility(View.VISIBLE);
             cardDatos.setVisibility(View.GONE);
         });
@@ -173,7 +172,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
                     tvErrores.setText(errores);
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
 
-                    loadGif(gifStatusResultado, R.drawable.check);
+                    loadGif(gifStatusResultado, R.drawable.ic_check);
 
                     saveButton.setVisibility(View.VISIBLE);
 

@@ -24,7 +24,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
-import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,7 +71,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
 
         // Inicialización de valores iniciales
         cardDatos.setVisibility(View.GONE);
-        loadGif(gifStatusR, R.drawable.reloj_de_arena);
+        loadGif(gifStatusR, R.drawable.ic_reloj_de_arena);
         receivedDataText.setText("Esperando, presione Comenzar...");
         tvTituloDatos.setText("Esperando datos...");
         tvErrores.setText("-");
@@ -94,7 +93,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
         sendButton.setOnClickListener(v -> {
             sendData("M1");
             sendButton.setEnabled(false);
-            loadGif(gifStatusR, R.drawable.dibujo);
+            loadGif(gifStatusR, R.drawable.ic_dibujo);
             receivedDataText.setText("Ejecutando el Test...");
             saveButton.setVisibility(View.GONE);
         });
@@ -110,7 +109,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
             tvErrores.setText("-");
             tvTiempoEjecucion.setText("- seg");
             resetButton.setVisibility(View.GONE);
-            loadGif(gifStatusR, R.drawable.reloj_de_arena);
+            loadGif(gifStatusR, R.drawable.ic_reloj_de_arena);
             cardEspera.setVisibility(View.VISIBLE);
             cardDatos.setVisibility(View.GONE);
         });
@@ -174,7 +173,7 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
                     tvErrores.setText(errores);
                     tvTiempoEjecucion.setText(tiempoEjecucion + " seg");
 
-                    loadGif(gifStatusResultado, R.drawable.check);
+                    loadGif(gifStatusResultado, R.drawable.ic_check);
 
                     // 💡 MOSTRAR EL BOTÓN GUARDAR AL RECIBIR DATOS DEL BLUETOOTH
                     saveButton.setVisibility(View.VISIBLE);

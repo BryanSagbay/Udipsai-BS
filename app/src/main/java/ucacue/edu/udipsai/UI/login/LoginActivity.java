@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .asGif()
-                .load(R.drawable.accesologin)
+                .load(R.drawable.ic_accesologin)
                 .into(loadingGif);
 
         Glide.with(this)

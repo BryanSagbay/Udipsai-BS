@@ -2920,10 +2920,8 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
-drawable accesologin
 drawable avd_hide_password
 drawable avd_show_password
-drawable bluetooth
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -2937,7 +2935,6 @@ drawable btn_roundedtest
 drawable calendar_backround
 drawable card_testview
 drawable cardr_results
-drawable check
 drawable circle
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
@@ -2964,15 +2961,18 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
-drawable dibujo
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable ic_accesologin
 drawable ic_arrow_back_black_24
 drawable ic_back
+drawable ic_bluetooth
+drawable ic_carpeta
+drawable ic_check
 drawable ic_clear_black_24
 drawable ic_clear_white_24dp
 drawable ic_clock_black_24dp
-drawable ic_delete_white_24dp
+drawable ic_dibujo
 drawable ic_error_login
 drawable ic_keyboard_black_24dp
 drawable ic_m3_chip_check
@@ -2989,9 +2989,9 @@ drawable ic_paciente
 drawable ic_passkey
 drawable ic_password
 drawable ic_pdf
+drawable ic_reloj_de_arena
 drawable ic_salir
 drawable ic_search_black_24
-drawable ic_send_white_24dp
 drawable ic_soporte
 drawable ic_test
 drawable lg_aguila
@@ -3075,7 +3075,6 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable pdf
-drawable reloj_de_arena
 drawable test_bennett
 drawable test_btn_1
 drawable test_btn_2
@@ -3175,7 +3174,6 @@ id autoCompleteToStart
 id automatic
 id back_button
 id backgroundImage
-id backgroundNotification
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3189,8 +3187,6 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
-id bt_refresh
-id bt_settings
 id btnAgregar
 id btnBennett
 id btnCancelar
@@ -3250,7 +3246,6 @@ id checkbox
 id checked
 id chronometer
 id circle_center
-id clear
 id clear_text
 id clip_horizontal
 id clip_vertical
@@ -3360,7 +3355,6 @@ id groups
 id guidelineCenter
 id hardware
 id header_title
-id hex
 id hideable
 id home
 id homeAsUp
@@ -3471,7 +3465,6 @@ id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
 id navigation_header_container
 id never
-id newline
 id noScroll
 id none
 id normal
@@ -3893,8 +3886,6 @@ layout test_bennett
 layout test_monotonia
 layout test_palanca
 layout test_riel
-menu menu_devices
-menu menu_terminal
 mipmap ic_launcher
 plurals mtrl_badge_content_description
 raw bennett

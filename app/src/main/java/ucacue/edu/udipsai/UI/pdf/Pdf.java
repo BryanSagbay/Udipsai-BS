@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.*;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -16,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.bumptech.glide.Glide;
 
 import java.io.OutputStream;
 import java.util.*;
@@ -25,20 +26,18 @@ import ucacue.edu.udipsai.Services.AuthService;
 import ucacue.edu.udipsai.Services.FirestoreService;
 import ucacue.edu.udipsai.Services.PDFGenerator;
 import ucacue.edu.udipsai.UI.home.HomePage;
-import ucacue.edu.udipsai.UI.test.HomeTest;
-import ucacue.edu.udipsai.UI.test.test_Palanca;
 
 public class Pdf extends AppCompatActivity {
 
-    private TextView textViewCorreo, textViewFechaSeleccionada;
+    private TextView textViewCorreo, textViewFechaSeleccionada, errorMessage;
     private Button btnGenerarPDF;
-    private ImageButton btnSeleccionarFecha;
-    private ProgressBar progressBar;
+    private ImageButton btnSeleccionarFecha, backButton;
     private DatePicker datePicker;
     private FirestoreService firestoreService;
     private String correoUsuario;
     private String fechaSeleccionada;
-    private ImageButton backButton;
+    private FrameLayout loadingOverlay, errorOverlay;
+    private ImageView loadingGif, errorloadingGif;
     private static final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
@@ -50,11 +49,18 @@ public class Pdf extends AppCompatActivity {
         textViewCorreo = findViewById(R.id.textViewCorreo);
         textViewFechaSeleccionada = findViewById(R.id.textViewFechaSeleccionada);
         btnGenerarPDF = findViewById(R.id.btnGenerarPDF);
-        progressBar = findViewById(R.id.progressBar);
         datePicker = findViewById(R.id.datePicker);
         btnSeleccionarFecha = findViewById(R.id.btnSeleccionarFecha);
         backButton = findViewById(R.id.back_button);
+        loadingOverlay = findViewById(R.id.loadingOverlay);
+        errorOverlay = findViewById(R.id.errorOverlay);
+        errorMessage = findViewById(R.id.errorMessage);
+        loadingGif = findViewById(R.id.loadingGif);
+        errorloadingGif = findViewById(R.id.errorloadingGif);  // Nuevo ImageView para el error
 
+        // Cargar los GIFs con Glide
+        Glide.with(this).asGif().load(R.drawable.ic_carpeta).into(loadingGif);  // GIF de carga
+        Glide.with(this).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);  // GIF de error
 
         // Inicializar FirestoreService
         try {
@@ -72,7 +78,7 @@ public class Pdf extends AppCompatActivity {
             btnGenerarPDF.setEnabled(false);
         }
 
-        // Ocultar el DatePicker por defecto
+        // Ocultar DatePicker por defecto
         datePicker.setVisibility(View.GONE);
         configurarDatePicker();
 
@@ -80,12 +86,16 @@ public class Pdf extends AppCompatActivity {
         btnSeleccionarFecha.setOnClickListener(v -> mostrarDatePicker());
         btnGenerarPDF.setOnClickListener(v -> verificarPermisosYGenerarPDF());
 
-        // Botón para regresar y desconectar Bluetooth
+        // Botón para regresar
         backButton.setOnClickListener(v -> {
             Intent homeIntent = new Intent(Pdf.this, HomePage.class);
             startActivity(homeIntent);
             finish();
         });
+
+        // Ocultar overlays por defecto
+        loadingOverlay.setVisibility(View.GONE);
+        errorOverlay.setVisibility(View.GONE);
     }
 
     private void mostrarDatePicker() {
@@ -105,7 +115,6 @@ public class Pdf extends AppCompatActivity {
         datePicker.init(año, mes, día, (view, year, monthOfYear, dayOfMonth) -> {
             fechaSeleccionada = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
             textViewFechaSeleccionada.setText(fechaSeleccionada);
-            Log.d("DEBUG", "Fecha seleccionada: " + fechaSeleccionada);
             datePicker.setVisibility(View.GONE);
         });
 
@@ -127,17 +136,16 @@ public class Pdf extends AppCompatActivity {
 
     private void generarPDF() {
         if (correoUsuario.equals("No autenticado") || fechaSeleccionada == null || fechaSeleccionada.isEmpty()) {
-            Toast.makeText(this, "Seleccione una fecha válida", Toast.LENGTH_SHORT).show();
+            mostrarError("Seleccione una fecha válida");
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        mostrarLoading(true);
         btnGenerarPDF.setEnabled(false);
 
         new Thread(() -> {
             try {
                 List<Map<String, Object>> resultados = firestoreService.getAllDataByEmailAndDate(correoUsuario, fechaSeleccionada);
-                Log.d("PdfActivity", "Resultados encontrados: " + resultados.size());
 
                 if (!resultados.isEmpty()) {
                     Uri pdfUri = guardarPDF(correoUsuario, fechaSeleccionada, resultados);
@@ -145,21 +153,48 @@ public class Pdf extends AppCompatActivity {
                         if (pdfUri != null) {
                             Toast.makeText(this, "PDF guardado en Descargas", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(this, "Error al guardar el PDF", Toast.LENGTH_SHORT).show();
+                            mostrarError("Error al guardar el PDF");
                         }
                     });
                 } else {
-                    runOnUiThread(() -> Toast.makeText(this, "No hay datos para esta fecha", Toast.LENGTH_SHORT).show());
+                    mostrarError("No hay datos para esta fecha");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                mostrarError("Error generando PDF");
             } finally {
                 runOnUiThread(() -> {
-                    progressBar.setVisibility(View.GONE);
+                    mostrarLoading(false);
                     btnGenerarPDF.setEnabled(true);
                 });
             }
         }).start();
+    }
+
+    private void mostrarLoading(boolean mostrar) {
+        runOnUiThread(() -> {
+            if (mostrar) {
+                loadingOverlay.setVisibility(View.VISIBLE);
+                loadingGif.setVisibility(View.VISIBLE);
+            } else {
+                loadingOverlay.setVisibility(View.GONE);
+                loadingGif.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void mostrarError(String mensaje) {
+        runOnUiThread(() -> {
+            errorMessage.setText(mensaje);
+            errorOverlay.setVisibility(View.VISIBLE);
+            errorloadingGif.setVisibility(View.VISIBLE);
+
+            // Ocultar el error después de 3 segundos
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                errorOverlay.setVisibility(View.GONE);
+                errorloadingGif.setVisibility(View.GONE);
+                }, 3000);
+        });
     }
 
     private Uri guardarPDF(String email, String date, List<Map<String, Object>> dataList) {
@@ -191,7 +226,7 @@ public class Pdf extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 generarPDF();
             } else {
-                Toast.makeText(this, "Se requieren permisos para guardar el PDF", Toast.LENGTH_LONG).show();
+                mostrarError("Se requieren permisos para guardar el PDF");
             }
         }
     }
