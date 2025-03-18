@@ -67,16 +67,16 @@
         <ImageView
             android:id="@+id/iconPdf"
             android:layout_width="450dp"
-            android:layout_height="40dp"
+            android:layout_height="39dp"
+            android:scaleType="centerInside"
             android:src="@drawable/pdf"
-            android:tint="#FFFF"
-            android:scaleType="centerInside"/>
+            android:tint="#FFFF" />
 
         <TextView
             android:id="@+id/textSoporte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Archivos"
+            android:text="Reportes"
             android:paddingTop="3dp"
             android:textSize="12sp"
             android:textColor="@android:color/white"
