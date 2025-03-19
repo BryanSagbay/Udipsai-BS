@@ -3087,6 +3087,7 @@ drawable test_palanca
 drawable test_riel
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable udipsai
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -3894,7 +3895,6 @@ layout test_bennett
 layout test_monotonia
 layout test_palanca
 layout test_riel
-mipmap ic_launcher
 plurals mtrl_badge_content_description
 raw bennett
 raw error

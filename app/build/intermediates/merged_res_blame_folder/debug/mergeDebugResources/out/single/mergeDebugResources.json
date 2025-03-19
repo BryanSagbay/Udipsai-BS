@@ -64,12 +64,12 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/dibujo.gif"
     },
     {
-        "merged": "ucacue.edu.udipsai.app-debug-42:/layout_spinner_dropdown_item.xml.flat",
-        "source": "ucacue.edu.udipsai.app-main-44:/layout/spinner_dropdown_item.xml"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_back.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_back.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_udipsai_app.jpeg.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/udipsai_app.jpeg"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/layout_test_bennett.xml.flat",
@@ -88,12 +88,12 @@
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_datauser.png"
     },
     {
-        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-mdpi_ic_clear_white_24dp.png.flat",
-        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-mdpi/ic_clear_white_24dp.png"
-    },
-    {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_salir.png.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/ic_salir.png"
+    },
+    {
+        "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable-mdpi_ic_clear_white_24dp.png.flat",
+        "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable-mdpi/ic_clear_white_24dp.png"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_no_data.gif.flat",
@@ -150,6 +150,10 @@
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_test_btn_2.xml.flat",
         "source": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-main-44:/drawable/test_btn_2.xml"
+    },
+    {
+        "merged": "ucacue.edu.udipsai.app-debug-42:/drawable_udipsai.jpeg.flat",
+        "source": "ucacue.edu.udipsai.app-main-44:/drawable/udipsai.jpeg"
     },
     {
         "merged": "/Users/bryansagbay/.gradle/daemon/8.10.2/ucacue.edu.udipsai.app-debug-42:/drawable_ic_pdf.png.flat",

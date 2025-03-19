@@ -19,7 +19,7 @@
 
     <!-- mipmap/ic_launcher created with Android Studio -> New -> Image Asset using @color/colorPrimaryDark as background color -->
     <application
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/udipsai"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:hasCode="true"

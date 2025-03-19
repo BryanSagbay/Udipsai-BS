@@ -42,11 +42,11 @@
     <color name="white80">#99FFFFFF</color>
     <color name="white90">#809B9B9B</color>
     <color name="yellow20">#FFEB3B</color>
-    <string name="app_name">Simple Bluetooth Terminal</string>
+    <string name="app_name">Inclulab Devices</string>
     <string name="bluetooth_permission_denied">Bluetooth permission was permanently denied. You have to enable permission \"%s\" in App settings.</string>
     <string name="bluetooth_permission_grant">Bluetooth permission is required by this App. Please grant in next dialog.</string>
     <string name="bluetooth_permission_title">Bluetooth permission</string>
-    <string name="devices">Bluetooth Devices</string>
+    <string name="devices">Inclulab Devices</string>
     <string name="gcm_defaultSenderId" translatable="false">527942724325</string>
     <string name="google_api_key" translatable="false">AIzaSyAoTsjoXldb5AAet3kNKzXJG2IBFQCIyLo</string>
     <string name="google_app_id" translatable="false">1:527942724325:android:c32f5a1f5744f2a48ec20c</string>

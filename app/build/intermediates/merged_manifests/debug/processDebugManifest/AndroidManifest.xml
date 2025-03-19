@@ -37,7 +37,7 @@
         android:debuggable="true"
         android:extractNativeLibs="false"
         android:hasCode="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/udipsai"
         android:label="@string/app_name"
         android:testOnly="true"
         android:theme="@style/AppTheme" >

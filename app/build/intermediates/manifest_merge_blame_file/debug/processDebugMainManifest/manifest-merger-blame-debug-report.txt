@@ -72,8 +72,8 @@
 38        android:extractNativeLibs="false"
 39        android:hasCode="true"
 39-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:25:9-31
-40        android:icon="@mipmap/ic_launcher"
-40-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:9-43
+40        android:icon="@drawable/udipsai"
+40-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:9-41
 41        android:label="@string/app_name"
 41-->/Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:23:9-41
 42        android:testOnly="true"

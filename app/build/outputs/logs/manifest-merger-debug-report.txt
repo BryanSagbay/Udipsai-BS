@@ -345,7 +345,7 @@ MERGED from [com.google.android.play:core-common:2.0.3] /Users/bryansagbay/.grad
 	tools:ignore
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:26:9-60
 	android:icon
-		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:9-43
+		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:22:9-41
 	android:theme
 		ADDED from /Users/bryansagbay/AndroidStudioProjects/Udipsai-BS/app/src/main/AndroidManifest.xml:24:9-40
 meta-data#android.assets_directories
