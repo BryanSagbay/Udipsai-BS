@@ -22,7 +22,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
+        android:hasCode="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+        <!-- Add metadata for assets directories -->
+        <meta-data
+            android:name="android.assets_directories"
+            android:value="assets" />
+
         <activity
             android:name=".UI.login.LoginActivity"
             android:screenOrientation="landscape"
@@ -34,6 +41,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Rest of your activities remain unchanged -->
         <activity
             android:name=".UI.register.RegisterActivity"
             android:screenOrientation="landscape"

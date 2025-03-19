@@ -1,20 +1,40 @@
 package ucacue.edu.udipsai.Services;
 
 import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.kernel.events.Event;
+import com.itextpdf.kernel.events.IEventHandler;
+import com.itextpdf.kernel.events.PdfDocumentEvent;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.*;
+import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.*;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
 public class PDFGenerator {
+
+    private static class BackgroundEventHandler implements IEventHandler {
+        private final PdfFormXObject background;
+
+        public BackgroundEventHandler(PdfFormXObject background) {
+            this.background = background;
+        }
+
+        @Override
+        public void handleEvent(Event event) {
+            PdfDocumentEvent docEvent = (PdfDocumentEvent) event;
+            PdfPage page = docEvent.getPage();
+            new PdfCanvas(page.newContentStreamBefore(), page.getResources(), docEvent.getDocument())
+                    .addXObject(background);
+        }
+    }
 
     public static void generatePDF(
             OutputStream outputStream,
@@ -27,12 +47,38 @@ public class PDFGenerator {
             throw new Exception("OutputStream es nulo, no se puede generar el PDF.");
         }
 
+        // Cargar la plantilla para extraer el fondo
+        InputStream templateStream = PDFGenerator.class.getClassLoader().getResourceAsStream("assets/Plantilla.pdf");
+        if (templateStream == null) {
+            throw new Exception("No se pudo encontrar la plantilla PDF en assets.");
+        }
+
+        PdfReader templateReader = new PdfReader(templateStream);
+        PdfDocument templatePdf = new PdfDocument(templateReader);
+        PdfPage templatePage = templatePdf.getFirstPage();
+        PageSize pageSize = new PageSize(templatePage.getPageSize());
+
+        // Crear nuevo documento PDF
         PdfWriter writer = new PdfWriter(outputStream);
         PdfDocument pdfDoc = new PdfDocument(writer);
-        Document document = new Document(pdfDoc);
+        Document document = new Document(pdfDoc, pageSize);
+
+        // Extraer el fondo como XObject
+        PdfFormXObject background = templatePage.copyAsFormXObject(pdfDoc);
+        templatePdf.close();
+
+        // Añadir evento para fondo en cada página
+        pdfDoc.addEventHandler(PdfDocumentEvent.START_PAGE, new BackgroundEventHandler(background));
+
+        // Ajustar márgenes para evitar superposición
+        float margenSuperior = 25;  // Aumentado para prevenir superposición en páginas siguientes
+        float margenInferior = 80;
+        document.setMargins(margenSuperior, 25, margenInferior, 50);
 
         PdfFont font = PdfFontFactory.createFont("assets/fonts/segoe-ui-emoji.ttf", PdfEncodings.IDENTITY_H);
 
+        // Contenido del PDF
+        document.add(new Paragraph("\n\n\n")); // Espaciado inicial
         document.add(new Paragraph("📌 Reporte de Resultados").setFont(font).setBold().setFontSize(16));
         document.add(new Paragraph("Usuario: " + email).setFont(font).setFontSize(12));
 
@@ -73,6 +119,12 @@ public class PDFGenerator {
 
                 document.add(table);
                 document.add(new Paragraph(" "));
+
+                // Comprobar si estamos cerca del final de la página y forzar salto si es necesario
+                if (document.getRenderer().getCurrentArea().getBBox().getHeight() < 100) {
+                    document.add(new AreaBreak());
+                    document.add(new Paragraph("\n\n\n")); // Espaciado inicial para la nueva página
+                }
             }
         }
 

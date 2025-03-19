@@ -36,10 +36,17 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:extractNativeLibs="false"
+        android:hasCode="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+
+        <!-- Add metadata for assets directories -->
+        <meta-data
+            android:name="android.assets_directories"
+            android:value="assets" />
+
         <activity
             android:name="ucacue.edu.udipsai.UI.login.LoginActivity"
             android:exported="true"
@@ -51,6 +58,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Rest of your activities remain unchanged -->
         <activity
             android:name="ucacue.edu.udipsai.UI.register.RegisterActivity"
             android:exported="true"
