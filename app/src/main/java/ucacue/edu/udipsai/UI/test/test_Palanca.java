@@ -217,7 +217,7 @@ public class test_Palanca extends AppCompatActivity implements SerialListener, S
         datos.put("correoUsuario", correoUsuario);
         datos.put("Título", Titulo);
         datos.put("Errores", Errores);
-        datos.put("Tiempo_de_Ejecución", Tiempo_de_Ejecucion);
+        datos.put("Tiempo de Ejecución", Tiempo_de_Ejecucion);
 
         // Guardar en Firestore en la colección "testResultados"
         FirebaseFirestore db = FirebaseFirestore.getInstance();

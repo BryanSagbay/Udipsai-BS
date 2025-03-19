@@ -315,8 +315,8 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
         datos.put("Título", Titulo);
         datos.put("Aciertos", Aciertos);
         datos.put("Errores", Errores);
-        datos.put("Tiempo_de_Ejecución", Tiempo_de_Ejecucion);
-        datos.put("Tiempo_de_Reacción", Tiempo_de_Reaccion);
+        datos.put("Tiempo de Ejecución", Tiempo_de_Ejecucion);
+        datos.put("Tiempo de Reacción", Tiempo_de_Reaccion);
 
         // Guardar en Firestore
         db.collection("testResultados")

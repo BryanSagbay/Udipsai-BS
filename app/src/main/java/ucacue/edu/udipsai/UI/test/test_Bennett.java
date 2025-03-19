@@ -272,13 +272,13 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
         datos.put("timestamp", System.currentTimeMillis());
         datos.put("nombrePaciente", nombrePaciente);
         datos.put("correoUsuario", correoUsuario);
-        datos.put("Tiempo_de_Ejecución_Fase_1", Tiempo_de_Ejecución_Fase_1);
-        datos.put("Resultados_Fase_1", Resultados_Fase_1);
-        datos.put("Tiempo_de_Ejecución_Fase_2", currentStep >= 4 ? Tiempo_de_Ejecución_Fase_2 : "0");
-        datos.put("Resultados_Fase_2", currentStep >= 4 ? Resultados_Fase_2 : "0");
-        datos.put("Tiempo_de_Ejecución_Fase_3", currentStep >= 6 ? Tiempo_de_Ejecución_Fase_3 : "0");
-        datos.put("Resultados_Fase_3", currentStep >= 6 ? Resultados_Fase_3 : "0");
-        datos.put("Tiempo_Total", currentStep >= 6 ? Tiempo_Total : "-");
+        datos.put("Tiempo de Ejecución Fase 1", Tiempo_de_Ejecución_Fase_1);
+        datos.put("Resultados Fase 1", Resultados_Fase_1);
+        datos.put("Tiempo de Ejecución Fase 2", currentStep >= 4 ? Tiempo_de_Ejecución_Fase_2 : "0");
+        datos.put("Resultados Fase 2", currentStep >= 4 ? Resultados_Fase_2 : "0");
+        datos.put("Tiempo de Ejecución Fase 3", currentStep >= 6 ? Tiempo_de_Ejecución_Fase_3 : "0");
+        datos.put("Resultados Fase 3", currentStep >= 6 ? Resultados_Fase_3 : "0");
+        datos.put("Tiempo Total", currentStep >= 6 ? Tiempo_Total : "-");
 
         db.collection("testResultados")
                 .add(datos)
