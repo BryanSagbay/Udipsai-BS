@@ -46,9 +46,9 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
     private FirebaseFirestore db;
 
     // Variables para almacenar datos de cada fase
-    private String tiempoM1 = "0", erroresM1 = "0";
-    private String tiempoM2 = "0", erroresM2 = "0";
-    private String tiempoM3 = "0", erroresM3 = "0", datoExtraM3 = "-";
+    private String Tiempo_de_Ejecución_Fase_1 = "0", Resultados_Fase_1 = "0";
+    private String Tiempo_de_Ejecución_Fase_2 = "0", Resultados_Fase_2 = "0";
+    private String Tiempo_de_Ejecución_Fase_3 = "0", Resultados_Fase_3 = "0", Tiempo_Total = "-";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,18 +179,18 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
 
                     switch (currentStep) {
                         case 2: // Respuesta M1
-                            tiempoM1 = values[0];
-                            erroresM1 = formatErrors(values[1]);
+                            Tiempo_de_Ejecución_Fase_1 = values[0];
+                            Resultados_Fase_1 = formatErrors(values[1]);
                             break;
                         case 4: // Respuesta M2
-                            tiempoM2 = values[0];
-                            erroresM2 = formatErrors(values[1]);
+                            Tiempo_de_Ejecución_Fase_2 = values[0];
+                            Resultados_Fase_2 = formatErrors(values[1]);
                             break;
                         case 6: // Respuesta M3
-                            tiempoM3 = values[0];
-                            erroresM3 = formatErrors(values[1]);
+                            Tiempo_de_Ejecución_Fase_3 = values[0];
+                            Resultados_Fase_3 = formatErrors(values[1]);
                             if (values.length == 3) {
-                                datoExtraM3 = values[2];
+                                Tiempo_Total = values[2];
                             }
                             saveButton.setVisibility(View.VISIBLE);
                             break;
@@ -270,15 +270,15 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
 
         Map<String, Object> datos = new HashMap<>();
         datos.put("timestamp", System.currentTimeMillis());
-        datos.put("Nombre de Paciente", nombrePaciente);
-        datos.put("Correo Usuario", correoUsuario);
-        datos.put("Tiempo de Ejecución 1", tiempoM1);
-        datos.put("Resultados Fase 1", erroresM1);
-        datos.put("Tiempo de Ejecución 2", currentStep >= 4 ? tiempoM2 : "0");
-        datos.put("Resultados Fase 2", currentStep >= 4 ? erroresM2 : "0");
-        datos.put("Tiempo de Ejecución 3", currentStep >= 6 ? tiempoM3 : "0");
-        datos.put("Resultados Fase 3", currentStep >= 6 ? erroresM3 : "0");
-        datos.put("Tiempo Total", currentStep >= 6 ? datoExtraM3 : "-");
+        datos.put("nombrePaciente", nombrePaciente);
+        datos.put("correoUsuario", correoUsuario);
+        datos.put("Tiempo_de_Ejecución_Fase_1", Tiempo_de_Ejecución_Fase_1);
+        datos.put("Resultados_Fase_1", Resultados_Fase_1);
+        datos.put("Tiempo_de_Ejecución_Fase_2", currentStep >= 4 ? Tiempo_de_Ejecución_Fase_2 : "0");
+        datos.put("Resultados_Fase_2", currentStep >= 4 ? Resultados_Fase_2 : "0");
+        datos.put("Tiempo_de_Ejecución_Fase_3", currentStep >= 6 ? Tiempo_de_Ejecución_Fase_3 : "0");
+        datos.put("Resultados_Fase_3", currentStep >= 6 ? Resultados_Fase_3 : "0");
+        datos.put("Tiempo_Total", currentStep >= 6 ? Tiempo_Total : "-");
 
         db.collection("testResultados")
                 .add(datos)
@@ -294,13 +294,13 @@ public class test_Bennett extends AppCompatActivity implements SerialListener, S
 
     // Método para resetear datos
     private void resetDatos() {
-        tiempoM1 = "0";
-        erroresM1 = "0";
-        tiempoM2 = "0";
-        erroresM2 = "0";
-        tiempoM3 = "0";
-        erroresM3 = "0";
-        datoExtraM3 = "-";
+        Tiempo_de_Ejecución_Fase_1 = "0";
+        Resultados_Fase_1 = "0";
+        Tiempo_de_Ejecución_Fase_2 = "0";
+        Resultados_Fase_2 = "0";
+        Tiempo_de_Ejecución_Fase_3 = "0";
+        Resultados_Fase_3 = "0";
+        Tiempo_Total = "-";
         currentStep = 0;
         saveButton.setVisibility(View.GONE);
     }

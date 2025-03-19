@@ -288,13 +288,13 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
      * Metodo para guardar datos en firestore
      */
     private void guardarDatos() {
-        String aciertos = tvAciertos.getText().toString();
-        String errores = tvErrores.getText().toString();
-        String tiempoEjecucion = tvTiempoEjecucion.getText().toString();
-        String tiempoReaccion = tvTiempoReaccion.getText().toString();
-        String titulo = tvTituloDatos.getText().toString();
+        String Aciertos = tvAciertos.getText().toString();
+        String Errores = tvErrores.getText().toString();
+        String Tiempo_de_Ejecucion = tvTiempoEjecucion.getText().toString();
+        String Tiempo_de_Reaccion = tvTiempoReaccion.getText().toString();
+        String Titulo = tvTituloDatos.getText().toString();
 
-        if (aciertos.equals("-") || errores.equals("-") || tiempoEjecucion.equals("- seg") || tiempoReaccion.equals("- seg")) {
+        if (Aciertos.equals("-") || Errores.equals("-") || Tiempo_de_Ejecucion.equals("- seg") || Tiempo_de_Reaccion.equals("- seg")) {
             Toast.makeText(this, "No hay datos para guardar", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -309,14 +309,14 @@ public class test_Monotonia extends AppCompatActivity implements SerialListener,
 
         // Crear datos para Firestore
         Map<String, Object> datos = new HashMap<>();
-        datos.put("titulo", titulo);
-        datos.put("aciertos", aciertos);
-        datos.put("errores", errores);
-        datos.put("tiempoEjecucion", tiempoEjecucion);
-        datos.put("tiempoReaccion", tiempoReaccion);
         datos.put("timestamp", System.currentTimeMillis());
         datos.put("nombrePaciente", nombrePaciente);
         datos.put("correoUsuario", correoUsuario);
+        datos.put("Título", Titulo);
+        datos.put("Aciertos", Aciertos);
+        datos.put("Errores", Errores);
+        datos.put("Tiempo_de_Ejecución", Tiempo_de_Ejecucion);
+        datos.put("Tiempo_de_Reacción", Tiempo_de_Reaccion);
 
         // Guardar en Firestore
         db.collection("testResultados")

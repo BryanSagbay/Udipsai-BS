@@ -194,12 +194,12 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
      * Metodo para guardar datos en firestore
      */
     private void guardarDatos() {
-        String errores = tvErrores.getText().toString();
-        String tiempoEjecucion = tvTiempoEjecucion.getText().toString();
-        String titulo = tvTituloDatos.getText().toString();
+        String Errores = tvErrores.getText().toString();
+        String Tiempo_de_Ejecucion = tvTiempoEjecucion.getText().toString();
+        String Titulo = tvTituloDatos.getText().toString();
 
         // Verificar si hay datos antes de guardar
-        if (errores.equals("-") || tiempoEjecucion.equals("- seg")) {
+        if (Errores.equals("-") || Tiempo_de_Ejecucion.equals("- seg")) {
             Toast.makeText(this, "No hay datos para guardar", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -214,12 +214,13 @@ public class test_Riel extends AppCompatActivity implements SerialListener, Serv
 
         // Crear el objeto para guardar en Firestore
         Map<String, Object> datos = new HashMap<>();
-        datos.put("titulo", titulo);
-        datos.put("errores", errores);
-        datos.put("tiempoEjecucion", tiempoEjecucion);
         datos.put("timestamp", System.currentTimeMillis());
         datos.put("nombrePaciente", nombrePaciente);
         datos.put("correoUsuario", correoUsuario);
+        datos.put("Título", Titulo);
+        datos.put("Errores", Errores);
+        datos.put("Tiempo_de_Ejecución", Tiempo_de_Ejecucion);
+
 
         // Guardar en Firestore en la colección "testResultados"
         FirebaseFirestore db = FirebaseFirestore.getInstance();
