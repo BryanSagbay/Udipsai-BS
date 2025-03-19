@@ -3198,6 +3198,7 @@ id btnEliminar
 id btnGenerarPDF
 id btnLogin
 id btnMonotonia
+id btnMore
 id btnPalanca
 id btnRegisterR
 id btnRiel
@@ -3566,6 +3567,7 @@ id snapMargins
 id software
 id spacer
 id special_effects_controller_view_tag
+id spinnerPacientes
 id spinner_optionsM
 id spline
 id split_action_bar

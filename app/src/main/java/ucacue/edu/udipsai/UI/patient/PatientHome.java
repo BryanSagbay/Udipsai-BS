@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -165,6 +167,12 @@ public class PatientHome extends AppCompatActivity {
      */
     private void agregarPaciente(String nombre, String apellido, String genero, int edad, String direccion, String telefono) {
         long timestamp = System.currentTimeMillis();
+
+        // Obtener el correo del usuario autenticado automáticamente
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String correoUsuario = (user != null) ? user.getEmail() : "No autenticado";
+
+        // Crear el objeto Patient con el correo del usuario
         Patient paciente = new Patient(nombre, apellido, genero, edad, direccion, telefono);
 
         mostrarAlertaCargando();
@@ -172,11 +180,12 @@ public class PatientHome extends AppCompatActivity {
         db.collection("pacientes").document(String.valueOf(timestamp))
                 .set(paciente)
                 .addOnSuccessListener(aVoid -> {
-                    mostrarAlertaCorrecto("Paciente agregado con éxito");
+                    mostrarAlertaCorrecto("Paciente agregado con éxito.");
                     cargarPacientes();
                 })
                 .addOnFailureListener(e -> mostrarAlertaError("Error al agregar paciente: " + e.getMessage()));
     }
+
 
     /**
      * Métodos de alertas personalizadas

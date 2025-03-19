@@ -3197,6 +3197,7 @@ int id btnEliminar 0x7f09006c
 int id btnGenerarPDF 0x7f09006d
 int id btnLogin 0x7f09006e
 int id btnMonotonia 0x7f09006f
+int id btnMore 0x7f090255
 int id btnPalanca 0x7f090070
 int id btnRegisterR 0x7f090071
 int id btnRiel 0x7f090072
@@ -3565,6 +3566,7 @@ int id snapMargins 0x7f0901df
 int id software 0x7f0901e0
 int id spacer 0x7f0901e1
 int id special_effects_controller_view_tag 0x7f0901e2
+int id spinnerPacientes 0x7f090256
 int id spinner_optionsM 0x7f0901e3
 int id spline 0x7f0901e4
 int id split_action_bar 0x7f0901e5

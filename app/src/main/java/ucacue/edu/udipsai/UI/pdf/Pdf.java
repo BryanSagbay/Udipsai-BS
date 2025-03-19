@@ -31,13 +31,18 @@ public class Pdf extends AppCompatActivity {
 
     private TextView textViewCorreo, textViewFechaSeleccionada, errorMessage;
     private Button btnGenerarPDF;
-    private ImageButton btnSeleccionarFecha, backButton;
+    private ImageButton btnSeleccionarFecha, backButton, btnSeleccionarPaciente;
     private DatePicker datePicker;
     private FirestoreService firestoreService;
     private String correoUsuario;
     private String fechaSeleccionada;
     private FrameLayout loadingOverlay, errorOverlay;
     private ImageView loadingGif, errorloadingGif;
+    private Spinner spinnerPacientes;
+    private List<String> listaPacientes = new ArrayList<>();
+    private String pacienteSeleccionado = "";
+
+
     private static final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
@@ -57,8 +62,10 @@ public class Pdf extends AppCompatActivity {
         errorMessage = findViewById(R.id.errorMessage);
         loadingGif = findViewById(R.id.loadingGif);
         errorloadingGif = findViewById(R.id.errorloadingGif);
+        spinnerPacientes = findViewById(R.id.spinnerPacientes);
+        btnSeleccionarPaciente = findViewById(R.id.btnMore);
 
-        // Cargar los GIFs con Glide
+        // Cargar GIFs con Glide
         Glide.with(this).asGif().load(R.drawable.ic_carpeta).into(loadingGif);
         Glide.with(this).asGif().load(R.drawable.ic_error_login).into(errorloadingGif);
 
@@ -78,9 +85,24 @@ public class Pdf extends AppCompatActivity {
             btnGenerarPDF.setEnabled(false);
         }
 
-        // Ocultar DatePicker por defecto
+        // Ocultar DatePicker y Spinner por defecto
         datePicker.setVisibility(View.GONE);
+        spinnerPacientes.setVisibility(View.GONE);
+
+        // Configurar DatePicker
         configurarDatePicker();
+
+        // Cargar pacientes en el Spinner
+        cargarPacientes();
+
+        // Configurar el botón para mostrar/ocultar el Spinner
+        btnSeleccionarPaciente.setOnClickListener(v -> {
+            if (spinnerPacientes.getVisibility() == View.GONE) {
+                spinnerPacientes.setVisibility(View.VISIBLE);
+            } else {
+                spinnerPacientes.setVisibility(View.GONE);
+            }
+        });
 
         // Eventos de clic
         btnSeleccionarFecha.setOnClickListener(v -> mostrarDatePicker());
@@ -97,7 +119,6 @@ public class Pdf extends AppCompatActivity {
         loadingOverlay.setVisibility(View.GONE);
         errorOverlay.setVisibility(View.GONE);
     }
-
     private void mostrarDatePicker() {
         if (datePicker.getVisibility() == View.GONE) {
             datePicker.setVisibility(View.VISIBLE);
@@ -145,7 +166,11 @@ public class Pdf extends AppCompatActivity {
 
         new Thread(() -> {
             try {
-                List<Map<String, Object>> resultados = firestoreService.getAllDataByEmailAndDate(correoUsuario, fechaSeleccionada);
+                List<Map<String, Object>> resultados = firestoreService.getAllDataByEmailDateAndPaciente(
+                        correoUsuario,
+                        fechaSeleccionada,
+                        pacienteSeleccionado // Nuevo parámetro
+                );
 
                 if (!resultados.isEmpty()) {
                     Uri pdfUri = guardarPDF(correoUsuario, fechaSeleccionada, resultados);
@@ -210,7 +235,8 @@ public class Pdf extends AppCompatActivity {
 
         if (uri != null) {
             try (OutputStream outputStream = resolver.openOutputStream(uri)) {
-                PDFGenerator.generatePDF(outputStream, email, date, dataList);
+                // Pasar el nombre del paciente seleccionado
+                PDFGenerator.generatePDF(outputStream, email, date, dataList, pacienteSeleccionado);
                 return uri;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -229,5 +255,29 @@ public class Pdf extends AppCompatActivity {
                 mostrarError("Se requieren permisos para guardar el PDF");
             }
         }
+    }
+
+
+    private void cargarPacientes() {
+        firestoreService.getPacientesPorUsuario(correoUsuario, new FirestoreService.PacientesCallback() {
+            @Override
+            public void onCallback(List<String> pacientes) {
+                runOnUiThread(() -> {
+                    listaPacientes = pacientes;
+
+                    // Crear un adaptador para el Spinner
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                            Pdf.this,
+                            android.R.layout.simple_spinner_item,
+                            listaPacientes
+                    );
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerPacientes.setAdapter(adapter);
+
+                    // Habilitar el Spinner si hay pacientes
+                    spinnerPacientes.setEnabled(!listaPacientes.isEmpty());
+                });
+            }
+        });
     }
 }

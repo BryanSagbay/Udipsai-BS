@@ -85,6 +85,7 @@ id btnEliminar
 id btnGenerarPDF
 id btnLogin
 id btnMonotonia
+id btnMore
 id btnPalanca
 id btnRegisterR
 id btnRiel
@@ -167,6 +168,7 @@ id radioGroupGenero
 id rbFemenino
 id rbMasculino
 id recyclerViewPacientes
+id spinnerPacientes
 id spinner_optionsM
 id textPacientes
 id textSoporte

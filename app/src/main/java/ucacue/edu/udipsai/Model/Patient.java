@@ -10,12 +10,13 @@ public class Patient {
     private String telefono;
     private long fechaRegistro;
 
+
     // Constructor vacío requerido por Firestore
     public Patient() {}
 
     // Constructor con parámetros
     public Patient(String nombre, String apellido, String genero, int edad, String direccion, String telefono) {
-        long timestamp = System.currentTimeMillis(); // Generar ID basado en timestamp
+        long timestamp = System.currentTimeMillis();
 
         this.id = timestamp;
         this.nombre = nombre;
@@ -37,8 +38,10 @@ public class Patient {
     public String getTelefono() { return telefono; }
     public long getFechaRegistro() { return fechaRegistro; }
 
+
     // Setters (Firestore los necesita para deserialización)
     public void setId(long id) { this.id = id; }
+
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setApellido(String apellido) { this.apellido = apellido; }
     public void setGenero(String genero) { this.genero = genero; }
@@ -46,4 +49,5 @@ public class Patient {
     public void setDireccion(String direccion) { this.direccion = direccion; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
     public void setFechaRegistro(long fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+
 }

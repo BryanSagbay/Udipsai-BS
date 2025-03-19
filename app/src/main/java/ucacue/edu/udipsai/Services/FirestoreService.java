@@ -29,15 +29,19 @@ public class FirestoreService {
     }
 
     /**
-     * Obtiene datos de la colección "testResultados" donde el correo y la fecha coincidan.
+     * Obtiene datos de la colección "testResultados" donde el correo, la fecha y el paciente coincidan.
      */
-    public List<Map<String, Object>> getAllDataByEmailAndDate(String email, String selectedDate) {
+    public List<Map<String, Object>> getAllDataByEmailDateAndPaciente(
+            String email,
+            String selectedDate,
+            String pacienteNombre
+    ) {
         List<Map<String, Object>> allData = new ArrayList<>();
 
         try {
             CollectionReference collectionRef = db.collection("testResultados");
 
-            // Obtener documentos con el correo del usuario
+            // Construir la consulta base
             Task<QuerySnapshot> queryTask = collectionRef
                     .whereEqualTo("correoUsuario", email)
                     .get();
@@ -55,18 +59,53 @@ public class FirestoreService {
 
                         Log.d("FirestoreService", "Fecha seleccionada: " + selectedDate + " - Fecha del documento: " + fechaDocumento);
 
+                        // Filtrar por fecha y paciente
                         if (fechaDocumento.equals(selectedDate)) {
-                            allData.add(data);
+                            if (pacienteNombre.isEmpty() ||
+                                    (data.containsKey("nombrePaciente") &&
+                                            data.get("nombrePaciente").toString().equals(pacienteNombre))) {
+                                allData.add(data);
+                            }
                         }
                     }
                 }
             }
 
-            Log.d("FirestoreService", "Datos filtrados por fecha: " + allData.size());
+            Log.d("FirestoreService", "Datos filtrados por fecha y paciente: " + allData.size());
         } catch (ExecutionException | InterruptedException e) {
             Log.e("FirestoreService", "Error al obtener datos de Firestore", e);
         }
 
         return allData;
+    }
+
+    /**
+     * Obtiene la lista de pacientes asignados a un usuario específico.
+     */
+    public void getPacientesPorUsuario(String usuarioEmail, PacientesCallback callback) {
+        db.collection("pacientes")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    List<String> pacientes = new ArrayList<>();
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        String nombre = doc.getString("nombre");
+                        String apellido = doc.getString("apellido");
+                        if (nombre != null && apellido != null) {
+                            pacientes.add(nombre + " " + apellido); // Combina nombre y apellido
+                        }
+                    }
+                    callback.onCallback(pacientes);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("FirestoreService", "Error al obtener pacientes", e);
+                    callback.onCallback(Collections.emptyList());
+                });
+    }
+
+    /**
+     * Interfaz para manejar la respuesta asíncrona de la lista de pacientes.
+     */
+    public interface PacientesCallback {
+        void onCallback(List<String> pacientes);
     }
 }
