@@ -9,13 +9,15 @@ public class Patient {
     private String direccion;
     private String telefono;
     private long fechaRegistro;
+    private String correoUsuario;
+
 
 
     // Constructor vacío requerido por Firestore
     public Patient() {}
 
     // Constructor con parámetros
-    public Patient(String nombre, String apellido, String genero, int edad, String direccion, String telefono) {
+    public Patient(String nombre, String apellido, String genero, int edad, String direccion, String telefono, String correoUsuario) {
         long timestamp = System.currentTimeMillis();
 
         this.id = timestamp;
@@ -26,6 +28,7 @@ public class Patient {
         this.direccion = direccion;
         this.telefono = telefono;
         this.fechaRegistro = timestamp;
+        this.correoUsuario = correoUsuario;
     }
 
     // Getters
@@ -37,6 +40,7 @@ public class Patient {
     public String getDireccion() { return direccion; }
     public String getTelefono() { return telefono; }
     public long getFechaRegistro() { return fechaRegistro; }
+    public String getCorreoUsuario() { return correoUsuario; }
 
 
     // Setters (Firestore los necesita para deserialización)
@@ -49,5 +53,6 @@ public class Patient {
     public void setDireccion(String direccion) { this.direccion = direccion; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
     public void setFechaRegistro(long fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public void setCorreoUsuario(String correoUsuario) { this.correoUsuario = correoUsuario; }
 
 }

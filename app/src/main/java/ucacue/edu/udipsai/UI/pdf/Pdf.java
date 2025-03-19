@@ -169,7 +169,7 @@ public class Pdf extends AppCompatActivity {
                 List<Map<String, Object>> resultados = firestoreService.getAllDataByEmailDateAndPaciente(
                         correoUsuario,
                         fechaSeleccionada,
-                        pacienteSeleccionado // Nuevo parámetro
+                        pacienteSeleccionado
                 );
 
                 if (!resultados.isEmpty()) {
@@ -257,7 +257,6 @@ public class Pdf extends AppCompatActivity {
         }
     }
 
-
     private void cargarPacientes() {
         firestoreService.getPacientesPorUsuario(correoUsuario, new FirestoreService.PacientesCallback() {
             @Override
@@ -265,7 +264,6 @@ public class Pdf extends AppCompatActivity {
                 runOnUiThread(() -> {
                     listaPacientes = pacientes;
 
-                    // Crear un adaptador para el Spinner
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(
                             Pdf.this,
                             android.R.layout.simple_spinner_item,
@@ -274,8 +272,18 @@ public class Pdf extends AppCompatActivity {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerPacientes.setAdapter(adapter);
 
-                    // Habilitar el Spinner si hay pacientes
-                    spinnerPacientes.setEnabled(!listaPacientes.isEmpty());
+                    // Manejar selección del paciente
+                    spinnerPacientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            pacienteSeleccionado = listaPacientes.get(position);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            pacienteSeleccionado = "";
+                        }
+                    });
                 });
             }
         });

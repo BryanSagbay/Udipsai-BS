@@ -3,9 +3,10 @@ package ucacue.edu.udipsai.Services;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -20,16 +21,31 @@ public class FirestoreService {
     }
 
     /**
-     * Convierte un timestamp (milisegundos) a una fecha en formato yyyy-M-d
-     * para que coincida con la salida del DatePicker.
+     * Obtiene la lista de pacientes registrados por un usuario específico.
      */
-    private String convertirTimestampAFecha(long timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
-        return sdf.format(new Date(timestamp));
+    public void getPacientesPorUsuario(String usuarioEmail, PacientesCallback callback) {
+        db.collection("pacientes")
+                .whereEqualTo("correoUsuario", usuarioEmail) // Filtrar por correo del usuario autenticado
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    List<String> pacientes = new ArrayList<>();
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        String nombre = doc.getString("nombre");
+                        String apellido = doc.getString("apellido");
+                        if (nombre != null && apellido != null) {
+                            pacientes.add(nombre + " " + apellido);
+                        }
+                    }
+                    callback.onCallback(pacientes);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("FirestoreService", "Error al obtener pacientes", e);
+                    callback.onCallback(Collections.emptyList());
+                });
     }
 
     /**
-     * Obtiene datos de la colección "testResultados" donde el correo, la fecha y el paciente coincidan.
+     * Obtiene datos de la colección "testResultados" filtrados por el usuario autenticado y paciente.
      */
     public List<Map<String, Object>> getAllDataByEmailDateAndPaciente(
             String email,
@@ -41,7 +57,7 @@ public class FirestoreService {
         try {
             CollectionReference collectionRef = db.collection("testResultados");
 
-            // Construir la consulta base
+            // Construir la consulta base con el correo del usuario autenticado
             Task<QuerySnapshot> queryTask = collectionRef
                     .whereEqualTo("correoUsuario", email)
                     .get();
@@ -80,26 +96,11 @@ public class FirestoreService {
     }
 
     /**
-     * Obtiene la lista de pacientes asignados a un usuario específico.
+     * Convierte un timestamp (milisegundos) a una fecha en formato yyyy-M-d.
      */
-    public void getPacientesPorUsuario(String usuarioEmail, PacientesCallback callback) {
-        db.collection("pacientes")
-                .get()
-                .addOnSuccessListener(querySnapshot -> {
-                    List<String> pacientes = new ArrayList<>();
-                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
-                        String nombre = doc.getString("nombre");
-                        String apellido = doc.getString("apellido");
-                        if (nombre != null && apellido != null) {
-                            pacientes.add(nombre + " " + apellido); // Combina nombre y apellido
-                        }
-                    }
-                    callback.onCallback(pacientes);
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("FirestoreService", "Error al obtener pacientes", e);
-                    callback.onCallback(Collections.emptyList());
-                });
+    private String convertirTimestampAFecha(long timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
+        return sdf.format(new Date(timestamp));
     }
 
     /**

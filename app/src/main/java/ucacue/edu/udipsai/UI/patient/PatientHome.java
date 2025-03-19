@@ -168,12 +168,12 @@ public class PatientHome extends AppCompatActivity {
     private void agregarPaciente(String nombre, String apellido, String genero, int edad, String direccion, String telefono) {
         long timestamp = System.currentTimeMillis();
 
-        // Obtener el correo del usuario autenticado automáticamente
+        // Obtener el usuario autenticado
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String correoUsuario = (user != null) ? user.getEmail() : "No autenticado";
 
         // Crear el objeto Patient con el correo del usuario
-        Patient paciente = new Patient(nombre, apellido, genero, edad, direccion, telefono);
+        Patient paciente = new Patient(nombre, apellido, genero, edad, direccion, telefono, correoUsuario);
 
         mostrarAlertaCargando();
 
@@ -185,6 +185,7 @@ public class PatientHome extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> mostrarAlertaError("Error al agregar paciente: " + e.getMessage()));
     }
+
 
 
     /**
