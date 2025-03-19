@@ -212,6 +212,8 @@ layout navbar_test
 layout pdf_home
 layout register
 layout select_patient
+layout spinner_dropdown_item
+layout spinner_item
 layout test_bennett
 layout test_monotonia
 layout test_palanca

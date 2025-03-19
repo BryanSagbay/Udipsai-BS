@@ -225,8 +225,10 @@
                     <Spinner
                         android:id="@+id/spinnerPacientes"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:drawable/edit_text"
+                        android:layout_height="48dp"
+                        android:textColor="#000000"
+                        android:background="@color/white"
+                        android:text="Seleccionar Paciente"
                         android:padding="10dp"/>
 
                 </LinearLayout>

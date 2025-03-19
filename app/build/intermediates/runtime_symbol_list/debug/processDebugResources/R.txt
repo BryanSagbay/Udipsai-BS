@@ -3886,6 +3886,8 @@ int layout select_dialog_item_material 0x7f0c0073
 int layout select_dialog_multichoice_material 0x7f0c0074
 int layout select_dialog_singlechoice_material 0x7f0c0075
 int layout select_patient 0x7f0c0076
+int layout spinner_dropdown_item 0x7f0c007d
+int layout spinner_item 0x7f0c007e
 int layout support_simple_spinner_dropdown_item 0x7f0c0077
 int layout test_bennett 0x7f0c0078
 int layout test_monotonia 0x7f0c0079
