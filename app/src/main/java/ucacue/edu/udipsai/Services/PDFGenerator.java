@@ -71,9 +71,9 @@ public class PDFGenerator {
         pdfDoc.addEventHandler(PdfDocumentEvent.START_PAGE, new BackgroundEventHandler(background));
 
         // Ajustar márgenes para evitar superposición
-        float margenSuperior = 25;  // Aumentado para prevenir superposición en páginas siguientes
+        float margenSuperior = 80;  // Aumentado para prevenir superposición en páginas siguientes
         float margenInferior = 80;
-        document.setMargins(margenSuperior, 25, margenInferior, 50);
+        document.setMargins(margenSuperior, 50, margenInferior, 50);
 
         PdfFont font = PdfFontFactory.createFont("assets/fonts/segoe-ui-emoji.ttf", PdfEncodings.IDENTITY_H);
 
