@@ -56,11 +56,35 @@ public class FirestoreService {
 
         try {
             CollectionReference collectionRef = db.collection("testResultados");
+            Task<QuerySnapshot> queryTask;
 
-            // Construir la consulta base con el correo del usuario autenticado
-            Task<QuerySnapshot> queryTask = collectionRef
-                    .whereEqualTo("correoUsuario", email)
-                    .get();
+            // Verificar si cada parámetro está realmente vacío o es nulo
+            boolean fechaVacia = (selectedDate == null || selectedDate.isEmpty());
+            boolean pacienteVacio = (pacienteNombre == null || pacienteNombre.isEmpty());
+
+            Log.d("FirestoreService", "Filtros: Email=" + email + ", Fecha=" +
+                    (fechaVacia ? "vacía" : selectedDate) + ", Paciente=" +
+                    (pacienteVacio ? "vacío" : pacienteNombre));
+
+            if (fechaVacia && pacienteVacio) {
+                // Caso 1: No hay filtros → Obtener todos los datos del usuario
+                queryTask = collectionRef.whereEqualTo("correoUsuario", email).get();
+            } else if (fechaVacia) {
+                // Caso 2: Filtrar solo por paciente
+                queryTask = collectionRef
+                        .whereEqualTo("correoUsuario", email)
+                        .whereEqualTo("nombrePaciente", pacienteNombre)
+                        .get();
+            } else if (pacienteVacio) {
+                // Caso 3: Filtrar solo por fecha (pero obteniendo todos los documentos del usuario)
+                queryTask = collectionRef.whereEqualTo("correoUsuario", email).get();
+            } else {
+                // Caso 4: Filtrar por paciente y por fecha
+                queryTask = collectionRef
+                        .whereEqualTo("correoUsuario", email)
+                        .whereEqualTo("nombrePaciente", pacienteNombre)
+                        .get();
+            }
 
             QuerySnapshot querySnapshot = Tasks.await(queryTask);
             Log.d("FirestoreService", "Documentos recuperados: " + querySnapshot.getDocuments().size());
@@ -73,21 +97,20 @@ public class FirestoreService {
                         long timestamp = (long) data.get("timestamp");
                         String fechaDocumento = convertirTimestampAFecha(timestamp);
 
-                        Log.d("FirestoreService", "Fecha seleccionada: " + selectedDate + " - Fecha del documento: " + fechaDocumento);
+                        // Filtrar por fecha solo si hay una fecha seleccionada
+                        boolean incluirDocumento = fechaVacia || fechaDocumento.equals(selectedDate);
 
-                        // Filtrar por fecha y paciente
-                        if (fechaDocumento.equals(selectedDate)) {
-                            if (pacienteNombre.isEmpty() ||
-                                    (data.containsKey("nombrePaciente") &&
-                                            data.get("nombrePaciente").toString().equals(pacienteNombre))) {
-                                allData.add(data);
-                            }
+                        if (incluirDocumento) {
+                            Log.d("FirestoreService", "Documento incluido: " + document.getId() +
+                                    " con fecha " + fechaDocumento + " y paciente " +
+                                    data.get("nombrePaciente"));
+                            allData.add(data);
                         }
                     }
                 }
             }
 
-            Log.d("FirestoreService", "Datos filtrados por fecha y paciente: " + allData.size());
+            Log.d("FirestoreService", "Datos filtrados: " + allData.size());
         } catch (ExecutionException | InterruptedException e) {
             Log.e("FirestoreService", "Error al obtener datos de Firestore", e);
         }

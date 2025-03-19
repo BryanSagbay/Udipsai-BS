@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.*;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -137,6 +138,7 @@ public class Pdf extends AppCompatActivity {
             fechaSeleccionada = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
             textViewFechaSeleccionada.setText(fechaSeleccionada);
             datePicker.setVisibility(View.GONE);
+
         });
 
         // Deshabilitar fechas futuras
@@ -156,37 +158,46 @@ public class Pdf extends AppCompatActivity {
     }
 
     private void generarPDF() {
-        if (correoUsuario.equals("No autenticado") || fechaSeleccionada == null || fechaSeleccionada.isEmpty()) {
-            mostrarError("Seleccione una fecha válida");
+        if (correoUsuario.equals("No autenticado")) {
+            mostrarError("No autenticado. Inicie sesión.");
             return;
         }
 
         mostrarLoading(true);
         btnGenerarPDF.setEnabled(false);
 
+        Log.d("PDF", "Generando PDF: Email=" + correoUsuario +
+                ", Fecha=" + (fechaSeleccionada == null ? "null" : fechaSeleccionada) +
+                ", Paciente=" + (pacienteSeleccionado == null ? "null" : pacienteSeleccionado));
+
         new Thread(() -> {
             try {
                 List<Map<String, Object>> resultados = firestoreService.getAllDataByEmailDateAndPaciente(
                         correoUsuario,
-                        fechaSeleccionada,
-                        pacienteSeleccionado
+                        fechaSeleccionada,  // Puede estar vacío o nulo
+                        pacienteSeleccionado // Puede estar vacío o nulo
                 );
 
+                Log.d("PDF", "Resultados obtenidos: " + resultados.size());
+
                 if (!resultados.isEmpty()) {
-                    Uri pdfUri = guardarPDF(correoUsuario, fechaSeleccionada, resultados);
+                    Uri pdfUri = guardarPDF(correoUsuario,
+                            fechaSeleccionada != null && !fechaSeleccionada.isEmpty() ?
+                                    fechaSeleccionada : "Todas", resultados);
                     runOnUiThread(() -> {
                         if (pdfUri != null) {
                             Toast.makeText(this, "PDF guardado en Descargas", Toast.LENGTH_SHORT).show();
+                            resetearFiltros();
                         } else {
                             mostrarError("Error al guardar el PDF");
                         }
                     });
                 } else {
-                    mostrarError("No hay datos para esta fecha");
+                    mostrarError("No hay datos disponibles.");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                mostrarError("Error generando PDF");
+                mostrarError("Error generando PDF: " + e.getMessage());
             } finally {
                 runOnUiThread(() -> {
                     mostrarLoading(false);
@@ -195,7 +206,6 @@ public class Pdf extends AppCompatActivity {
             }
         }).start();
     }
-
     private void mostrarLoading(boolean mostrar) {
         runOnUiThread(() -> {
             if (mostrar) {
@@ -223,7 +233,7 @@ public class Pdf extends AppCompatActivity {
     }
 
     private Uri guardarPDF(String email, String date, List<Map<String, Object>> dataList) {
-        String fileName = "Reporte_" + email + "_" + date + ".pdf";
+        String fileName = "Reporte_" + email + "_" + (date.equals("Todas") ? "Todos" : date) + ".pdf";
 
         ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName);
@@ -235,7 +245,6 @@ public class Pdf extends AppCompatActivity {
 
         if (uri != null) {
             try (OutputStream outputStream = resolver.openOutputStream(uri)) {
-                // Pasar el nombre del paciente seleccionado
                 PDFGenerator.generatePDF(outputStream, email, date, dataList, pacienteSeleccionado);
                 return uri;
             } catch (Exception e) {
@@ -262,7 +271,11 @@ public class Pdf extends AppCompatActivity {
             @Override
             public void onCallback(List<String> pacientes) {
                 runOnUiThread(() -> {
-                    listaPacientes = pacientes;
+                    listaPacientes = new ArrayList<>();
+                    // Agregar una opción "Todos los pacientes" al principio de la lista
+                    listaPacientes.add("Todos los pacientes");
+                    // Agregar el resto de los pacientes
+                    listaPacientes.addAll(pacientes);
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(
                             Pdf.this,
@@ -276,7 +289,12 @@ public class Pdf extends AppCompatActivity {
                     spinnerPacientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            pacienteSeleccionado = listaPacientes.get(position);
+                            String seleccion = listaPacientes.get(position);
+                            if (seleccion.equals("Todos los pacientes")) {
+                                pacienteSeleccionado = "";
+                            } else {
+                                pacienteSeleccionado = seleccion;
+                            }
                         }
 
                         @Override
@@ -288,4 +306,24 @@ public class Pdf extends AppCompatActivity {
             }
         });
     }
+    private void resetearFiltros() {
+        runOnUiThread(() -> {
+            // Restablecer la fecha
+            fechaSeleccionada = "";
+            textViewFechaSeleccionada.setText("Seleccionar fecha");
+            datePicker.setVisibility(View.GONE);
+
+            // Restablecer el paciente seleccionado
+            pacienteSeleccionado = "";
+            if (spinnerPacientes.getAdapter() != null) {
+                spinnerPacientes.setSelection(0); // Volver a "Todos"
+            }
+            spinnerPacientes.setVisibility(View.GONE);
+
+            // Habilitar el botón nuevamente
+            btnGenerarPDF.setEnabled(true);
+        });
+    }
+
+
 }
