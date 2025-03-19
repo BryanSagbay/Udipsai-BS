@@ -1,6 +1,8 @@
 package ucacue.edu.udipsai.Services;
 
 import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.events.Event;
 import com.itextpdf.kernel.events.IEventHandler;
 import com.itextpdf.kernel.events.PdfDocumentEvent;
@@ -71,15 +73,17 @@ public class PDFGenerator {
         pdfDoc.addEventHandler(PdfDocumentEvent.START_PAGE, new BackgroundEventHandler(background));
 
         // Ajustar márgenes para evitar superposición
-        float margenSuperior = 80;  // Aumentado para prevenir superposición en páginas siguientes
+        float margenSuperior = 80;
         float margenInferior = 80;
         document.setMargins(margenSuperior, 50, margenInferior, 50);
 
         PdfFont font = PdfFontFactory.createFont("assets/fonts/segoe-ui-emoji.ttf", PdfEncodings.IDENTITY_H);
+        DeviceRgb pinColor = new DeviceRgb(0, 102, 204);
+        DeviceRgb checkColor = new DeviceRgb(0, 153, 0);
 
         // Contenido del PDF
-        document.add(new Paragraph("\n\n\n")); // Espaciado inicial
-        document.add(new Paragraph("📌 Reporte de Resultados").setFont(font).setBold().setFontSize(16));
+        document.add(new Paragraph("\n\n\n"));
+        document.add(new Paragraph("📌 Reporte de Resultados").setFont(font).setFontColor(pinColor).setBold().setFontSize(16));
         document.add(new Paragraph("Usuario: " + email).setFont(font).setFontSize(12));
 
         if (date.equals("Todas")) {
@@ -101,9 +105,8 @@ public class PDFGenerator {
         } else {
             for (Map<String, Object> data : dataList) {
                 if (data.containsKey("titulo")) {
-                    document.add(new Paragraph("📌 " + data.get("titulo").toString()).setFont(font).setBold().setFontSize(14));
+                    document.add(new Paragraph("📌 " + data.get("titulo").toString()).setFont(font).setFontColor(pinColor).setBold().setFontSize(14));
                 }
-
                 document.add(new Paragraph(" "));
 
                 Table table = new Table(2);
@@ -113,17 +116,35 @@ public class PDFGenerator {
 
                     if (!key.equals("timestamp") && !key.equals("correoUsuario") && !key.equals("titulo") && !key.equals("nombrePaciente")) {
                         table.addCell(new Cell().add(new Paragraph(key).setFont(font).setBold()));
-                        table.addCell(new Cell().add(new Paragraph(value.toString()).setFont(font)));
+
+                        Paragraph valueParagraph = new Paragraph();
+                        String valueStr = value.toString();
+
+                        for (int i = 0; i < valueStr.length(); i++) {
+                            char c = valueStr.charAt(i);
+                            String charStr = String.valueOf(c);
+
+                            if (charStr.equals("✅")) {
+                                valueParagraph.add(new Text(charStr).setFont(font).setFontColor(checkColor));
+                            } else if (charStr.equals("❌")) {
+                                valueParagraph.add(new Text(charStr).setFont(font).setFontColor(ColorConstants.RED));
+                            } else if (charStr.equals("📌")) {
+                                valueParagraph.add(new Text(charStr).setFont(font).setFontColor(pinColor));
+                            } else {
+                                valueParagraph.add(new Text(charStr).setFont(font));
+                            }
+                        }
+
+                        table.addCell(new Cell().add(valueParagraph));
                     }
                 }
 
                 document.add(table);
                 document.add(new Paragraph(" "));
 
-                // Comprobar si estamos cerca del final de la página y forzar salto si es necesario
                 if (document.getRenderer().getCurrentArea().getBBox().getHeight() < 100) {
                     document.add(new AreaBreak());
-                    document.add(new Paragraph("\n\n\n")); // Espaciado inicial para la nueva página
+                    document.add(new Paragraph("\n\n\n"));
                 }
             }
         }
